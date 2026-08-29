@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>반도체 교과서 — 계층 대시보드</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300;400;500;600&family=IBM+Plex+Serif:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --sand:#EFE6D6; --card:#F6EFE3; --card-2:#EDE2CE;
+  --ink:#241C16; --ink-soft:#6B5A4A; --line:#D6C6AE;
+  --brass:#B5761D; --clay:#6E3A24; --teal:#2E5E5B;
+  --r:3px; --bar:#B5761D;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--sand);color:var(--ink);
+  font-family:"IBM Plex Sans KR",system-ui,sans-serif;font-size:15px;line-height:1.65;
+  -webkit-font-smoothing:antialiased}
+.wrap{max-width:1180px;margin:0 auto;padding:0 28px 96px}
+
+/* ── 시그니처: 상단 2줄 층 스트립 ───────────────────── */
+.spine{position:sticky;top:0;z-index:10;background:var(--sand);
+  padding:20px 0 12px;border-bottom:1px solid var(--line);margin-bottom:30px}
+.spine-cap{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--ink-soft);margin-bottom:10px}
+.row1{display:flex;align-items:stretch;gap:0;overflow-x:auto;padding-bottom:4px}
+.layer{flex:1 1 0;min-width:96px;border:none;background:transparent;font:inherit;color:var(--ink-soft);
+  cursor:pointer;text-align:left;padding:0 10px 0 0;position:relative;transition:color .16s}
+.layer .tick{height:6px;background:var(--bar);opacity:.45;border-radius:1px;margin-bottom:8px;transition:opacity .16s,height .16s}
+.layer b{display:block;font-family:"IBM Plex Mono",monospace;font-size:10px;font-weight:500;letter-spacing:.08em}
+.layer span{display:block;font-size:12.5px;line-height:1.3;margin-top:2px}
+.layer:hover .tick,.layer.on .tick{opacity:1;height:10px}
+.layer:hover,.layer.on{color:var(--ink)}
+.layer.on b{color:var(--clay)}
+.layer:focus-visible{outline:2px solid var(--brass);outline-offset:2px}
+.row1 .arw{align-self:flex-end;padding:0 6px 6px;color:var(--line);font-size:12px;user-select:none}
+
+.row2{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px;min-height:30px}
+.sub{border:1px solid var(--line);background:var(--card);border-radius:20px;
+  padding:4px 13px;font-size:12.5px;color:var(--ink-soft);cursor:pointer;font-family:inherit;
+  transition:border-color .16s,color .16s,background .16s}
+.sub:hover{border-color:var(--brass);color:var(--ink)}
+.sub.on{background:var(--bar);border-color:var(--bar);color:#FBF6EC}
+.sub em{font-style:normal;font-family:"IBM Plex Mono",monospace;font-size:10px;opacity:.7;margin-right:5px}
+.row2 .hint{font-size:12px;color:var(--ink-soft);opacity:.7;padding:5px 0}
+
+/* ── 헤더 ─────────────────────────────────────────── */
+.crumb{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-family:"IBM Plex Mono",monospace;
+  font-size:11px;letter-spacing:.06em;color:var(--ink-soft);margin-bottom:18px;min-height:18px}
+.crumb button{background:none;border:none;font:inherit;color:var(--brass);cursor:pointer}
+.crumb button:hover{text-decoration:underline}
+.crumb i{font-style:normal;opacity:.45}
+.eyebrow{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--clay);margin:0 0 10px}
+h1{font-family:"IBM Plex Serif",serif;font-weight:500;font-size:clamp(27px,3.6vw,40px);
+  line-height:1.15;letter-spacing:-.01em;margin:0 0 12px}
+.lede{font-size:16px;color:var(--ink-soft);max-width:62ch;margin:0 0 24px}
+
+/* ── 패널·카드 ────────────────────────────────────── */
+.panel{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:22px 26px;margin-bottom:20px}
+.panel h2{font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:500;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--ink-soft);margin:0 0 12px}
+.panel p{margin:0 0 10px;max-width:70ch}.panel p:last-child{margin-bottom:0}
+.stats{display:flex;flex-wrap:wrap;margin-top:18px;border-top:1px solid var(--line);padding-top:16px}
+.stat{padding-right:32px;margin-right:32px;border-right:1px solid var(--line)}
+.stat:last-child{border:none;margin:0;padding:0}
+.stat b{display:block;font-family:"IBM Plex Mono",monospace;font-size:23px;font-weight:500;line-height:1}
+.stat span{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft)}
+
+.tools{display:flex;gap:8px;margin-bottom:26px;flex-wrap:wrap}
+.btn{border:1px solid var(--line);background:var(--card);border-radius:var(--r);cursor:pointer;
+  font:inherit;font-size:13px;padding:7px 15px;color:var(--ink);display:flex;align-items:center;gap:7px;
+  transition:border-color .16s,background .16s}
+.btn:hover{border-color:var(--brass);background:var(--card-2)}
+.btn.on{background:var(--bar);border-color:var(--bar);color:#FBF6EC}
+.btn:focus-visible{outline:2px solid var(--brass);outline-offset:2px}
+.btn .dot{width:7px;height:7px;border-radius:50%;background:var(--bar)}
+.btn.on .dot{background:#FBF6EC}
+
+.figure{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--bar);
+  border-radius:var(--r);padding:22px 24px;margin-bottom:26px}
+.figure h3{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-soft);margin:0 0 14px;font-weight:500}
+.figure svg{max-width:100%;height:auto;display:block}
+.figure .cap{font-size:13px;color:var(--ink-soft);margin-top:14px;max-width:62ch}
+
+.board{display:grid;grid-template-columns:repeat(auto-fill,minmax(262px,1fr));gap:14px}
+.card{position:relative;background:var(--card);border:1px solid var(--line);border-radius:var(--r);
+  padding:19px 19px 17px 23px;text-align:left;font:inherit;color:inherit;cursor:pointer;
+  transition:transform .16s,box-shadow .16s,border-color .16s}
+.card::before{content:"";position:absolute;left:0;top:-1px;bottom:-1px;width:6px;
+  border-radius:var(--r) 0 0 var(--r);background:var(--bar)}
+.card:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(60,40,22,.10);border-color:var(--brass)}
+.card:focus-visible{outline:2px solid var(--brass);outline-offset:2px}
+.card .no{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.12em;color:var(--ink-soft)}
+.card h3{font-family:"IBM Plex Serif",serif;font-size:18.5px;font-weight:500;margin:6px 0 8px;line-height:1.25}
+.card p{margin:0;font-size:13.5px;color:var(--ink-soft);line-height:1.55}
+.card .foot{margin-top:13px;padding-top:11px;border-top:1px solid var(--line);display:flex;
+  justify-content:space-between;font-family:"IBM Plex Mono",monospace;font-size:10.5px;
+  letter-spacing:.08em;color:var(--ink-soft)}
+.card .go{color:var(--brass)} .empty{color:var(--teal)}
+.body-copy{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:24px 26px}
+.placeholder{border:1px dashed var(--line);border-radius:var(--r);padding:20px 22px;color:var(--ink-soft);font-size:14px}
+.placeholder code{font-family:"IBM Plex Mono",monospace;font-size:12.5px;color:var(--clay)}
+
+/* ── 출처 ─────────────────────────────────────────── */
+.sources{margin-top:24px;border-top:1px solid var(--line);padding-top:18px}
+.sources h3{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--ink-soft);margin:0 0 12px;font-weight:500;
+  display:flex;align-items:center;gap:8px}
+.sources h3 .cnt{color:var(--clay)}
+.sources ol{list-style:none;margin:0;padding:0;counter-reset:s}
+.sources li{counter-increment:s;position:relative;padding:7px 0 7px 30px;font-size:13.5px;line-height:1.5;
+  border-bottom:1px solid rgba(214,198,174,.5)}
+.sources li:last-child{border-bottom:none}
+.sources li::before{content:counter(s);position:absolute;left:0;top:8px;
+  font-family:"IBM Plex Mono",monospace;font-size:10px;color:var(--ink-soft);
+  border:1px solid var(--line);border-radius:2px;width:19px;height:19px;
+  display:flex;align-items:center;justify-content:center}
+.sources a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--brass)}
+.sources a:hover{color:var(--brass)}
+.sources .meta{display:block;font-family:"IBM Plex Mono",monospace;font-size:10.5px;
+  letter-spacing:.05em;color:var(--ink-soft);margin-top:3px}
+.sources .kind{border:1px solid var(--line);border-radius:2px;padding:0 5px;margin-right:7px}
+.sources .none{font-size:13px;color:var(--teal)}
+.card .src{font-family:"IBM Plex Mono",monospace;font-size:10px;color:var(--ink-soft);opacity:.8}
+
+footer{margin-top:44px;padding-top:16px;border-top:1px solid var(--line);
+  font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.08em;color:var(--ink-soft)}
+@media (max-width:760px){
+  .wrap{padding:0 16px 72px}
+  .layer{min-width:118px;flex:0 0 auto}
+  .row1 .arw{display:none}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="spine">
+    <div class="spine-cap">계층 흐름 — 재료에서 집적까지</div>
+    <div class="row1" id="row1"></div>
+    <div class="row2" id="row2"></div>
+  </div>
+
+  <div class="crumb" id="crumb"></div>
+  <p class="eyebrow" id="eyebrow"></p>
+  <h1 id="title"></h1>
+  <p class="lede" id="lede"></p>
+  <section class="panel" id="panel"></section>
+  <div class="tools" id="tools"></div>
+  <div id="figbox"></div>
+  <div id="content"></div>
+  <footer>반도체교과서 · 계층 8장 · data.json 빌드 · 공개 자료만 수록 · 모든 서술은 출처 링크로 확인 가능</footer>
+</div>
+
+<script>
+/* ══════════════════════════════════════════════════════
+   내용은 build.js 가 content/*.md 에서 만든 ./data.json 을 읽는다.
+   node = { id, no, title, lede, summary[], body, sources[], figure{svg,cap}, children[] }
+   children 없으면 잎 노드. 있으면 그 자리에 대시보드가 한 겹 더 펼쳐진다.
+   figure 가 있으면 "원리 그림" 버튼이 생긴다.
+   ══════════════════════════════════════════════════════ */
+
+const BAR=["#5A2E1C","#6E3A24","#84492A","#9A5A2A","#AC6A22","#B5761D","#C08A2E","#C9A24A"];
+const idxOf=(DATA,p)=>p[1]?DATA.children.findIndex(c=>c.id===p[1].id):-1;
+
+let DATA=null, figOpen=false;
+
+function resolve(DATA,hash){
+  const ids=hash.replace(/^#\/?/,"").split("/").filter(Boolean);
+  const path=[DATA]; let cur=DATA;
+  for(const id of ids){const nx=(cur.children||[]).find(c=>c.id===id); if(!nx)break; path.push(nx); cur=nx;}
+  return path;
+}
+const href=p=>"#/"+p.slice(1).map(n=>n.id).join("/");
+
+function render(){
+  if(!DATA) return;
+  const path=resolve(DATA,location.hash), node=path[path.length-1], i=idxOf(DATA,path);
+  const bar=i<0?"#B5761D":BAR[i%BAR.length];
+  document.documentElement.style.setProperty("--bar",bar);
+
+  // 1줄 — 계층 흐름
+  const chapters=DATA.children||[];
+  document.getElementById("row1").innerHTML=chapters.map((c,k)=>
+    `<button class="layer ${path[1]&&path[1].id===c.id?"on":""}" data-id="${c.id}" style="--bar:${BAR[k%BAR.length]}">
+       <div class="tick"></div><b>${c.no||k+1}</b><span>${c.title}</span></button>`
+    + (k<chapters.length-1?'<span class="arw">→</span>':'')).join("");
+
+  // 2줄 — 선택된 계층의 소주제
+  const subs=path[1]?(path[1].children||[]):[];
+  document.getElementById("row2").innerHTML = subs.length
+    ? subs.map((s,k)=>`<button class="sub ${path[2]&&path[2].id===s.id?"on":""}" data-sub="${s.id}">
+         <em>${k+1}</em>${s.title}</button>`).join("")
+    : `<span class="hint">${chapters.length?"위에서 계층을 고르면 소주제가 여기에 펼쳐집니다.":"content/ 에 md 를 넣고 build 하면 여기에 계층이 채워집니다."}</span>`;
+
+  document.querySelectorAll(".layer").forEach(el=>el.onclick=()=>location.hash="#/"+el.dataset.id);
+  document.querySelectorAll(".sub").forEach(el=>el.onclick=()=>location.hash=`#/${path[1].id}/${el.dataset.sub}`);
+
+  // 브레드크럼
+  const cr=document.getElementById("crumb"); cr.innerHTML="";
+  path.forEach((n,k)=>{
+    if(k) cr.insertAdjacentHTML("beforeend","<i>›</i>");
+    if(k<path.length-1){const b=document.createElement("button");
+      b.textContent=k===0?"전체":n.title; b.onclick=()=>location.hash=href(path.slice(0,k+1)); cr.appendChild(b);}
+    else if(path.length>1) cr.insertAdjacentHTML("beforeend",`<span>${n.title}</span>`);
+  });
+
+  document.getElementById("eyebrow").textContent =
+    path.length===1?"계층 축 · data.json":path.length===2?`계층 ${node.no||""}`:`${path[1].title} · 소주제`;
+  document.getElementById("title").textContent=node.title;
+  document.getElementById("lede").textContent=node.lede||"";
+
+  const sum=node.summary||[];
+  document.getElementById("panel").innerHTML=`<h2>요약</h2>`+
+    (sum.length?sum.map(s=>`<p>${s}</p>`).join("")
+      :`<p style="color:var(--teal)">아직 비어 있음. content/ md 에서 이 노드의 첫 문단을 채우세요.</p>`)+
+    (node.stats?`<div class="stats">${node.stats.map(s=>`<div class="stat"><b>${s.n}</b><span>${s.l}</span></div>`).join("")}</div>`:"");
+
+  // 원리 그림 버튼
+  const tools=document.getElementById("tools"), figbox=document.getElementById("figbox");
+  if(node.figure){
+    tools.innerHTML=`<button class="btn ${figOpen?"on":""}" id="figbtn"><span class="dot"></span>원리 그림 ${figOpen?"닫기":"보기"}</button>`;
+    document.getElementById("figbtn").onclick=()=>{figOpen=!figOpen;render();};
+    figbox.innerHTML=figOpen?`<div class="figure"><h3>원리 그림</h3>${node.figure.svg}
+      ${node.figure.cap?`<p class="cap">${node.figure.cap}</p>`:""}</div>`:"";
+  } else { tools.innerHTML=""; figbox.innerHTML=""; }
+
+  // 카드보드 / 본문
+  const kids=node.children||[], content=document.getElementById("content");
+  const srcHTML = (n)=>{
+    const s=n.sources||[];
+    return `<section class="sources"><h3>출처 <span class="cnt">${s.length||"—"}</span></h3>`+
+      (s.length?`<ol>${s.map(x=>
+        `<li>${x.u?`<a href="${x.u}" target="_blank" rel="noopener">${x.t}</a>`:x.t}
+         <span class="meta">${x.kind?`<span class="kind">${x.kind}</span>`:""}${x.pub||""}${x.date?" · "+x.date:""}</span></li>`).join("")}</ol>`
+      :`<p class="none">아직 출처가 없습니다. 공개 자료만 싣는 사이트이므로 본문보다 출처를 먼저 채우세요.</p>`)+
+      `</section>`;
+  };
+  if(kids.length){
+    content.innerHTML=`<div class="board">${kids.map((c,k)=>{
+      const deep=(c.children||[]).length, filled=(c.summary||[]).length||c.body;
+      return `<button class="card" data-id="${c.id}" style="--bar:${path.length===1?BAR[k%BAR.length]:bar}">
+        <div class="no">${c.no?"CH "+c.no:"소주제 "+(k+1)}</div>
+        <h3>${c.title}</h3><p>${c.lede||""}</p>
+        <div class="foot"><span class="${filled?"":"empty"}">${filled?"작성됨":"비어 있음"}</span>
+        <span class="src">출처 ${(c.sources||[]).length||"—"}</span>
+        <span class="go">${deep?deep+"개 →":"열기 →"}</span></div></button>`;}).join("")}</div>`;
+    content.querySelectorAll(".card").forEach(el=>el.onclick=()=>
+      location.hash=href(path.concat([kids.find(k=>k.id===el.dataset.id)])));
+  } else {
+    content.innerHTML=node.body?`<div class="body-copy">${node.body}</div>`
+      :`<div class="placeholder">본문이 아직 없습니다. content/ md 에 본문을 채우거나,
+        <code>### basis:</code> 절을 추가하면 여기에 대시보드가 한 겹 더 펼쳐집니다.</div>`;
+  }
+  content.insertAdjacentHTML("beforeend", srcHTML(node));
+  scrollTo({top:0,behavior:"instant"});
+}
+
+addEventListener("hashchange",function(){figOpen=false;render();});
+
+fetch("./data.json")
+  .then(r=>r.json())
+  .then(d=>{ DATA=d; render(); })
+  .catch(err=>{
+    document.getElementById("title").textContent="data.json 을 불러오지 못했습니다";
+    document.getElementById("lede").textContent="npm run build 로 public/data.json 을 먼저 생성하세요. ("+err+")";
+  });
+</script>
+</body>
+</html>

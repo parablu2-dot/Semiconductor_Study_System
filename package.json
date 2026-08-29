@@ -1,0 +1,13 @@
+{
+  "name": "semiconductor-study-system",
+  "version": "0.1.0",
+  "private": true,
+  "description": "반도체교과서 — 드라이브 md 원문을 계층 대시보드용 data.json으로 빌드",
+  "scripts": {
+    "build": "node build.js"
+  },
+  "dependencies": {
+    "gray-matter": "^4.0.3",
+    "marked": "^12.0.0"
+  }
+}
