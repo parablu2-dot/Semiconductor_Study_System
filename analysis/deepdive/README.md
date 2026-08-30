@@ -1,7 +1,12 @@
 # 소주제 심화 연구 진행 현황
 
-`analysis/subtopics.json`의 42개 소주제를 대상으로, 계층(장) 하나씩 순서대로 심화 연구 문서를 작성한다.
-문서는 `analysis/deepdive/<소주제id>.md` 하나당 하나. 대시보드 빌드에는 아직 연결하지 않음(연결은 별도 작업).
+`analysis/subtopics.json`의 43개 소주제(원래 42개 + chiplet-ucie 분리로 +1)를 대상으로, 계층(장) 하나씩
+순서대로 심화 연구 문서를 작성한다. 문서는 `analysis/deepdive/<소주제id>.md` 하나당 하나.
+
+**2026-08-30 chiplet-ucie 분리(사용자 지시).** "chiplet은 package, ucie는 IP"라는 판단에 따라
+기존 6개 장 교차 극단 사례였던 `chiplet-ucie`를 [chiplet.md](chiplet.md)(ch7, 다이 물리 분할·조립 문제)와
+[ucie.md](ucie.md)(ch4, D2D 인터페이스·IP 재사용 표준)로 나눴다. 다른 문서에 있던 `[[chiplet-ucie]]` 링크는
+문맥에 따라 `[[chiplet]]` 또는 `[[ucie]]`로 전부 재배선했다.
 
 ## 착수 전 결정 — 교차 소주제의 주 소속 계층
 
@@ -13,9 +18,10 @@
 - `finfet-gaa-nanosheet`: appears_in=[1,2,3]이지만 ch=2(소자) — 구조 자체의 본체가 소자 계층이기 때문.
 - `uvm-verification`: appears_in=[4,5]이지만 ch=5(설계방법론) — 검증 방법론의 본체가 설계방법론 계층이기 때문.
 - `compute-in-memory`: appears_in=[2,6]이지만 ch=6(아키텍처) — PIM은 아키텍처 개념이고 ch2는 그 물성적 제약만 참조.
-- `chiplet-ucie`: appears_in=[3,4,5,6,7,8], ch=4 — 6개 장에 걸치는 극단적 사례. "소주제"가 아니라
-  "축을 관통하는 주제"로 별도 카테고리화가 필요할 수 있다는 이견이 있음(미결정, 리뷰 코멘트 유래).
-  연구 자체는 ch4를 주 소속으로 진행하되, 문서 안에 다른 5개 장 관점을 모두 절로 나눠 담는다.
+- `chiplet`(ch7)·`ucie`(ch4): 원래 하나였던 6개 장 교차 극단 사례를 "무엇을 쪼개 어떻게 붙이는가"(패키징)와
+  "그 이음매를 어떤 표준으로 규정하는가"(IP)로 분리했다 — chiplet은 물리적 다이 분할·조립(수율·KGD·재작업),
+  ucie는 D2D 인터페이스 표준화(상호운용성·pJ/bit). 이 분리로 "축을 관통하는 주제" 별도 카테고리화 논의는
+  해소됨(각자 정상적인 교차 소주제로 정리).
 
 **규칙**: 연구는 `ch` 필드가 가리키는 계층 차례에서 1회 수행한다. 다른 장 차례가 와도 같은 id를 다시 연구하지 않고
 기존 문서에 링크만 건다. 4번 문항("상위 계층 영향")은 교차 소주제의 경우 "교차 계층 영향"으로 이름을 바꿔
@@ -32,7 +38,8 @@ appears_in에 속한 모든 장과의 관계를 각각 문장으로 정리한다
 
 장 단위 4문항과 다른 점: 질문이 "이 계층 전체에서 무엇이 표준인가"가 아니라
 "이 구체적 기술/재료/구조가 왜 표준(후보)인가"로 좁혀진다. 그만큼 메커니즘·수치·경쟁 후보를 더 구체적으로 쓴다.
-출처(sources)는 이번 라운드에서는 넣지 않는다 — 별도 남은 일(구현지시서 6-b 원칙에 따른 검증)로 분리되어 있다.
+출처(sources)는 이 deepdive 문서들에는 넣지 않는다 — build.js가 실제로 파싱하는 `content/*.md`(장 문서)에
+한정해 구현지시서 6-b 원칙(검증된 것만)으로 넣는다. 아래 "다음 단계" 절 참조.
 
 ## 진행 현황
 
@@ -41,13 +48,13 @@ appears_in에 속한 모든 장과의 관계를 각각 문장으로 정리한다
 | ch1 재료·물성 | 6 | 6 | ✅ 완료 (2026-08-30) |
 | ch2 소자 | 5 | 5 | ✅ 완료 (2026-08-30) |
 | ch3 공정·계측 | 5 | 5 | ✅ 완료 (2026-08-30) |
-| ch4 회로·IP | 6 | 6 | ✅ 완료 (2026-08-30, chiplet-ucie 포함) |
+| ch4 회로·IP | 6 | 6 | ✅ 완료 (2026-08-30, ucie 포함) |
 | ch5 설계방법론 | 4 | 4 | ✅ 완료 (2026-08-30) |
 | ch6 아키텍처 | 5 | 5 | ✅ 완료 (2026-08-30) |
-| ch7 패키징·집적 | 5 | 5 | ✅ 완료 (2026-08-30) |
+| ch7 패키징·집적 | 6 | 6 | ✅ 완료 (2026-08-30, chiplet 포함) |
 | ch8 시스템·SW | 6 | 6 | ✅ 완료 (2026-08-30) |
 
-**42/42 완료.** 완료 표시는 `analysis/subtopics.json`의 `researched: true`로도 동일하게 추적한다(전량 `true`).
+**43/43 완료.** 완료 표시는 `analysis/subtopics.json`의 `researched: true`로도 동일하게 추적한다(전량 `true`).
 
 ### 전체 문서 목록 (계층순)
 
@@ -57,21 +64,24 @@ appears_in에 속한 모든 장과의 관계를 각각 문장으로 정리한다
 
 **ch3 공정·계측** — [euv-lithography](euv-lithography.md) · [atomic-layer-process](atomic-layer-process.md) · [metrology-scatterometry](metrology-scatterometry.md) · [har-etching](har-etching.md) · [lithography-alternatives](lithography-alternatives.md)
 
-**ch4 회로·IP** — [rtl-design-flow](rtl-design-flow.md)(교차 ch4+ch5) · [standard-cell-ip-reuse](standard-cell-ip-reuse.md) · [analog-mixed-signal-design](analog-mixed-signal-design.md)(교차 ch4+ch5) · [hls-high-level-synthesis](hls-high-level-synthesis.md)(교차 ch4+ch5) · [ml-eda-automation](ml-eda-automation.md)(교차 ch4+ch5) · [chiplet-ucie](chiplet-ucie.md)(극단 교차 ch3~ch8, 6개 장)
+**ch4 회로·IP** — [rtl-design-flow](rtl-design-flow.md)(교차 ch4+ch5) · [standard-cell-ip-reuse](standard-cell-ip-reuse.md) · [analog-mixed-signal-design](analog-mixed-signal-design.md)(교차 ch4+ch5) · [hls-high-level-synthesis](hls-high-level-synthesis.md)(교차 ch4+ch5) · [ml-eda-automation](ml-eda-automation.md)(교차 ch4+ch5) · [ucie](ucie.md)(교차 ch4+ch5+ch7)
 
 **ch5 설계방법론** — [uvm-verification](uvm-verification.md)(교차 ch4+ch5) · [mmmc-ssta-signoff](mmmc-ssta-signoff.md)(교차 ch3+ch5) · [open-source-eda](open-source-eda.md)(교차 ch4+ch5) · [hardware-emulation](hardware-emulation.md)
 
 **ch6 아키텍처** — [von-neumann-cache-hierarchy](von-neumann-cache-hierarchy.md) · [memory-bandwidth-energy-wall](memory-bandwidth-energy-wall.md) · [compute-in-memory](compute-in-memory.md)(교차 ch2+ch6) · [wafer-scale-dataflow-architecture](wafer-scale-dataflow-architecture.md)(교차 ch6+ch7+ch8) · [logic-stack-hybrid-bonding](logic-stack-hybrid-bonding.md)(교차 ch3+ch6+ch7)
 
-**ch7 패키징·집적** — [hbm](hbm.md)(교차 ch6+ch7+ch8) · [silicon-interposer](silicon-interposer.md)(교차 ch6+ch7) · [glass-interposer-substrate](glass-interposer-substrate.md) · [co-packaged-optics](co-packaged-optics.md)(교차 ch6+ch7+ch8) · [fan-out-mobile-packaging](fan-out-mobile-packaging.md)
+**ch7 패키징·집적** — [chiplet](chiplet.md)(교차 ch3+ch6+ch7+ch8) · [hbm](hbm.md)(교차 ch6+ch7+ch8) · [silicon-interposer](silicon-interposer.md)(교차 ch6+ch7) · [glass-interposer-substrate](glass-interposer-substrate.md) · [co-packaged-optics](co-packaged-optics.md)(교차 ch6+ch7+ch8) · [fan-out-mobile-packaging](fan-out-mobile-packaging.md)
 
 **ch8 시스템·SW** — [cuda-programming-model](cuda-programming-model.md) · [pytorch-jax-framework](pytorch-jax-framework.md) · [mfu-utilization-gap](mfu-utilization-gap.md) · [distributed-training-framework](distributed-training-framework.md) · [llm-serving-optimization](llm-serving-optimization.md) · [cxl-memory-fabric](cxl-memory-fabric.md)(교차 ch6+ch7+ch8)
 
-## 다음 단계 (착수 전 — 그림 작업)
+## 다음 단계 진행 순서 (2026-08-30 사용자 지시)
 
-소주제별 심화 연구(주 작업)가 42/42 완료됐다. 사용자 지시에 따라 **그림(층1 SVG 개념도 + 층2 외부 링크) 작업은 이번 세션에서 시작하지 않고 다음 세션으로 넘긴다.**
+사용자 지시: "3번(chiplet/UCIe)은 정리했고, 출처는 확실한 것만 연결, 그림은 간단하게, 대시보드는 이 셋을 정리하고 진행."
 
-그림 착수 전 남은 선택지(다음 세션에서 결정):
-1. `chiplet-ucie`를 "축을 관통하는 주제"로 별도 카테고리화할지 — [chiplet-ucie.md](chiplet-ucie.md) 하단에 미결정으로 표시해둠.
-2. 출처(sources) 보강을 그림 작업 전/후 어느 시점에 넣을지 — 구현지시서 6-b 원칙(링크 확인 후에만 게재)에 따라 42개 문서 전체가 아직 출처 0건.
-3. 층1 SVG 대상은 계층 8개 + 교차 소주제 22개로 이미 확정돼 있음(사용자 확정 사항) — 이번 42개 심화 문서가 그 SVG의 "경계 긋기" 내용 소스가 된다.
+1. ✅ chiplet-ucie 분리 완료 — 위 참조.
+2. 출처(sources) — `content/*.md` 8장 원문에, 실제로 존재를 확인한 것만 `**출처**` 블록으로 추가(구현지시서 6-b 원칙). 미확인 항목은 신지 않는다.
+3. 그림 — `figures/<장id>.svg` 층1 개념도를 간단한 스타일로 8장분 우선 제작(경계 긋기 목적, 팔레트 고정, 수치 없음, 라벨 6단어 이내).
+4. 대시보드 — 위 세 가지 반영 후 `npm run build`로 `docs/data.json` 재생성·검증, push.
+
+소주제 deepdive 42~43개 자체에 출처·그림을 넣을지는 아직 범위 밖 — 이번 라운드는 build.js가 실제로 읽는
+`content/*.md`(장 문서)에 한정한다. deepdive 문서는 그 뒤 별도 라운드에서 검토.

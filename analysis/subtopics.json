@@ -23,7 +23,7 @@
   { "ch": 4, "id": "analog-mixed-signal-design", "title": "아날로그·믹스드시그널 설계", "lede": "SPICE 기반 수작업 흐름 — 디지털 자동화와 30년째 분리 유지. ch5(unified mixed-signal signoff 미완결)에서도 다뤄짐", "appears_in": [4, 5], "researched": true },
   { "ch": 4, "id": "hls-high-level-synthesis", "title": "고수준 합성 (HLS)", "lede": "C/C++/SystemC→RTL 자동 합성 — 특정 도메인은 승리, 범용 대체는 미해결. [통일] ch4·ch5가 각자의 대안 후보 목록에서 동일 기술을 독립적으로 다룸", "appears_in": [4, 5], "researched": true },
   { "ch": 4, "id": "ml-eda-automation", "title": "ML 기반 EDA 자동화", "lede": "강화학습 배치·배선, DSO.ai류 — 좁은 최적화는 검증됐으나 넓은 대체는 마케팅 단계. [통일] ch4·ch5가 각자의 대안 후보 목록에서 동일 기술을 독립적으로 다룸", "appears_in": [4, 5], "researched": true },
-  { "ch": 4, "id": "chiplet-ucie", "title": "Chiplet · UCIe", "lede": "다이 분할과 D2D 표준화 — 수율·다이크기 한계에서 강제되어 패키징·시스템까지 전파. [통일] '다이 크기 상한→chiplet 강제'(ch3) + 'chiplet 기반 IP 재사용과 UCIe 표준화'(ch4) + 'chiplet 인터페이스 표준화'(ch5) + 'chiplet 기반 아키텍처 분할'(ch6) + 조립·시험 전반(ch7) + 되돌아가는 요구(ch8)를 하나로 묶음", "appears_in": [3, 4, 5, 6, 7, 8], "researched": true },
+  { "ch": 4, "id": "ucie", "title": "UCIe (Universal Chiplet Interconnect Express)", "lede": "물리 다이 단위 IP 재사용을 위한 D2D 인터페이스 표준 — 상호운용 상용 사례 제한적. 2026-08-30 사용자 지시로 Chiplet(패키징)과 분리. ch5(검증비용이 강제한 표준화)·ch7(물리계층 스펙 제약)에서도 다뤄짐", "appears_in": [4, 5, 7], "researched": true },
 
   { "ch": 5, "id": "uvm-verification", "title": "UVM 검증 방법론", "lede": "constrained-random + functional coverage 표준, 검증 상태 폭발이 강제한 4층 파이프라인. ch4(검증 인력·시간이 설계를 넘어선 원인)에서도 다뤄짐", "appears_in": [4, 5], "researched": true },
   { "ch": 5, "id": "mmmc-ssta-signoff", "title": "MMMC/SSTA 사인오프", "lede": "process·voltage·temperature 수백~수천 corner 병렬 검증. ch3(변동성이 강제한 통계적 사인오프 이행)에서도 다뤄짐", "appears_in": [3, 5], "researched": true },
@@ -36,6 +36,7 @@
   { "ch": 6, "id": "wafer-scale-dataflow-architecture", "title": "데이터플로우·웨이퍼-스케일 아키텍처", "lede": "Cerebras WSE·Groq LPU — 정적 스케줄링이 general-purpose 워크로드에 열등. [통일] ch6(아키텍처 대안)·ch7(WSI 패키징 대안)·ch8(Dataflow SW 스택)가 동일 사례를 각 계층 관점에서 독립적으로 다룸 — 00_종합 불일치 목록 #2와 같은 지점", "appears_in": [6, 7, 8], "researched": true },
   { "ch": 6, "id": "logic-stack-hybrid-bonding", "title": "3D 로직 스택 · Hybrid Bonding", "lede": "V-Cache·Foveros의 수직 적층과 이를 구현하는 Cu-Cu 직접 접합. [통일] '3D 로직 스택'(ch6)과 'hybrid bonding(직접 Cu-Cu/SiO₂ 접합)'(ch7)을 하나로 묶음. ch3(열예산 충돌)에서도 다뤄짐", "appears_in": [3, 6, 7], "researched": true },
 
+  { "ch": 7, "id": "chiplet", "title": "Chiplet (다이 분할)", "lede": "수율·다이크기 한계에서 강제된 물리적 조립 문제 — KGD 시험·재작업 불가능성. 2026-08-30 사용자 지시로 UCIe(IP)와 분리. ch3(강제 원인)·ch6(아키텍처 파티션)·ch8(개방성 요구)에서도 다뤄짐", "appears_in": [3, 6, 7, 8], "researched": true },
   { "ch": 7, "id": "hbm", "title": "HBM (High Bandwidth Memory)", "lede": "메모리 셀·패키징·인터페이스 세 계층이 동시에 걸리는 사례 — base die 커스텀화로 메모리에서 조립 서브시스템으로 이동. ch6(대역폭 벽의 근거 수치)·ch8(스택 수·pitch 확장 요구)에서도 다뤄짐", "appears_in": [6, 7, 8], "researched": true },
   { "ch": 7, "id": "silicon-interposer", "title": "2.5D 실리콘 인터포저 (CoWoS·EMIB)", "lede": "서브-μm 배선으로 HBM-to-로직 대역폭을 실현하는 유일한 매체. ch6(대역폭 상한이 강제한 인프라)에서도 다뤄짐", "appears_in": [6, 7], "researched": true },
   { "ch": 7, "id": "glass-interposer-substrate", "title": "유리 인터포저·서브스트레이트", "lede": "CTE 조정·저유전손실 후보 — TGV 공정 성숙도가 CMOS 그레이드에 미달", "appears_in": [7], "researched": true },

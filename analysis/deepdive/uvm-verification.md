@@ -37,4 +37,4 @@ UVM의 승리 전제는 **"constrained-random stimulus + functional coverage + s
 
 **검증 인력·시간이 설계 인력·시간을 넘어선다는 사실이 회로·IP 계층에서 재확인되며, IP 통합 검증이 사인오프의 지배적 관문이 된다** — [[standard-cell-ip-reuse]]에서 다룬 대로 IP 하나를 붙이는 통합 검증 비용이 IP 라이선스 비용을 초과하는 경우가 흔하다는 관찰과 같은 계열의 현상이다.
 
-**커버리지 지표의 이질성(functional·property·emulation·post-silicon coverage가 서로 다름)이 chiplet 시대의 multi-die 검증([[chiplet-ucie]])에서 더 심화된다** — die 단위로 검증이 쪼개질수록 커버리지 통합의 어려움이 곱절로 커진다.
+**커버리지 지표의 이질성(functional·property·emulation·post-silicon coverage가 서로 다름)이 chiplet 시대의 multi-die 검증([[chiplet]]의 물리적 분할 + [[ucie]]의 인터페이스 표준화)에서 더 심화된다** — die 단위로 검증이 쪼개질수록 커버리지 통합의 어려움이 곱절로 커진다.

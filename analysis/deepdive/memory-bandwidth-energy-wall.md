@@ -25,7 +25,7 @@ appears_in: [6]
 
 ## 3. 대안 후보 — 상한을 넘으려는 여덟 갈래 시도
 
-이 이중 상한을 정면 또는 우회로 넘겠다는 시도는 여덟 갈래로 나뉜다. **(i) [[compute-in-memory]]** — 데이터 이동 자체를 0에 근접시키려는 접근. **(ii) 니어 메모리 컴퓨팅(PIM)** — 삼성 HBM-PIM, SK hynix AiM, UPMEM. **(iii) [[wafer-scale-dataflow-architecture]]** — 캐시 계층을 최소화하고 정적 스케줄링으로 우회. **(iv) [[chiplet-ucie]] 기반 아키텍처 분할** — monolithic 다이의 한계를 D2D 인터커넥트로 봉합. **(v) [[logic-stack-hybrid-bonding]]** 기반 3D 로직 스택. **(vi) 뉴로모픽·이벤트 기반 아키텍처.** **(vii) [[co-packaged-optics]]로 대표되는 광·아날로그 신호 도메인 우회.** **(viii) 명시적 스코프 병렬 모델(CUDA·SYCL·HSA류)** — [[von-neumann-cache-hierarchy]] 참조.
+이 이중 상한을 정면 또는 우회로 넘겠다는 시도는 여덟 갈래로 나뉜다. **(i) [[compute-in-memory]]** — 데이터 이동 자체를 0에 근접시키려는 접근. **(ii) 니어 메모리 컴퓨팅(PIM)** — 삼성 HBM-PIM, SK hynix AiM, UPMEM. **(iii) [[wafer-scale-dataflow-architecture]]** — 캐시 계층을 최소화하고 정적 스케줄링으로 우회. **(iv) [[chiplet]] 기반 아키텍처 분할과 [[ucie]] 표준화** — monolithic 다이의 한계를 D2D 인터커넥트로 봉합. **(v) [[logic-stack-hybrid-bonding]]** 기반 3D 로직 스택. **(vi) 뉴로모픽·이벤트 기반 아키텍처.** **(vii) [[co-packaged-optics]]로 대표되는 광·아날로그 신호 도메인 우회.** **(viii) 명시적 스코프 병렬 모델(CUDA·SYCL·HSA류)** — [[von-neumann-cache-hierarchy]] 참조.
 
 이 여덟 후보를 종합하면, **"메모리를 연산에 가깝게" 또는 "연산을 메모리에 가깝게" 두 방향 모두에서 실리콘·패키징·소프트웨어 스택의 재정렬이 요구되며, 어느 후보도 단독으로 이중 상한을 해결하지 못하고 여러 후보가 조합될 것**이라는 점이 현재의 산업 통설이다. 어느 조합이 지배할지는 논쟁이 남는다.
 

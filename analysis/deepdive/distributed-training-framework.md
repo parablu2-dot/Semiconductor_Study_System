@@ -33,4 +33,4 @@ DeepSpeed(ZeRO)·FSDP·Megatron-LM이 대형 모델 병렬화 관행을 만들�
 
 **straggler·fault 문제가 아키텍처 계층에 결정론적 실행·gang scheduling·hardware-level fault isolation을 요구한다** — 대규모 분산 학습의 fault 빈도가 하이퍼스케일러 리포트에서 반복 확인되면서, 이 요구가 다음 세대 아키텍처 설계에 반영되는 압력으로 작용한다.
 
-**분산 학습의 fault tolerance 요구가 패키징·회로 계층에 chiplet redundancy·HBM spare channel 확대를 요구한다** — [[chiplet-ucie]]·[[hbm]]에서 다룬 조합 수율 문제와 결합해, 분산 학습 규모가 커질수록 개별 부품의 결함 허용 설계가 더 중요해진다.
+**분산 학습의 fault tolerance 요구가 패키징·회로 계층에 chiplet redundancy·HBM spare channel 확대를 요구한다** — [[chiplet]]·[[hbm]]에서 다룬 조합 수율 문제와 결합해, 분산 학습 규모가 커질수록 개별 부품의 결함 허용 설계가 더 중요해진다.
