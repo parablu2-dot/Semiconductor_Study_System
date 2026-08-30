@@ -36,11 +36,11 @@
   { "ch": 6, "id": "wafer-scale-dataflow-architecture", "title": "데이터플로우·웨이퍼-스케일 아키텍처", "lede": "Cerebras WSE·Groq LPU — 정적 스케줄링이 general-purpose 워크로드에 열등. [통일] ch6(아키텍처 대안)·ch7(WSI 패키징 대안)·ch8(Dataflow SW 스택)가 동일 사례를 각 계층 관점에서 독립적으로 다룸 — 00_종합 불일치 목록 #2와 같은 지점", "appears_in": [6, 7, 8], "researched": true },
   { "ch": 6, "id": "logic-stack-hybrid-bonding", "title": "3D 로직 스택 · Hybrid Bonding", "lede": "V-Cache·Foveros의 수직 적층과 이를 구현하는 Cu-Cu 직접 접합. [통일] '3D 로직 스택'(ch6)과 'hybrid bonding(직접 Cu-Cu/SiO₂ 접합)'(ch7)을 하나로 묶음. ch3(열예산 충돌)에서도 다뤄짐", "appears_in": [3, 6, 7], "researched": true },
 
-  { "ch": 7, "id": "hbm", "title": "HBM (High Bandwidth Memory)", "lede": "메모리 셀·패키징·인터페이스 세 계층이 동시에 걸리는 사례 — base die 커스텀화로 메모리에서 조립 서브시스템으로 이동. ch6(대역폭 벽의 근거 수치)·ch8(스택 수·pitch 확장 요구)에서도 다뤄짐", "appears_in": [6, 7, 8], "researched": false },
-  { "ch": 7, "id": "silicon-interposer", "title": "2.5D 실리콘 인터포저 (CoWoS·EMIB)", "lede": "서브-μm 배선으로 HBM-to-로직 대역폭을 실현하는 유일한 매체. ch6(대역폭 상한이 강제한 인프라)에서도 다뤄짐", "appears_in": [6, 7], "researched": false },
-  { "ch": 7, "id": "glass-interposer-substrate", "title": "유리 인터포저·서브스트레이트", "lede": "CTE 조정·저유전손실 후보 — TGV 공정 성숙도가 CMOS 그레이드에 미달", "appears_in": [7], "researched": false },
-  { "ch": 7, "id": "co-packaged-optics", "title": "Co-Packaged Optics (CPO)", "lede": "광 트랜시버를 로직 옆에 배치해 pJ/bit를 낮추는 접근 — 온도 민감성·이종 공정 통합 미해결. ch6(광 도메인 우회 후보)·ch8(패키지 내 통합 요구)에서도 다뤄짐", "appears_in": [6, 7, 8], "researched": false },
-  { "ch": 7, "id": "fan-out-mobile-packaging", "title": "Fan-out 패키징 (InFO·PoP)", "lede": "모바일·클라이언트 세그먼트의 사실상 표준 — HBM급 대역폭이 불필요한 영역", "appears_in": [7], "researched": false },
+  { "ch": 7, "id": "hbm", "title": "HBM (High Bandwidth Memory)", "lede": "메모리 셀·패키징·인터페이스 세 계층이 동시에 걸리는 사례 — base die 커스텀화로 메모리에서 조립 서브시스템으로 이동. ch6(대역폭 벽의 근거 수치)·ch8(스택 수·pitch 확장 요구)에서도 다뤄짐", "appears_in": [6, 7, 8], "researched": true },
+  { "ch": 7, "id": "silicon-interposer", "title": "2.5D 실리콘 인터포저 (CoWoS·EMIB)", "lede": "서브-μm 배선으로 HBM-to-로직 대역폭을 실현하는 유일한 매체. ch6(대역폭 상한이 강제한 인프라)에서도 다뤄짐", "appears_in": [6, 7], "researched": true },
+  { "ch": 7, "id": "glass-interposer-substrate", "title": "유리 인터포저·서브스트레이트", "lede": "CTE 조정·저유전손실 후보 — TGV 공정 성숙도가 CMOS 그레이드에 미달", "appears_in": [7], "researched": true },
+  { "ch": 7, "id": "co-packaged-optics", "title": "Co-Packaged Optics (CPO)", "lede": "광 트랜시버를 로직 옆에 배치해 pJ/bit를 낮추는 접근 — 온도 민감성·이종 공정 통합 미해결. ch6(광 도메인 우회 후보)·ch8(패키지 내 통합 요구)에서도 다뤄짐", "appears_in": [6, 7, 8], "researched": true },
+  { "ch": 7, "id": "fan-out-mobile-packaging", "title": "Fan-out 패키징 (InFO·PoP)", "lede": "모바일·클라이언트 세그먼트의 사실상 표준 — HBM급 대역폭이 불필요한 영역", "appears_in": [7], "researched": true },
 
   { "ch": 8, "id": "cuda-programming-model", "title": "CUDA/GPU 프로그래밍 모델", "lede": "SIMT 기반 벤더 종속 스택 — OpenCL·ROCm·SYCL 대비 라이브러리 축적의 승리", "appears_in": [8], "researched": false },
   { "ch": 8, "id": "pytorch-jax-framework", "title": "PyTorch/JAX 프레임워크", "lede": "동적 그래프 디버깅 경험이 TensorFlow를 밀어낸 2018~2020년 전환", "appears_in": [8], "researched": false },
