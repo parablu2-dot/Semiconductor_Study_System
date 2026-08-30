@@ -48,7 +48,15 @@
             "Ge / SiGe 고농도 채널. 정공 이동도가 Si의 4배 수준이라 PMOS 병목을 직접 겨냥한다. Intel·IMEC가 20여 년 논문을 냈지만, 여전히 못 푼 문제는 Ge의 native oxide(GeO₂·GeO)가 휘발성·불안정성이어서 D_it가 Si–SiO₂ 대비 1~2 자릿수 높다는 점이다. Al₂O₃/GeOx 인터레이어로 완화하는 연구가 있지만 신뢰성 데이터가 부족하다."
           ],
           "body": "<p><strong>III-V(InGaAs, InAs).</strong> NMOS 채널에서 전자 이동도가 Si의 5~10배지만, (i) Si 웨이퍼와의 격자 부정합(InP는 8%)이 관통 전위(threading dislocation) 10⁸ cm⁻² 이상을 만들고, (ii) 표면 페르미 레벨 피닝으로 정상 인버전이 잘 안 걸리며, (iii) 정공 이동도는 오히려 Si보다 낮아서 PMOS 짝이 없다. &quot;III-V NMOS + Ge PMOS 이종 통합&quot;이 계속 제안됐지만 웨이퍼 스케일 결함 밀도가 양산 기준(10² cm⁻² 이하)에 도달한 사례는 아직 보고되지 않았다.</p>\n<p><strong>2D 반도체(MoS₂, WSe₂, WS₂).</strong> 단원자층 두께 자체가 short channel effect 억제를 물리 레벨에서 해결한다는 점이 매력이다. 2024년 TSMC·Intel·삼성 모두 컨퍼런스에서 sub-1 nm 채널 데모를 냈다. 못 푼 문제는 (i) 금속-2D 컨택 저항이 여전히 100 Ω·μm 수준으로 Si 대비 10배 이상 높고 (Bi·Sb 반금속 컨택으로 낮추는 연구가 최근 진전), (ii) 300 mm 웨이퍼 스케일 균일 성장(MOCVD·ALD)이 결정립 크기·층 수 제어에서 양산 편차를 못 잡았다는 점이다.</p>\n<p><strong>강유전 HfO₂(HfZrO₂, Zr 도핑).</strong> 2011년 Böscke 논문 이후 등장한 CMOS 호환 강유전체. 기존 HfO₂ 장비·공정을 대부분 재활용할 수 있다는 점이 결정적 강점이라 FeFET·FeRAM·FeCap 후보로 급부상했다. 미해결은 (i) 강유전 상(orthorhombic)이 metastable이어서 사이클링(wake-up, fatigue) 특성이 재료 배치마다 편차가 크고, (ii) endurance가 10⁹~10¹⁰ 수준에 머물러 DRAM 대체는 아직 어렵다.</p>\n<p><strong>배선 대안(Co, Ru, Mo, graphene).</strong> Co는 이미 로컬 인터커넥트(M0/M1)에 부분 도입됐고, Ru는 barrier-less가 가능해 실효 저항이 유리하다. 못 푼 문제는 Ru의 CMP 난이도와 에칭 화학, 그리고 Co의 EM 신뢰성 데이터 축적 부족이다. Graphene 인터커넥트는 20년째 논문만 나오고 양산 경로는 열려 있지 않다.</p>\n<p><strong>Wide-bandgap(SiC, GaN).</strong> 이 재료들은 로직 대안이 아니라 파워·RF 영역의 별도 트랙으로 자리잡았다 — 이 장에서 로직 대체 후보로 취급하지 않는다.</p>\n",
-          "sources": [],
+          "sources": [
+            {
+              "t": "Ferroelectricity in Hafnium Oxide Thin Films",
+              "u": "https://pubs.aip.org/aip/apl/article/99/10/102903/121850/Ferroelectricity-in-Hafnium-Oxide-Thin-Films",
+              "kind": "논문",
+              "pub": "Applied Physics Letters (AIP Publishing)",
+              "date": "2011"
+            }
+          ],
           "children": []
         },
         {
@@ -172,7 +180,15 @@
             "지금 로직에서 표준으로 자리잡은 소자 구조는 HKMG(High-k Metal Gate) 스택 위에 세워진 FinFET, 그리고 그 뒤를 잇는 GAA(Gate-All-Around) 나노시트 트랜지스터이다. 메모리에서는 DRAM 1T1C 셀에 buried word line + high aspect ratio pillar/trench 커패시터 구조, NAND는 charge-trap 기반 3D V-NAND, SRAM은 여전히 6T 셀이 표준이다. 각 표준이 경쟁 후보를 이긴 이유를 계층별로 짚으면 다음과 같다."
           ],
           "body": "<p><strong>로직 트랜지스터.</strong> 2000년대 중반까지 플래너 벌크 MOSFET이 표준이었으나, 이전 장의 제약(Si 밴드갭이 주는 서브스레숄드 leakage + 짧은 채널에서의 게이트 제어력 부족)이 그대로 작동해 채널 길이를 20 nm 대로 밀어붙이는 순간 무너졌다. Intel이 22 nm(2011)에서 FinFET을 도입하고 파운드리들이 16/14 nm에서 뒤따른 것은, 재료가 못 주는 게이트 제어를 <strong>기하학</strong>으로 벌충한다는 원칙이 산업 전체에서 받아들여진 순간이다. FDSOI가 경쟁 후보로 남아 저전력 응용에서 살아 있지만, 로직 리딩엣지에서 FinFET이 이긴 이유는 대체로 세 가지로 합의된다 — (i) 벌크 웨이퍼 생태계와의 연속성, (ii) 스케일링이 진행될수록 fin의 3면 게이트 제어가 planar FD-SOI의 backgate 제어를 능가한다는 정전기적 이점, (iii) 파운드리 다수 고객의 IP 자산이 벌크에 쌓여 있었다는 이력적 경로의존성. 마지막 요인은 종종 기술적 우위로 오해되지만, <strong>경로의존성에 가깝다</strong>는 것이 정직한 기술사적 평가다.</p>\n<p>FinFET은 fin depopulation(핀 개수 축소)이 fin 하나 이하로 내려갈 수 없다는 하한에 부딪히면서, N3~N2 세대에서 <strong>GAA 나노시트</strong>에 자리를 내주고 있다. Samsung이 3 nm(2022)에서 먼저 도입했고 TSMC는 N2(2025년 양산 예정)에서 도입한다. GAA가 이긴 이유는 단순명료하다 — 게이트가 채널을 4면으로 감싸므로 같은 footprint 대비 유효채널 폭(Weff)을 나노시트 개수·폭으로 자유롭게 조절할 수 있고, 이는 fin 개수라는 이산적 단위에 묶여 있던 FinFET의 설계 자유도를 정량적으로 넘어선다.</p>\n<p><strong>DRAM 셀.</strong> 1T1C(트랜지스터 1개 + 커패시터 1개)가 표준으로 굳은 것은 1970년대이지만, 지금까지 살아남은 이유는 이전 장의 제약이 직접 강제한 결과다. HfO₂의 유전상수 상한(~25)이 평면 커패시터로는 충분한 정전용량을 못 벌어주기 때문에, 산업은 <strong>커패시터를 수직으로 세우고 aspect ratio를 60:1 이상으로 밀어붙이는 pillar 구조</strong>로 대응해 왔다. 대안이었던 1T DRAM(플로팅 바디), FeRAM 확장 등은 retention·endurance 어느 한쪽에서 표준을 이기지 못했다.</p>\n<p><strong>NAND.</strong> 2D NAND의 평면 스케일링이 20 nm 근처에서 셀 간 간섭과 charge loss로 한계에 도달하자, 산업 전체가 <strong>3D V-NAND(수직 채널, string 방향으로 워드라인 적층)</strong> 로 전환했다. 현재 상용 제품은 200단 후반~300단대이며(제조사·발표 시점에 따라 편차가 크므로 단수는 정확한 노드 표기가 아님을 주의), 셀 자체는 대체로 charge-trap 방식이다. floating gate가 밀린 이유는 3D 적층 공정과의 궁합이었다.</p>\n<p><strong>SRAM.</strong> 6T 셀이 30년 넘게 표준으로 유지되고 있고, 5T·8T 같은 변형은 특수 응용에 국한된다. 그러나 SRAM은 최근 세대에서 <strong>밀도 스케일링이 사실상 멎었다</strong> — TSMC N3 세대에서 SRAM bit-cell 면적이 N5 대비 거의 개선되지 않았다는 사실은 발표된 수치로 확인된 통설이다. 이 정체는 다음 절의 한계로 이어진다.</p>\n",
-          "sources": [],
+          "sources": [
+            {
+              "t": "Samsung Begins Chip Production Using 3nm Process Technology With GAA Architecture",
+              "u": "https://news.samsung.com/us/samsung-begins-chip-production-3nm-process-gaa-architecture/",
+              "kind": "기업자료",
+              "pub": "Samsung Newsroom",
+              "date": "2022"
+            }
+          ],
           "children": []
         },
         {
@@ -335,7 +351,15 @@
             "High-NA EUV (0.55 NA). ASML의 TWINSCAN EXE:5000이 Intel(2024년 수령)·TSMC·Samsung에 순차 도입 중이며, Intel 14A와 TSMC A14 세대에서 HVM(양산) 진입이 예상된다. NA를 올려 해상도를 개선하는 정통 광학 접근이고, 그만큼 EUV 자산 승계라는 이점이 그대로 유지된다. 아직 못 푼 문제는 anamorphic 광학계로 인한 half-field(하프 필드) 이미징 — 노광 필드가 26×33mm에서 26×16.5mm로 반이 되며, 이는 대형 HPC 다이가 stitching 없이 한 번에 노광될 수 없음을 뜻한다. 이 문제는 물리적으로 우회 불가능하며 회로 설계 쪽으로 다이 크기 상한이라는 강제를 만든다. 또한 depth of focus가 얕아져 웨이퍼 평탄도·CMP 균일도 요구가 더 조여지고, mask 3D 효과(EMF)와 stochastic 문제는 그대로 남는다."
           ],
           "body": "<p><strong>Hyperbolic·Hyper-NA EUV(0.7 이상).</strong> 개념 단계이며 상용 로드맵은 확정되지 않았다. 진공·거울 반사율·anamorphic 왜곡이 지금보다 더 심해지므로 상용화 시점을 논하기 이르다.</p>\n<p><strong>나노임프린트 리소그래피(NIL).</strong> Canon FPA-1200NZ2C가 상용 출시됐고 Kioxia가 3D NAND 일부 층에 도입한 것으로 보도됐다. 마스크(템플릿)와 웨이퍼를 물리적으로 접촉시켜 레지스트를 성형하는 방식으로 광학 회절 한계를 아예 우회한다. 못 푼 문제는 <strong>결함 전사</strong> — 템플릿의 미세 결함이 그대로 웨이퍼에 1:1로 옮겨간다. 로직처럼 결함 하나가 다이 전체를 죽이는 응용에서는 아직 신뢰도가 부족하고, NAND처럼 셀 리던던시가 있는 응용에서 먼저 실전 채택된 이유다. 처리량과 오버레이도 광학 노광 수준까지는 도달하지 않았다.</p>\n<p><strong>DSA(Directed Self-Assembly).</strong> 블록 공중합체의 자기조립을 유도해 EUV 이하 피치를 얻는 접근. 특정 반복 패턴(라인, 홀 어레이)에는 강하지만 <strong>임의 형상을 정의할 수 없고 결함(defectivity)이 상용 기준을 넘기 어렵다</strong>는 문제가 15년째 반복돼왔다. 로직의 표준 셀 라이브러리처럼 형상 자유도가 필요한 응용에는 원리적으로 부적합하다는 것이 현재 정설이다. 논쟁 여지는 특정 back-end 층이나 contact 어레이에서 국소 채택 가능성 정도다.</p>\n<p><strong>Multi-beam Mask Writer / Direct Write.</strong> 마스크 제작(멀티빔 마스크 라이터, IMS Nanofabrication 등)은 이미 상용화됐고 EUV 마스크 제작에 필수다. 웨이퍼 직접 묘사(Multi-beam Direct Write, MAPPER 등)는 처리량 부족으로 상용화가 좌초됐다. 처리량 문제는 병렬 빔 수를 늘려도 마스크 없는 자유도의 이점보다 시간당 웨이퍼 수의 열세가 크다.</p>\n<p><strong>Cryogenic·pulsed·ALE 기반 HAR 에칭.</strong> Lam·TEL·AMAT가 극저온(-100℃ 이하) 조건에서 3D NAND HAR 채널을 뚫는 방식을 상용화했다. 저온에서 부산물이 재증착되지 않아 bowing이 완화되지만 장비·유틸리티 비용이 오르고 처리량이 떨어진다. 근본적으로 aspect ratio가 더 올라가면 다시 벽에 부딪힌다.</p>\n<p><strong>Selective deposition / area-selective ALD.</strong> 표면 화학의 차이를 이용해 원하는 영역에만 막을 쌓는 방식. 이론상 self-aligned 공정 스텝을 줄여 overlay 예산을 완화한다. 못 푼 문제는 <strong>선택도의 완전성</strong> — 원치 않는 영역에 아주 소량이라도 성장이 일어나면 defect가 되므로, 선택비가 무한대에 가까워야 실전 통합 가능하다. 부분 채택은 시작됐으나 광범위 대체 단계는 아니다.</p>\n<p>계측 쪽 대안은 다음과 같다.</p>\n<p><strong>CD-SAXS(X-ray 산란 계측).</strong> 매장 구조에 대해 감도가 있고 비파괴다. 웨이퍼 스케일 처리량과 spot size가 아직 in-line 표준 대체 수준은 아니지만 참조 계측(reference metrology)으로 자리잡는 중이다. 상용 처리량 확보가 미해결 과제다.</p>\n<p><strong>E-beam multi-column inspection.</strong> 다수 컬럼을 병렬화해 SEM 처리량 문제를 완화하는 접근. AMAT·ASML(Hermes) 등이 개발 중이며 웨이퍼 검사(inspection) 영역에서 광학 검사와 병용된다. 남은 문제는 컬럼 간 균일도와 정렬, 그리고 단순 물량 증가로 매장 구조 문제를 못 푼다는 점이다.</p>\n<p><strong>Hybrid metrology / ML 기반 재구성.</strong> 여러 계측(scatterometry + CD-SEM + X-ray)을 결합해 각각의 약점을 보완하는 접근. 지도학습으로 형상 파라미터를 역산하는 방식이 도입되고 있다. 못 푼 문제는 학습 데이터를 만들 참조 진리(ground truth)의 확보 — 파괴 TEM 결과를 참조로 삼는데 이 자체가 소수 표본이라 통계적 검증이 어렵다.</p>\n<p><strong>In-line 3D tomography / atom probe / X-ray CT.</strong> 매장 구조를 3차원으로 재구성. 파괴/반파괴이며 웨이퍼 스케일 in-line 적용은 아직 요원하다.</p>\n<p>이 모든 대안은 EUV+ALD+scatterometry 표준을 통째로 대체하지 못한다. 각각이 특정 층·특정 응용에서 표준을 보완하는 국소 대안일 뿐이며, 이는 <strong>선단 공정이 단일 솔루션에서 다수 국소 솔루션의 조합으로 파편화</strong>되고 있음을 뜻한다. 이 파편화 자체가 원가와 통합 복잡도의 원천이 된다.</p>\n",
-          "sources": [],
+          "sources": [
+            {
+              "t": "TWINSCAN EXE:5000 — EUV lithography systems",
+              "u": "https://www.asml.com/en/products/euv-lithography-systems/twinscan-exe-5000",
+              "kind": "기업자료",
+              "pub": "ASML",
+              "date": "2024"
+            }
+          ],
           "children": []
         },
         {
@@ -524,7 +548,22 @@
             "첫 번째 후보는 고수준 합성(HLS: High-Level Synthesis) 이다. C/C++/SystemC로 알고리즘을 기술하면 도구가 RTL을 생성한다. Xilinx Vitis HLS·Cadence Stratus·Siemens Catapult가 상용 도구이며, 비디오 코덱·DSP·특정 가속기 도메인에서는 채택이 실증됐다는 것이 통설이다. 아직 못 푼 문제는 명확하다: (a) 범용 제어 로직·저지연 회로에서 hand-written RTL과의 QoR 격차가 여전히 유의미하고, (b) HLS가 생성한 RTL은 디버깅·검증이 어렵고, (c) 무엇보다 아날로그·클록 도메인 크로싱·비동기 회로에는 적용되지 않는다. HLS가 언젠가 RTL을 대체할 것이라는 예측은 20년 넘게 반복돼 왔지만, 대체는 아직 일어나지 않았다는 점에서 논쟁 중인 사안이다."
           ],
           "body": "<p><strong>두 번째 후보는 ML 기반 배치·배선</strong>이다. 2020년대 초 Google이 발표한 강화학습 기반 chip floorplanning, Synopsys DSO.ai, Cadence Cerebrus가 대표적이다. <strong>DSO.ai가 상용 프로젝트에서 인력 대비 몇 배의 설계 공간 탐색을 수행했다는 사례 보고</strong>는 벤더 백서로 공개돼 있다. 아직 못 푼 문제: (a) 재현성(같은 입력에 대한 결정론적 결과 보장)이 전통 EDA만큼 강하지 않아 사인오프 단계에서 신뢰가 어렵고, (b) 학습된 모델의 설계 간 일반화가 제한적이며, (c) Google의 원 논문 결과에 대한 재현·비판 논문이 이어져 <strong>성능 개선 폭이 벤더 주장만큼인지는 논쟁 중</strong>이다.</p>\n<p><strong>세 번째 후보는 chiplet 기반 IP 재사용과 UCIe 표준화</strong>다. 이전 장에서 chiplet이 강제 사항이 됐다는 결론을 받았을 때, 그 위에서 IP 재사용의 단위를 &quot;물리 다이&quot;로 옮기려는 시도가 UCIe(Universal Chiplet Interconnect Express) 컨소시엄으로 결집됐다. <strong>UCIe 1.0(2022)·1.1(2023)·2.0(2024) 사양이 공개</strong>돼 있으며, PHY·프로토콜·폼팩터가 표준화 대상이다. 아직 못 푼 문제: (a) 서로 다른 파운드리·노드에서 만든 chiplet 간의 상호운용성이 실제 상용 제품에서 검증된 사례는 아직 제한적이고, (b) chiplet 단위 IP 마켓플레이스가 기술적으로는 가능해도 상업적·법적 인프라(품질 보증·책임 분담·KGD 인증)가 성숙하지 않았으며, (c) D2D PHY 자체가 아날로그 IP이므로 앞서 언급한 아날로그 이식성 문제를 그대로 물려받는다. D2D 프로토콜·PHY의 세부는 다음 계층(패키징·시스템) 장의 소관이므로 여기서는 더 다루지 않는다.</p>\n<p><strong>네 번째 후보는 아날로그 자동화</strong>다. Cadence Virtuoso ADE·Synopsys Custom Compiler에 통합된 최적화·ML 기반 sizing·layout 자동화 시도가 계속되고 있으며, 학계에서는 완전 자동 아날로그 합성 연구가 30년 넘게 이어졌다. 아직 못 푼 문제: (a) 아날로그 성능은 layout parasitic·matching에 극단적으로 민감해 topology 선택 → sizing → layout → post-layout 시뮬레이션의 반복 루프를 완전 자동화한 사례가 상용 규모로는 없고, (b) 노드 이식(porting)의 자동화도 여전히 제한적이다. <strong>완전 자동 아날로그 합성은 30년 전 예측이 여전히 유효한 미해결 문제</strong>라는 것이 통설이다.</p>\n<p><strong>다섯 번째 후보는 오픈소스 IP·EDA 생태계</strong>다. RISC-V ISA를 중심으로 SiFive·Andes·오픈소스 코어(Rocket·BOOM·CVA6)가 상용 채택을 확대했고, OpenROAD·OpenLane은 오픈소스 RTL-to-GDS 흐름을 제공한다. <strong>Google-SkyWater가 130nm PDK를 오픈소스로 공개한 사건(2020)</strong> 이 이 흐름의 상징적 계기였다. 아직 못 푼 문제: (a) 선단 노드 PDK는 파운드리 IP이므로 오픈소스화가 불가능하고, (b) 오픈소스 EDA 흐름의 QoR은 성숙 노드에서 상용 도구에 근접했다는 보고는 있으나 선단 노드에서는 격차가 크며, (c) 오픈소스 IP의 검증·서명·책임 체인이 상용 벤더만큼 확립되지 않았다.</p>\n<p><strong>여섯 번째 후보는 형식 검증(formal verification)의 범위 확대</strong>다. 블록 수준의 property checking·equivalence checking은 이미 표준이며, sequential equivalence checking·formal fault propagation·security property verification 등으로 범위가 넓어지고 있다. Cadence Jasper·Synopsys VC Formal이 상용 도구다. 아직 못 푼 문제: (a) 형식 도구의 용량이 SoC 전체를 다루지 못하며, (b) property 작성 자체가 고급 엔지니어링 스킬이라 확산이 느리다.</p>\n<p><strong>일곱 번째 후보는 실리콘 후 in-field 검증·자가 진단 확대</strong>다. 이전 장에서 강제된 on-die sensor·BIST가 사후적으로 신뢰도를 관찰하는 인프라를 제공하며, silicon lifecycle management(SLM, Synopsys·proteanTecs 등이 상용화) 카테고리로 산업이 형성되고 있다. 아직 못 푼 문제: (a) 이는 검증을 대체하는 것이 아니라 검증 실패의 피해를 사후 완화하는 것이며, (b) 필드 데이터를 설계로 되먹이는 폐루프가 정착하려면 데이터 파이프라인·개인정보·경쟁 데이터 공유 이슈가 남는다.</p>\n",
-          "sources": [],
+          "sources": [
+            {
+              "t": "UCIe™ (Universal Chiplet Interconnect Express™) Consortium Releases its 1.1 Specification",
+              "u": "https://www.businesswire.com/news/home/20230808798613/en/UCIe-Universal-Chiplet-Interconnect-Express-Consortium-Releases-its-1.1-Specification",
+              "kind": "보도",
+              "pub": "Business Wire (UCIe Consortium 발표)",
+              "date": "2023"
+            },
+            {
+              "t": "Google Partners with SkyWater and Efabless to Enable Open Source Manufacturing of Custom ASICs",
+              "u": "https://www.skywatertechnology.com/google-partners-with-skywater-and-efabless-to-enable-open-source-manufacturing-of-custom-asics/",
+              "kind": "기업자료",
+              "pub": "SkyWater Technology",
+              "date": "2020"
+            }
+          ],
           "children": []
         },
         {
@@ -671,8 +710,23 @@
           "summary": [
             "후보 1: AI/ML 기반 EDA. 이 후보는 마케팅과 검증된 성과의 간극이 가장 큰 영역이므로 구분이 필요하다."
           ],
-          "body": "<ul>\n<li><p><strong>Google의 강화학습 floorplanning (Nature 2021).</strong> 논문의 주장: &quot;인간 전문가와 대등하거나 그 이상의 배치를, 몇 달이 아닌 몇 시간에 생성&quot;. <strong>검증된 부분:</strong> Google이 TPU v4의 일부 블록 배치에 사용했다고 확인했다. <strong>논쟁 부분:</strong> ISPD 2022의 반박 논문(Cheng et al.)은 논문의 baseline이 약했으며 상용 도구 대비 우위가 재현되지 않는다고 주장했다. Google의 반박도 이어졌고, 재현성·baseline 강도 논쟁은 아직 결론이 없다. 즉 &quot;RL floorplanning이 특정 조건에서 유용하다&quot;까지가 합의이며, &quot;인간 전문가를 대체한다&quot;는 마케팅 명제는 검증되지 않았다.</p>\n</li>\n<li><p><strong>Synopsys DSO.ai, Cadence Cerebrus, Siemens Aprisa.ai.</strong> 벤더 주장: PPA 개선·turnaround 단축·엔지니어 생산성 향상. <strong>검증된 부분:</strong> 삼성·ST마이크로·MediaTek·TSMC 등 고객사가 도입 사례를 공개했고, 일부 블록에서 유의미한 PPA 개선이 보고됐다. <strong>논쟁 부분:</strong> 개선폭이 도구 자체의 기여인지, 병렬 탐색을 인간이 관리한 결과인지 구분이 어렵다. 벤더가 보고하는 &quot;3~10배 생산성&quot; 같은 수치는 independent 재현이 없다. <strong>못 푼 문제:</strong> 사인오프 전체를 AI로 대체하는 것이 아니라, 파라미터 탐색·recipe tuning의 자동화에 국한된다는 점이 대체로 인정된다.</p>\n</li>\n<li><p><strong>ML timing/power 예측 (GNN 기반).</strong> 배선 전 단계에서 배선 후 타이밍을 예측하는 GNN 모델들이 학계·벤더에서 발표됐고, MAPE 5~15% 수준의 예측 정확도가 보고된다. <strong>검증된 부분:</strong> 조기 예측으로 반복 횟수를 줄이는 실제 사례가 있다. <strong>못 푼 문제:</strong> 사인오프 정확도(수 ps 수준)에는 도달하지 못하며, 예측이 실패했을 때의 커버리지·리스크 관리 방법론이 아직 표준화되지 않았다.</p>\n</li>\n<li><p><strong>LLM 기반 RTL 생성·검증.</strong> 스타트업(Astrus, Silimate 등)과 학계가 대량으로 시도 중이다. <strong>검증된 부분:</strong> 소규모 블록·프로토타입 수준의 코드 생성에 유용. <strong>못 푼 문제:</strong> 상용 SoC의 RTL은 회사 IP 보호·품질 요구·특정 도구 흐름 최적화 등 문맥 의존성이 커서, LLM이 이 문맥을 다 담지 못한다. 이 후보는 아직 실험 단계이며, 사인오프 흐름에 편입된 사례가 확인되지 않는다.</p>\n</li>\n<li><p><strong>총평:</strong> AI 기반 EDA는 좁은 최적화 문제(파라미터 탐색·조기 예측·설계 recipe 자동화)에서 검증된 성과를 냈고, 넓은 대체(사인오프 자동화·인간 검증자 대체)에서는 마케팅 단계다. 이 구분을 흐리는 서술은 벤더 백서와 언론 기사에서 반복되므로, 텍스트북 서술에서는 명시적으로 구분해야 한다.</p>\n</li>\n</ul>\n<p><strong>후보 2: Cloud-native EDA.</strong> AWS·Azure·Google Cloud와 Big 3 벤더의 파트너십으로 사인오프 부하를 클라우드로 분산하는 흐름이다. <strong>검증된 부분:</strong> burst capacity 확보로 사인오프 실행 시간이 압축된 사례가 있고, TSMC·Samsung 등 파운드리의 클라우드 IP 접근이 부분 개방됐다. <strong>못 푼 문제:</strong> peak-hour 라이선스 비용, IP 보안 요구(파운드리 PDK의 클라우드 반입 조건), 데이터 egress 비용, 대형 데이터베이스 전송 지연이다. 클라우드가 CapEx를 OpEx로 바꿔주지만 총비용을 줄여주는지에 대해서는 데이터가 엇갈린다.</p>\n<p><strong>후보 3: 오픈소스 EDA.</strong> OpenROAD(DARPA IDEA·POSH), OpenLane(Efabless), Yosys(Claire Wolf)의 스택이 발전했다. <strong>검증된 부분:</strong> SkyWater 130nm·GlobalFoundries 180nm 등에서 완전 오픈 흐름의 tapeout이 반복적으로 성공했고, 학계·교육 영역에서는 사실상 표준이 됐다. <strong>못 푼 문제:</strong> 첨단 노드(7nm 이하) PDK가 오픈되지 않아 파운드리 접근 자체가 막혀 있으며, MMMC 사인오프·high-density routing·advanced DFM 등 상용 도구가 축적한 노하우 격차가 크다. <strong>오픈소스가 legacy 노드에서 성숙해도 leading edge로 확장할 경로가 PDK 접근에서 막혀 있다</strong>는 것이 핵심 미해결이다.</p>\n<p><strong>후보 4: High-Level Synthesis (HLS).</strong> Siemens Catapult, Cadence Stratus, Xilinx/AMD Vitis HLS가 C/C++/SystemC에서 RTL을 합성한다. <strong>검증된 부분:</strong> DSP·이미지 처리·고정 dataflow accelerator에서 상용 실적이 축적됐고, 특히 FPGA 프로토타이핑에서 널리 쓰인다. <strong>못 푼 문제:</strong> 범용 제어 논리·아웃오브오더 마이크로아키텍처 등 irregular한 회로에서 HLS가 만드는 RTL의 품질이 손 코딩 대비 20~50% 열등하다는 보고가 반복되며, 이 격차를 좁히려는 시도가 20년 넘게 계속되는 중이지만 결론이 나지 않았다. HLS는 특정 도메인에서 승리하고 다른 도메인에서 진입하지 못하는 상태로 정착했다.</p>\n<p><strong>후보 5: 새로운 HDL — Chisel, SpinalHDL, PyMTL, Amaranth.</strong> RISC-V 생태계(Berkeley·SiFive)에서 Chisel이, 스타트업 계열에서 SpinalHDL이 확산 중이다. <strong>검증된 부분:</strong> RTL 생산성 향상, 매개변수화된 IP 생성 용이. Alibaba XuanTie, SiFive 코어 등 상용 사례가 축적된다. <strong>못 푼 문제:</strong> 이 HDL들도 결국 Verilog로 변환돼 기존 사인오프 흐름을 탄다. 즉 상위 서술 언어의 혁신이 하위 검증·사인오프 스택을 바꾸지는 못한다. Chisel이 이긴다고 해도 그 승리가 Big 3 EDA 지배 구조를 흔들지는 않는다.</p>\n<p><strong>후보 6: 형식 검증(formal)의 확장.</strong> Bounded Model Checking·property checking·equivalence checking은 이미 상용 성숙 단계이며, 특정 블록(캐시 코히런스, 인터럽트 컨트롤러, 메모리 컨트롤러)에서 시뮬레이션을 상당 부분 대체한다. <strong>못 푼 문제:</strong> 상태 공간 폭발로 full-chip formal은 불가능하며, property specification 자체가 인간 검증자에게 큰 부담이다. Assertion을 잘 쓰는 인력이 희소하다는 것이 실질 제약이다.</p>\n<p><strong>후보 7: Portable Stimulus Standard (PSS).</strong> Accellera가 표준화한, 테스트 의도를 도구 간 이식 가능한 형태로 서술하는 언어다. <strong>검증된 부분:</strong> 일부 벤더 도구가 지원하고 특정 프로젝트에서 재사용 이득이 보고됐다. <strong>못 푼 문제:</strong> 채택률이 UVM만큼 확산되지 않았고, PSS가 실제로 검증 총량을 줄여주는지에 대해 아직 결정적 데이터가 부족하다.</p>\n<p><strong>후보 8: Silicon Lifecycle Management (SLM)와 digital twin.</strong> Synopsys SLM, proteanTecs, Cadence Anirudh 계열의 on-chip sensor + 필드 텔레메트리 흐름이 EDA와 결합된다. <strong>검증된 부분:</strong> 필드 aging 데이터 수집·수율 개선 되먹임에서 상용 사례가 있다. <strong>못 푼 문제:</strong> 이 데이터가 설계 개선으로 폐루프되는 사례는 아직 드물며, 대부분 사후 진단·수율 최적화에 그친다는 관찰이 통설이다.</p>\n<p><strong>후보 9: 하드웨어 에뮬레이션의 확장.</strong> Palladium Z2·Veloce Strato·ZeBu의 게이트 수용량이 수십억 게이트로 성장했고, virtual platform·hybrid emulation으로 소프트웨어 shift-left가 진행된다. <strong>검증된 부분:</strong> first-silicon success 확률 향상, post-silicon 부담 이전. <strong>못 푼 문제:</strong> 에뮬레이터 단가가 수천만 달러 수준이고, 시간 배분이 조직 정치가 된다. 접근 격차가 대형 팹리스와 신생 팹리스 사이의 실질 격차를 벌린다.</p>\n",
-          "sources": [],
+          "body": "<ul>\n<li><p><strong>Google의 강화학습 floorplanning (Nature 2021).</strong> 논문의 주장: &quot;인간 전문가와 대등하거나 그 이상의 배치를, 몇 달이 아닌 몇 시간에 생성&quot;. <strong>검증된 부분:</strong> Google이 TPU v4의 일부 블록 배치에 사용했다고 확인했다. <strong>논쟁 부분:</strong> ISPD 2023의 반박 논문(Cheng et al., &quot;Assessment of Reinforcement Learning for Macro Placement&quot;)은 논문의 baseline이 약했으며 상용 도구 대비 우위가 재현되지 않는다고 주장했다. Google의 반박도 이어졌고, 재현성·baseline 강도 논쟁은 아직 결론이 없다. 즉 &quot;RL floorplanning이 특정 조건에서 유용하다&quot;까지가 합의이며, &quot;인간 전문가를 대체한다&quot;는 마케팅 명제는 검증되지 않았다.</p>\n</li>\n<li><p><strong>Synopsys DSO.ai, Cadence Cerebrus, Siemens Aprisa.ai.</strong> 벤더 주장: PPA 개선·turnaround 단축·엔지니어 생산성 향상. <strong>검증된 부분:</strong> 삼성·ST마이크로·MediaTek·TSMC 등 고객사가 도입 사례를 공개했고, 일부 블록에서 유의미한 PPA 개선이 보고됐다. <strong>논쟁 부분:</strong> 개선폭이 도구 자체의 기여인지, 병렬 탐색을 인간이 관리한 결과인지 구분이 어렵다. 벤더가 보고하는 &quot;3~10배 생산성&quot; 같은 수치는 independent 재현이 없다. <strong>못 푼 문제:</strong> 사인오프 전체를 AI로 대체하는 것이 아니라, 파라미터 탐색·recipe tuning의 자동화에 국한된다는 점이 대체로 인정된다.</p>\n</li>\n<li><p><strong>ML timing/power 예측 (GNN 기반).</strong> 배선 전 단계에서 배선 후 타이밍을 예측하는 GNN 모델들이 학계·벤더에서 발표됐고, MAPE 5~15% 수준의 예측 정확도가 보고된다. <strong>검증된 부분:</strong> 조기 예측으로 반복 횟수를 줄이는 실제 사례가 있다. <strong>못 푼 문제:</strong> 사인오프 정확도(수 ps 수준)에는 도달하지 못하며, 예측이 실패했을 때의 커버리지·리스크 관리 방법론이 아직 표준화되지 않았다.</p>\n</li>\n<li><p><strong>LLM 기반 RTL 생성·검증.</strong> 스타트업(Astrus, Silimate 등)과 학계가 대량으로 시도 중이다. <strong>검증된 부분:</strong> 소규모 블록·프로토타입 수준의 코드 생성에 유용. <strong>못 푼 문제:</strong> 상용 SoC의 RTL은 회사 IP 보호·품질 요구·특정 도구 흐름 최적화 등 문맥 의존성이 커서, LLM이 이 문맥을 다 담지 못한다. 이 후보는 아직 실험 단계이며, 사인오프 흐름에 편입된 사례가 확인되지 않는다.</p>\n</li>\n<li><p><strong>총평:</strong> AI 기반 EDA는 좁은 최적화 문제(파라미터 탐색·조기 예측·설계 recipe 자동화)에서 검증된 성과를 냈고, 넓은 대체(사인오프 자동화·인간 검증자 대체)에서는 마케팅 단계다. 이 구분을 흐리는 서술은 벤더 백서와 언론 기사에서 반복되므로, 텍스트북 서술에서는 명시적으로 구분해야 한다.</p>\n</li>\n</ul>\n<p><strong>후보 2: Cloud-native EDA.</strong> AWS·Azure·Google Cloud와 Big 3 벤더의 파트너십으로 사인오프 부하를 클라우드로 분산하는 흐름이다. <strong>검증된 부분:</strong> burst capacity 확보로 사인오프 실행 시간이 압축된 사례가 있고, TSMC·Samsung 등 파운드리의 클라우드 IP 접근이 부분 개방됐다. <strong>못 푼 문제:</strong> peak-hour 라이선스 비용, IP 보안 요구(파운드리 PDK의 클라우드 반입 조건), 데이터 egress 비용, 대형 데이터베이스 전송 지연이다. 클라우드가 CapEx를 OpEx로 바꿔주지만 총비용을 줄여주는지에 대해서는 데이터가 엇갈린다.</p>\n<p><strong>후보 3: 오픈소스 EDA.</strong> OpenROAD(DARPA IDEA·POSH), OpenLane(Efabless), Yosys(Claire Wolf)의 스택이 발전했다. <strong>검증된 부분:</strong> SkyWater 130nm·GlobalFoundries 180nm 등에서 완전 오픈 흐름의 tapeout이 반복적으로 성공했고, 학계·교육 영역에서는 사실상 표준이 됐다. <strong>못 푼 문제:</strong> 첨단 노드(7nm 이하) PDK가 오픈되지 않아 파운드리 접근 자체가 막혀 있으며, MMMC 사인오프·high-density routing·advanced DFM 등 상용 도구가 축적한 노하우 격차가 크다. <strong>오픈소스가 legacy 노드에서 성숙해도 leading edge로 확장할 경로가 PDK 접근에서 막혀 있다</strong>는 것이 핵심 미해결이다.</p>\n<p><strong>후보 4: High-Level Synthesis (HLS).</strong> Siemens Catapult, Cadence Stratus, Xilinx/AMD Vitis HLS가 C/C++/SystemC에서 RTL을 합성한다. <strong>검증된 부분:</strong> DSP·이미지 처리·고정 dataflow accelerator에서 상용 실적이 축적됐고, 특히 FPGA 프로토타이핑에서 널리 쓰인다. <strong>못 푼 문제:</strong> 범용 제어 논리·아웃오브오더 마이크로아키텍처 등 irregular한 회로에서 HLS가 만드는 RTL의 품질이 손 코딩 대비 20~50% 열등하다는 보고가 반복되며, 이 격차를 좁히려는 시도가 20년 넘게 계속되는 중이지만 결론이 나지 않았다. HLS는 특정 도메인에서 승리하고 다른 도메인에서 진입하지 못하는 상태로 정착했다.</p>\n<p><strong>후보 5: 새로운 HDL — Chisel, SpinalHDL, PyMTL, Amaranth.</strong> RISC-V 생태계(Berkeley·SiFive)에서 Chisel이, 스타트업 계열에서 SpinalHDL이 확산 중이다. <strong>검증된 부분:</strong> RTL 생산성 향상, 매개변수화된 IP 생성 용이. Alibaba XuanTie, SiFive 코어 등 상용 사례가 축적된다. <strong>못 푼 문제:</strong> 이 HDL들도 결국 Verilog로 변환돼 기존 사인오프 흐름을 탄다. 즉 상위 서술 언어의 혁신이 하위 검증·사인오프 스택을 바꾸지는 못한다. Chisel이 이긴다고 해도 그 승리가 Big 3 EDA 지배 구조를 흔들지는 않는다.</p>\n<p><strong>후보 6: 형식 검증(formal)의 확장.</strong> Bounded Model Checking·property checking·equivalence checking은 이미 상용 성숙 단계이며, 특정 블록(캐시 코히런스, 인터럽트 컨트롤러, 메모리 컨트롤러)에서 시뮬레이션을 상당 부분 대체한다. <strong>못 푼 문제:</strong> 상태 공간 폭발로 full-chip formal은 불가능하며, property specification 자체가 인간 검증자에게 큰 부담이다. Assertion을 잘 쓰는 인력이 희소하다는 것이 실질 제약이다.</p>\n<p><strong>후보 7: Portable Stimulus Standard (PSS).</strong> Accellera가 표준화한, 테스트 의도를 도구 간 이식 가능한 형태로 서술하는 언어다. <strong>검증된 부분:</strong> 일부 벤더 도구가 지원하고 특정 프로젝트에서 재사용 이득이 보고됐다. <strong>못 푼 문제:</strong> 채택률이 UVM만큼 확산되지 않았고, PSS가 실제로 검증 총량을 줄여주는지에 대해 아직 결정적 데이터가 부족하다.</p>\n<p><strong>후보 8: Silicon Lifecycle Management (SLM)와 digital twin.</strong> Synopsys SLM, proteanTecs, Cadence Anirudh 계열의 on-chip sensor + 필드 텔레메트리 흐름이 EDA와 결합된다. <strong>검증된 부분:</strong> 필드 aging 데이터 수집·수율 개선 되먹임에서 상용 사례가 있다. <strong>못 푼 문제:</strong> 이 데이터가 설계 개선으로 폐루프되는 사례는 아직 드물며, 대부분 사후 진단·수율 최적화에 그친다는 관찰이 통설이다.</p>\n<p><strong>후보 9: 하드웨어 에뮬레이션의 확장.</strong> Palladium Z2·Veloce Strato·ZeBu의 게이트 수용량이 수십억 게이트로 성장했고, virtual platform·hybrid emulation으로 소프트웨어 shift-left가 진행된다. <strong>검증된 부분:</strong> first-silicon success 확률 향상, post-silicon 부담 이전. <strong>못 푼 문제:</strong> 에뮬레이터 단가가 수천만 달러 수준이고, 시간 배분이 조직 정치가 된다. 접근 격차가 대형 팹리스와 신생 팹리스 사이의 실질 격차를 벌린다.</p>\n",
+          "sources": [
+            {
+              "t": "A graph placement methodology for fast chip design",
+              "u": "https://www.nature.com/articles/s41586-021-03544-w",
+              "kind": "논문",
+              "pub": "Nature",
+              "date": "2021"
+            },
+            {
+              "t": "Assessment of Reinforcement Learning for Macro Placement",
+              "u": "https://dl.acm.org/doi/10.1145/3569052.3578926",
+              "kind": "논문",
+              "pub": "ISPD '23 (ACM)",
+              "date": "2023"
+            }
+          ],
           "children": []
         },
         {
@@ -808,7 +862,29 @@
             "이 계층의 지배적 물리 한계는 메모리 대역폭과 데이터 이동 에너지 두 축으로 요약된다. 나머지 한계 — dark silicon, 병렬성 천장, 캐시 코히런스 트래픽 폭증, speculative execution의 보안 세금 — 는 이 두 축의 파생물이거나 이 두 축과 얽혀서 나타난다. 이 절은 두 축을 먼저 정면으로 다루고, 그 위에 파생 한계를 얹는 순서로 서술한다."
           ],
           "body": "<p><strong>첫째, 메모리 대역폭이 연산 능력의 성장률을 따라가지 못한다(memory bandwidth wall).</strong> 이는 최소 1990년대부터 지적된 문제이며(Wulf·McKee, &quot;Hitting the Memory Wall&quot;, 1995), 현재까지 완전히 해결되지 않은 채 accelerator 시대에 더 심화됐다. HBM3/HBM3E 한 스택이 제공하는 대역폭은 약 0.8<del>1.2 TB/s 수준이며(공식 스펙 기준, 세대·벤더에 따라 폭이 있음), 최상위 AI accelerator는 HBM 스택을 6</del>8개까지 붙여 수 TB/s 급을 확보한다. 그러나 같은 세대의 chip-내부 tensor throughput은 수백 TFLOPS~PFLOPS급으로 성장했고, byte/FLOP 비율(operational intensity 관점)이 지속 악화되고 있다. <strong>결과적으로 roofline 곡선의 대부분 영역에서 워크로드가 &quot;memory-bound&quot; 사분면에 걸치며, 코어를 아무리 확장해도 대역폭 상한에 부딪혀 실효 활용률이 떨어진다.</strong> 이는 통설이며, 남는 논쟁은 이 상한을 얼마만큼 3D 스택·CIM·near-memory로 밀어낼 수 있느냐이다.</p>\n<p><strong>둘째, 데이터 이동 에너지가 연산 에너지를 압도한다.</strong> Horowitz의 2014년 ISSCC 기조연설이 정리한 수치가 이후 논의의 기준선이 되었다 — 45nm 기준 32-bit ALU 연산은 약 0.1<del>1 pJ, on-chip SRAM 접근은 수 pJ, off-chip DRAM 접근은 수십</del>수백 pJ 수준. 정확한 수치는 세대·공정·인터페이스에 따라 다르며, 최신 HBM은 pJ/bit를 크게 낮췄지만(대략 3~10 pJ/bit 범위로 인용됨, 벤더·조건에 따라 차이), off-chip과 on-chip의 자릿수 격차 자체는 사라지지 않았다. <strong>결과적으로 &quot;연산을 어디에서 수행할 것인가&quot;가 아니라 &quot;데이터를 어디까지 이동시키지 않을 것인가&quot;가 아키텍처의 에너지 예산을 결정한다.</strong> 이 관찰이 지난 10년간 caches → HBM → PIM/CIM으로 이어지는 &quot;데이터를 연산으로 옮기지 말고 연산을 데이터 쪽으로 옮기라&quot;는 흐름의 물리적 근거다. 통설이지만, 이 재배치가 어느 계층까지 실현될지에 대한 논쟁이 3번의 대안 후보를 정렬시킨다.</p>\n<p><strong>셋째, 위 두 축의 결합이 dark silicon을 강제한다.</strong> Esmaeilzadeh 등(2011, ISCA)이 정식화한 &quot;post-Dennard scaling에서 트랜지스터 밀도는 계속 증가하지만 전력 예산은 그렇지 않다&quot;는 관찰은, 아키텍처 관점에서 &quot;특정 순간에 활성화 가능한 실리콘 면적이 전체보다 훨씬 작다&quot;는 형태로 나타난다. 결과적으로 대칭 다중코어를 무한정 늘려도 병렬 활용이 되지 않고, 도메인 특화 accelerator를 &quot;필요할 때만 켜는&quot; 형태로 배치하는 것이 유일한 우회로가 된다. <strong>오늘날 모바일 AP·서버 AI 칩·자율주행 SoC가 모두 heterogeneous accelerator 통합으로 향한 근본 원인은 dark silicon이며, 이는 앞 절에서 본 &quot;이질 통합의 지배 패턴&quot;의 물리적 근거다.</strong> 통설이다.</p>\n<p><strong>넷째, ILP 추출의 한계와 speculative execution의 보안 세금이 겹친다.</strong> 1990년대 후반~2000년대 초반의 OoO/speculative 확장은 ILP를 지속적으로 끌어냈지만, 2010년대 중반 이후 issue width 확장의 성능 이득이 급감했다. 여기에 2018년 Spectre/Meltdown 공개 이후 speculative 경로에 삽입해야 할 완화(hardware barrier, branch target sanitization, KPTI류 소프트웨어 완충)가 성능·전력 세금으로 정착됐다. <strong>결과적으로 general-purpose CPU의 IPC 성장률은 완만해졌고, 성능 성장의 주된 축은 &quot;코어 수·클럭·특화 가속기&quot;로 이동했다.</strong> 이 진단은 통설이지만, &quot;OoO의 완화 세금이 앞으로 얼마나 더 커질지&quot;는 마이크로아키텍처 세대별로 편차가 크며 논쟁 중이다.</p>\n<p><strong>다섯째, 캐시 코히런스 트래픽이 코어 수에 대해 비선형으로 증가한다.</strong> MESI/MOESI/MESIF 계열의 스누프·디렉토리 프로토콜은 코어 수 수십~수백 규모에서는 감당 가능하지만, 그 위로 확장하려면 계층적 디렉토리·NUMA 도메인·부분 코히런스(coherent island) 같은 우회 구조를 도입해야 한다. <strong>AMD EPYC의 CCX/CCD 계층, 인텔의 mesh interconnect, 하이퍼스케일러의 partitioned coherence — 모두 &quot;flat coherence는 확장 불가능하다&quot;는 전제 위에 서 있다.</strong> 통설이며, 논쟁은 어느 규모에서 명시적 비코히런스 모델(예: HSA·CUDA류의 명시 스코프)로 옮겨가야 하는가에 관한 것이다.</p>\n<p><strong>여섯째, 이 모든 한계가 경제적 형태로 응축된 지점이 &quot;타일당 실효 성능의 정체&quot;다.</strong> 공정 미세화가 던져주는 밀도 이득이 dark silicon과 대역폭 상한에 의해 실효 성능으로 변환되지 못하므로, 세대 간 IPC/W 개선은 완만해지고 개선의 주된 축은 워크로드 특화 accelerator·메모리 재배치·패키징으로 넘어간다. <strong>즉 이 계층의 경제적 한계는 &quot;코어 아키텍처 혁신으로 세대 이득을 뽑아내는 시대의 종언&quot;이다.</strong> 이 진단 자체는 통설이지만, &quot;코어 아키텍처 혁신이 완전히 끝났는지 vs. 아직 여지가 있는지&quot;는 여전히 논쟁 중이다 — Apple의 P-core 확장, ARM Neoverse V 시리즈, RISC-V 커스텀 확장이 실증하는 IPC 이득은 반례로 인용된다.</p>\n<p>한 문장으로 요약하면, <strong>이 계층의 벽은 메모리 대역폭·데이터 이동 에너지가 만들어낸 이중 상한이며, dark silicon·ILP 한계·coherence 확장 한계·speculative 보안 세금은 이 이중 상한의 파생 증상이다. 파생 증상들은 완화 가능하지만, 이중 상한 자체는 아키텍처 계층 내부에서 해결될 수 없다</strong> — 이 사실이 3번의 대안 후보와 4번의 패키징 강제를 결정한다.</p>\n",
-          "sources": [],
+          "sources": [
+            {
+              "t": "Hitting the memory wall: implications of the obvious",
+              "u": "https://dl.acm.org/doi/10.1145/216585.216588",
+              "kind": "논문",
+              "pub": "ACM SIGARCH Computer Architecture News",
+              "date": "1995"
+            },
+            {
+              "t": "1.1 Computing's energy problem (and what we can do about it)",
+              "u": "https://doi.org/10.1109/ISSCC.2014.6757323",
+              "kind": "논문",
+              "pub": "ISSCC 2014 (IEEE)",
+              "date": "2014"
+            },
+            {
+              "t": "Dark silicon and the end of multicore scaling",
+              "u": "https://dl.acm.org/doi/10.1145/2000064.2000108",
+              "kind": "논문",
+              "pub": "ISCA '11 (ACM)",
+              "date": "2011"
+            }
+          ],
           "children": []
         },
         {
@@ -969,8 +1045,23 @@
           "summary": [
             "HBM(High Bandwidth Memory)은 단일 부품이 아니라 세 계층의 결합체다. (a) 메모리 셀 층: 삼성·SK하이닉스·마이크론이 1α~1γ nm(현 세대는 1b~1c급이라 부르지만 정확한 물리 CD는 기업별로 다름) 공정으로 만든 DRAM 다이 4·8·12·16단 스택. (b) 패키징 층: 각 DRAM 다이 사이의 TSV로 수직 연결, 최하단 base die가 로직 인터페이스를 담당, μbump로 인터포저에 접합. (c) 인터페이스 층: JEDEC이 정의한 HBM2E·HBM3·HBM3E·HBM4의 물리·프로토콜 표준, 1024비트 폭 채널이 여러 pseudo-channel로 분할되는 구조."
           ],
-          "body": "<p><strong>HBM은 이 세 계층의 어느 하나가 병목이 되면 세대 진화가 멈춘다.</strong> 셀 층은 DRAM 캐패시터 종횡비와 refresh·리텐션이 결정하고(→ 저장 소자 물리, Ch.02·04 영역), 패키징 층은 TSV 밀도·스택 높이·열 발산이 결정하고(→ 이 장), 인터페이스 층은 base die의 SerDes 속도와 인터포저 채널 손실이 결정한다(→ 회로·IP, Ch.05). HBM3에서 HBM3E로의 진화는 주로 인터페이스·base die 속도 향상이었고, HBM4는 base die를 파운드리 로직 공정으로 이동시켜 커스텀 base die 시대를 여는 것으로 알려져 있다(2024~2025년 발표 기준, 최종 양산 사양은 벤더별로 확정 중이라 여기서는 방향만 기록). <strong>이 &quot;base die 커스텀화&quot;는 HBM이 순수한 메모리 부품에서 &quot;메모리+로직의 조립 서브시스템&quot;으로 이동한다는 뜻이며, 이 이동 자체가 패키징 계층이 아키텍처 계층에 흡수되는 최전선이다.</strong></p>\n<p><strong>HBM 스택 내부의 열 문제는 통설과 논쟁의 경계에 있다.</strong> 12단·16단으로 올라갈수록 상단 다이의 열 배출 경로가 길어지고, 최상단이 최하단보다 refresh 요구를 더 자주 만드는 비대칭이 발생한다는 것이 통설이다. 이 비대칭을 (a) 스택 내 온도 센서로 dynamic refresh 조정, (b) TSV 밀도 증가로 열 경로 개선, (c) 상단 다이 두께 조정 중 어느 조합으로 해결할지는 벤더별로 다르며, 어느 접근이 표준이 될지는 아직 논쟁 중이다.</p>\n<p><strong>HBM의 존재 자체가 이 장의 인과를 요약한다.</strong> 아키텍처가 요구한 TB/s 대역폭·pJ/bit 효율을 organic 서브스트레이트·GDDR로는 감당할 수 없으므로, DRAM은 자기 계층의 진화 축(밀도·속도)에서 벗어나 &quot;3D 스택 + 실리콘 인터포저 근접 배치&quot;라는 패키징 축의 진화에 종속됐다. 이 장은 이런 종속이 왜 광범위해졌는지를 4문항으로 나눠 설명한다.</p>\n<hr>\n",
-          "sources": [],
+          "body": "<p><strong>HBM은 이 세 계층의 어느 하나가 병목이 되면 세대 진화가 멈춘다.</strong> 셀 층은 DRAM 캐패시터 종횡비와 refresh·리텐션이 결정하고(→ 저장 소자 물리, Ch.02·04 영역), 패키징 층은 TSV 밀도·스택 높이·열 발산이 결정하고(→ 이 장), 인터페이스 층은 base die의 SerDes 속도와 인터포저 채널 손실이 결정한다(→ 회로·IP, Ch.05). HBM3에서 HBM3E로의 진화는 주로 인터페이스·base die 속도 향상이었고, HBM4는 base die를 파운드리 로직 공정으로 이동시켜 커스텀 base die 시대를 여는 것으로 알려져 있다(2024~2025년 발표 기준, 최종 양산 사양은 벤더별로 확정 중이라 여기서는 방향만 기록). <strong>이 &quot;base die 커스텀화&quot;는 HBM이 순수한 메모리 부품에서 &quot;메모리+로직의 조립 서브시스템&quot;으로 이동한다는 뜻이며, 이 이동 자체가 패키징 계층이 아키텍처 계층에 흡수되는 최전선이다.</strong></p>\n<p><strong>HBM 스택 내부의 열 문제는 통설과 논쟁의 경계에 있다.</strong> 12단·16단으로 올라갈수록 상단 다이의 열 배출 경로가 길어지고, 최상단이 최하단보다 refresh 요구를 더 자주 만드는 비대칭이 발생한다는 것이 통설이다. 이 비대칭을 (a) 스택 내 온도 센서로 dynamic refresh 조정, (b) TSV 밀도 증가로 열 경로 개선, (c) 상단 다이 두께 조정 중 어느 조합으로 해결할지는 벤더별로 다르며, 어느 접근이 표준이 될지는 아직 논쟁 중이다.</p>\n<p><strong>HBM의 존재 자체가 이 장의 인과를 요약한다.</strong> 아키텍처가 요구한 TB/s 대역폭·pJ/bit 효율을 organic 서브스트레이트·GDDR로는 감당할 수 없으므로, DRAM은 자기 계층의 진화 축(밀도·속도)에서 벗어나 &quot;3D 스택 + 실리콘 인터포저 근접 배치&quot;라는 패키징 축의 진화에 종속됐다. 이 장은 이런 종속이 왜 광범위해졌는지를 4문항으로 나눠 설명한다.</p>\n",
+          "sources": [
+            {
+              "t": "JEDEC Publishes HBM3 Update to High Bandwidth Memory (HBM) Standard",
+              "u": "https://www.jedec.org/news/pressreleases/jedec-publishes-hbm3-update-high-bandwidth-memory-hbm-standard",
+              "kind": "표준",
+              "pub": "JEDEC",
+              "date": "2022"
+            },
+            {
+              "t": "CoWoS® — Taiwan Semiconductor Manufacturing Company",
+              "u": "https://3dfabric.tsmc.com/english/dedicatedFoundry/technology/cowos.htm",
+              "kind": "기업자료",
+              "pub": "TSMC",
+              "date": "2024"
+            }
+          ],
           "children": []
         },
         {
@@ -1155,7 +1246,15 @@
             "이 계층의 물리적·경제적 한계를 한 문장으로 정리하면, 벤더 데이터시트의 이론 FLOPS·대역폭과 실제 워크로드가 뽑아내는 유효 처리량 사이에 지속적이고 좁혀지지 않는 격차가 있고, 이 격차가 시스템 계층 비용 함수의 대부분을 지배한다는 것이다. 이 격차는 소프트웨어 스택의 성숙만으로 사라지지 않으며, 아키텍처·회로·패키징이 정한 예산과 워크로드의 산술 강도가 만나 결정되는 구조적 산물이다."
           ],
           "body": "<p><strong>대표 지표는 MFU(Model FLOPs Utilization)다.</strong> 대형 LLM 학습에서 MFU 50%는 매우 잘 튜닝된 수치, 30<del>40%가 일반적이라는 것이 2022</del>2024년 학습 리포트들의 통설이다. Google의 PaLM 논문이 자체 스택에서 46% MFU를 인용했고, Megatron-LM·MosaicML·Nvidia의 후속 리포트가 40<del>55% 범위를 보고했다. NVIDIA H100의 이론 989 TFLOPS(FP16, sparsity 미포함)에 대응하는 실측 유효 처리량은 학습에서 300</del>500 TFLOPS/GPU 수준이 자주 보고된다. 이 격차의 물리·경제적 함의는 명확하다. <strong>하이엔드 accelerator TCO의 절반 이상이 이론상으로는 &quot;쓰지 못하는 성능&quot;에 지불되고 있다는 것</strong>이다. 벤더의 마케팅 수치와 사용자의 유효 처리량 사이의 이 gap 자체가 산업 계층의 논쟁 대상이다.</p>\n<p><strong>격차의 원인은 계층별로 분해된다.</strong> 첫째, <strong>메모리 대역폭 병목</strong>이 지배적이다. LLM decoding처럼 산술 강도(arithmetic intensity, FLOP per byte)가 낮은 워크로드는 roofline 모델상 반드시 메모리 bound이며, HBM 대역폭이 이론 상한을 정한다. H100 SXM의 3.35TB/s HBM3에서 실측 이용률은 워크로드에 따라 60<del>80% 수준이 자주 인용되고, 나머지는 페이지 미스·컨트롤러 스케줄링·refresh overhead로 소실된다. 둘째, <strong>커널 런치 오버헤드와 파이프라인 버블</strong>이 있다. 짧은 커널이 많은 워크로드(특히 LLM decoding의 토큰당 forward)에서 CUDA graph·CUDA stream 활용에도 불구하고 GPU가 유휴 상태에 있는 시간이 무시할 수 없다. 셋째, <strong>collective communication overhead</strong>가 있다. NVLink·NVSwitch의 이론 대역폭 대비 NCCL AllReduce·AllGather의 실측 이용률은 데이터 크기·토폴로지에 따라 60</del>85% 범위이고, 이 격차가 pipeline·tensor parallelism의 확장성을 제한한다. 넷째, <strong>straggler 문제</strong>가 있다. 수천 GPU 동기 학습에서 한 노드의 지연이 전체 step 시간을 결정하므로, 결함 GPU·네트워크 jitter·전력 스로틀링이 이론 총 FLOPS를 갉아먹는다. 다섯째, <strong>precision cast·quantization overhead</strong>가 있다. FP8·FP4 등 저정밀 유닛의 이론 처리량을 실측에서 뽑기 어렵고, cast·rescale 로직이 오버헤드로 남는다. 여섯째, <strong>컴파일러 autotuning의 한계</strong>가 있다. torch.compile·XLA가 kernel fusion·operator scheduling을 자동화하지만, 워크로드마다 최적 스케줄이 달라 완전 자동화는 여전히 미완성이며 수작업 커널(FlashAttention, PagedAttention)이 격차를 좁혀왔다는 것이 실증적 사실이다.</p>\n<p><strong>서빙 계층에서는 격차의 성격이 다르다.</strong> LLM 서빙의 병목은 KV 캐시 메모리와 배치 균질성이다. vLLM의 PagedAttention이 등장하기 전 서빙 스택은 GPU 메모리의 상당 부분을 KV 캐시 단편화로 낭비했고, 실측 처리량이 이론 상한 대비 20~30%에 머무는 사례가 흔했다. PagedAttention·continuous batching·speculative decoding 같은 최근 기법이 격차를 좁혔지만, 이론 상한에 도달했다고 보기는 어렵다는 것이 통설이다.</p>\n<p><strong>분산·클러스터 계층에서의 한계는 economic·operational 성격을 띤다.</strong> 대규모 학습 job의 실측 goodput(장애·재시작·checkpoint 오버헤드를 뺀 유효 시간)은 raw MFU에서 다시 10<del>20% 이상 깎이는 것이 하이퍼스케일러들의 리포트에서 확인된다. Meta의 Llama 학습 리포트, Google의 Gemini 학습 리포트가 대형 클러스터의 fault 빈도(수백</del>수천 GPU에서 하루 수 회~수십 회 fault)를 보고했고, 이 오버헤드가 이론-실측 격차를 시스템·운영 계층까지 확장시킨다.</p>\n<p><strong>경제적 한계는 이 격차의 재정적 표현이다.</strong> MFU 40%라는 것은 곧 accelerator TCO의 60%가 소각된다는 뜻이고, 여기에 goodput 감가상각을 더하면 데이터센터 회계상 유효 자본 수익률이 이론값의 30~40% 수준에 머무른다는 것이 하이퍼스케일러들의 내부 인식으로 알려져 있다. 이 경제 격차가 자체 SoC(Trainium, TPU, Maia) 흐름의 재정적 정당화이고, &quot;동일 이론 FLOPS에서 실측 활용률이 더 높은 스택&quot;을 향한 벤더 다변화 압력의 원천이다.</p>\n<p><strong>통설과 논쟁의 구분.</strong> 이론-실측 격차의 존재 자체는 통설이다. 격차의 원인 분해도 대체로 합의됐다(메모리 병목·통신·straggler·컴파일러 한계). 논쟁이 남은 지점은 세 가지다. 첫째, 이 격차의 근본 원인이 하드웨어인가 소프트웨어인가 워크로드 특성인가에 대한 책임 분담. 둘째, 소프트웨어 스택 성숙만으로 격차가 어디까지 좁혀질 수 있는가(낙관론 vs 회의론). 셋째, MFU를 유일한 지표로 삼는 것이 타당한가 — 최근 low-precision·MoE·sparsity가 도입되면서 MFU 정의 자체가 흔들린다는 지적이 있다. 예컨대 MoE 모델에서 활성화되는 파라미터만 계산에 참여하므로 &quot;이론 FLOPS&quot; 정의가 모호해지고, 이 정의 문제가 벤더 마케팅과 학술 논문 사이의 수치 비교를 어렵게 만든다.</p>\n<p><strong>요약하면, 이 계층의 한계는 개별 병목의 총합이 아니라 &quot;이론값과 실측값의 구조적 괴리&quot;라는 단일 지표로 요약되고, 이 괴리가 자본 지출·소프트웨어 인력·아키텍처 요구·패키징 우선순위 모두를 재정의한다.</strong> 3번의 대안 후보들은 이 괴리를 좁히려는 서로 다른 접근으로 읽을 수 있다.</p>\n",
-          "sources": [],
+          "sources": [
+            {
+              "t": "PaLM: Scaling Language Modeling with Pathways",
+              "u": "https://arxiv.org/abs/2204.02311",
+              "kind": "논문",
+              "pub": "arXiv (Google Research)",
+              "date": "2022"
+            }
+          ],
           "children": []
         },
         {
@@ -1166,7 +1265,15 @@
             "이론-실측 격차를 좁히려는 후보들은 계층별로 분포한다. 프로그래밍 모델·컴파일러·분산 프레임워크·서빙 최적화·소프트웨어 하드웨어 공동 설계·벤더 중립 스택·서버리스 추상화가 각각 다른 축을 공략한다. 각 후보의 지향과 미해결 문제를 정리한다."
           ],
           "body": "<p><strong>Triton(OpenAI, 2019~)은 커널 작성 계층의 대안이다.</strong> Python DSL로 CUDA C++ 없이 GPU 커널을 쓸 수 있게 하고, torch.compile의 백엔드로 채택되면서 사용 빈도가 급증했다. <strong>미해결 문제</strong>: 최상위 성능은 여전히 수작업 튜닝된 CUDA C++ 커널(FlashAttention·CUTLASS 등)에 미치지 못하고, NVIDIA 외 백엔드(AMD MI300용 Triton)에서의 성숙도 편차가 크다. Triton이 &quot;CUDA를 대체하는 문법&quot;이 될지 &quot;CUDA 위의 편의 계층&quot;에 머무를지는 논쟁 중이다.</p>\n<p><strong>MLIR 계열 컴파일러(XLA·IREE·TVM·Mojo)는 컴파일러 계층의 대안이다.</strong> 프론트엔드(TensorFlow·JAX·PyTorch)와 백엔드(CPU·GPU·TPU·NPU) 사이에 공통 IR을 두어 벤더 파편화를 흡수하는 것이 목표다. XLA는 TPU 백엔드에서 실증됐고, IREE는 모바일·엣지에서 진행 중이다. <strong>미해결 문제</strong>: 벤더 백엔드 성숙도 편차가 여전하고, 프론트엔드 파편화(각 프레임워크가 자기 IR을 갖는 상황)가 남아 있다. Mojo(Modular)가 Python 호환 시스템 언어로 이 문제를 정면 공략 중이지만 상용 채택은 초기 단계다.</p>\n<p><strong>SYCL·oneAPI(Intel 주도)는 벤더 중립 프로그래밍 모델의 재도전이다.</strong> 표준으로서의 완성도는 높고 인텔 GPU·CPU에서 실측 성능도 검증되고 있다. <strong>미해결 문제</strong>: NVIDIA·AMD GPU에서의 실측 성능 격차, 그리고 무엇보다 개발자 인력의 관성. &quot;표준으로서는 옳지만 시장이 채택하지 않는다&quot;는 OpenCL의 반복이 될 가능성이 논쟁 지점이다.</p>\n<p><strong>분산 학습 프레임워크(DeepSpeed·FSDP·Alpa·ColossalAI·Megatron-LM)는 다중 노드 계층의 대안이다.</strong> ZeRO 계열의 파라미터 shard, pipeline parallelism, tensor parallelism 자동화가 대형 모델 학습의 표준 관행을 만들었다. Alpa는 병렬 전략을 자동 탐색하려 했다. <strong>미해결 문제</strong>: 자동 병렬 전략 탐색은 워크로드·클러스터 토폴로지·모델 구조마다 정답이 달라 여전히 수작업 튜닝을 완전히 대체하지 못한다. FSDP가 PyTorch native로 흡수됐지만, 최상위 학습은 여전히 Megatron-LM 스타일 수작업이 우세하다는 것이 통설이다.</p>\n<p><strong>Dataflow SW 스택(Cerebras Wafer-Scale, SambaNova RDU SDK, Groq TSP, Graphcore Poplar)은 하드웨어·소프트웨어 공동 재설계 대안이다.</strong> SIMT를 버리고 다른 실행 모델(spatial dataflow, wafer-scale mesh)로 이론-실측 격차를 좁히려 한다. Groq은 LLM 추론 지연 지표에서 GPU 스택을 능가한다고 보고했다. <strong>미해결 문제</strong>: 특정 워크로드(추론 지연 중심)에서의 우위가 전 워크로드로 일반화되지 않고, 소프트웨어 생태계(라이브러리·프레임워크 지원)가 CUDA에 비해 얕다. 학습 시장에서의 채택은 실증되지 않았다는 것이 통설이다.</p>\n<p><strong>CXL fabric 관리(CXL 3.x, 2022~)는 노드·클러스터 사이의 메모리·통신 재설계 대안이다.</strong> switch·pooling·sharing을 통해 GPU·CPU·메모리를 한 fabric으로 묶어 이론-실측 격차의 원인 중 하나인 메모리 병목을 해소하려 한다. <strong>미해결 문제</strong>: 표준 성숙과 스위치 하드웨어의 상용화가 여전히 진행 중이고, 소프트웨어 스택(OS의 메모리 관리·페이지 마이그레이션)이 CXL 3.x가 정의하는 계층 구조를 제대로 활용하는 시점은 앞이 남았다. 하이퍼스케일러 채택 시점에 대한 논쟁이 크다.</p>\n<p><strong>서빙 최적화 스택(vLLM, PagedAttention, continuous batching, speculative decoding, SGLang, TensorRT-LLM)은 서빙 계층의 격차 축소 대안이다.</strong> KV 캐시 단편화·배치 균질성·decoding 병렬성 문제를 각각 공략해 실측 처리량을 이론 상한에 근접시켰다. vLLM은 오픈소스 사실상 표준으로 확산됐다. <strong>미해결 문제</strong>: 각 최적화가 워크로드 특화(긴 컨텍스트 vs 짧은 컨텍스트, 단일 vs 배치, greedy vs sampling)를 요구하고, 이론적으로 &quot;모든 워크로드에 최적인 서빙 스택&quot;은 아직 없다. 최적화가 급속히 진행 중이라 6개월 단위 지형 변화가 크다는 점이 통설이다.</p>\n<p><strong>Confidential computing 스택(AMD SEV-SNP, Intel TDX, NVIDIA Confidential Computing on H100/H200)은 신뢰 경계 계층의 대안이다.</strong> 다중 테넌트 클라우드에서 모델 가중치·프롬프트·응답을 하드웨어 신뢰 경계 안에 격리한다. <strong>미해결 문제</strong>: 성능 오버헤드(암호화·attestation)가 여전히 워크로드에 따라 10~30% 수준으로 인용되고, 원격 attestation 표준·키 관리 프로토콜의 성숙이 진행 중이다. 규제(EU AI Act, 미국 행정명령)가 채택을 앞당길지 여부가 논쟁이다.</p>\n<p><strong>Serverless AI 추론(Modal, RunPod, Together, Anyscale, Fireworks)은 인프라 추상화 계층의 대안이다.</strong> GPU를 함수 단위로 사용해 유휴 시간의 이론-실측 격차(경제적 격차)를 좁힌다. <strong>미해결 문제</strong>: cold start 지연(수 초~수십 초), GPU sharing 오버헤드, 예측 불가능한 처리량이 하이엔드 학습에 부적합하다. 추론 세그먼트에서만 유효하며, 학습 세그먼트로의 확장은 실증되지 않았다.</p>\n<p><strong>MoE·sparsity·speculative decoding 등 알고리즘 계층 대안은 워크로드 자체를 바꿔 격차를 우회한다.</strong> MoE는 활성 파라미터를 줄여 이론 FLOPS를 낮추되 실측 정확도를 유지하고, speculative decoding은 draft-verify로 유효 처리량을 늘린다. <strong>미해결 문제</strong>: MoE의 all-to-all 통신이 새로운 병목을 만들고(→ 4번에서 통신 계층 요구로 되돌아감), speculative decoding의 acceptance rate가 워크로드 의존이다. 알고리즘 대안이 격차의 정의 자체를 흔든다는 지적이 논쟁 지점이다.</p>\n<p><strong>요약하면, 이 계층의 대안 후보들은 &quot;격차를 어느 계층에서 좁힐 것인가&quot;에 대한 답이 서로 다르고, 어느 하나가 통합 표준이 될 것이라는 합의는 없다.</strong> 커널 계층(Triton), 컴파일러 계층(MLIR), 프로그래밍 모델 계층(SYCL), 분산 계층(FSDP·Alpa), 하드웨어 공동 재설계(Dataflow SW), 서빙 계층(vLLM), 알고리즘 계층(MoE·Speculative) 어느 것도 격차를 단독으로 해소하지 못한다. 여러 대안이 병렬로 진행되고, 각자가 좁힌 격차의 합이 산업의 실측 활용률을 결정할 것이라는 다중 경로 시나리오가 최근의 통설이다.</p>\n",
-          "sources": [],
+          "sources": [
+            {
+              "t": "Efficient Memory Management for Large Language Model Serving with PagedAttention",
+              "u": "https://dl.acm.org/doi/10.1145/3600006.3613165",
+              "kind": "논문",
+              "pub": "SOSP '23 (ACM)",
+              "date": "2023"
+            }
+          ],
           "children": []
         },
         {
@@ -1300,7 +1407,7 @@
       "l": "기본 노드"
     },
     {
-      "n": "—",
+      "n": "14",
       "l": "출처"
     }
   ]
