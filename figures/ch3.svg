@@ -1,0 +1,20 @@
+<svg viewBox="0 0 640 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="공정·계측 층1 개념도">
+  <rect width="640" height="300" fill="#F6EFE3"/>
+  <text x="28" y="34" font-size="22" font-weight="700" fill="#241C16">3. 공정·계측</text>
+  <rect x="28" y="56" width="380" height="210" rx="14" fill="none" stroke="#2E5E5B" stroke-width="2" stroke-dasharray="7 5"/>
+
+    <rect x="48" y="90" width="163.7" height="42" rx="21" fill="#D6C6AE"/>
+    <text x="129.8" y="116.0" font-size="16" fill="#241C16" text-anchor="middle">EUV 리소그래피</text>
+    <rect x="48" y="144" width="213.3" height="42" rx="21" fill="#D6C6AE"/>
+    <text x="154.6" y="170.0" font-size="16" fill="#241C16" text-anchor="middle">ALD/ALE 원자층 공정</text>
+    <rect x="48" y="198" width="212.5" height="42" rx="21" fill="#D6C6AE"/>
+    <text x="154.2" y="224.0" font-size="16" fill="#241C16" text-anchor="middle">Scatterometry 계측</text>
+  <text x="48" y="250" font-size="12" fill="#6B5A4A">이 계층에서는 이만큼만 알면 된다</text>
+  <line x1="424" y1="161" x2="616" y2="161" stroke="#B5761D" stroke-width="3" marker-end="url(#arrow-ch3)"/>
+  <text x="424" y="147" font-size="13" fill="#B5761D">회로·IP에 강제</text>
+  <defs>
+    <marker id="arrow-ch3" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#B5761D"/>
+    </marker>
+  </defs>
+</svg>

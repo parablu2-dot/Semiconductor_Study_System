@@ -1,0 +1,18 @@
+<svg viewBox="0 0 640 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="소자 층1 개념도">
+  <rect width="640" height="300" fill="#F6EFE3"/>
+  <text x="28" y="34" font-size="22" font-weight="700" fill="#241C16">2. 소자</text>
+  <rect x="28" y="56" width="380" height="210" rx="14" fill="none" stroke="#2E5E5B" stroke-width="2" stroke-dasharray="7 5"/>
+
+    <rect x="48" y="90" width="236.2" height="42" rx="21" fill="#D6C6AE"/>
+    <text x="166.1" y="116.0" font-size="16" fill="#241C16" text-anchor="middle">FinFET → GAA 나노시트</text>
+    <rect x="48" y="144" width="205.6" height="42" rx="21" fill="#D6C6AE"/>
+    <text x="150.8" y="170.0" font-size="16" fill="#241C16" text-anchor="middle">DRAM·NAND·SRAM 셀</text>
+  <text x="48" y="250" font-size="12" fill="#6B5A4A">이 계층에서는 이만큼만 알면 된다</text>
+  <line x1="424" y1="161" x2="616" y2="161" stroke="#B5761D" stroke-width="3" marker-end="url(#arrow-ch2)"/>
+  <text x="424" y="147" font-size="13" fill="#B5761D">공정·계측에 강제</text>
+  <defs>
+    <marker id="arrow-ch2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#B5761D"/>
+    </marker>
+  </defs>
+</svg>

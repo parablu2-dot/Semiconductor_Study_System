@@ -71,6 +71,9 @@
           "children": []
         }
       ],
+      "figure": {
+        "svg": "<svg viewBox=\"0 0 640 300\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"재료·물성 층1 개념도\">\n  <rect width=\"640\" height=\"300\" fill=\"#F6EFE3\"/>\n  <text x=\"28\" y=\"34\" font-size=\"22\" font-weight=\"700\" fill=\"#241C16\">1. 재료·물성</text>\n  <rect x=\"28\" y=\"56\" width=\"380\" height=\"210\" rx=\"14\" fill=\"none\" stroke=\"#2E5E5B\" stroke-width=\"2\" stroke-dasharray=\"7 5\"/>\n\n    <rect x=\"48\" y=\"90\" width=\"146.9\" height=\"42\" rx=\"21\" fill=\"#D6C6AE\"/>\n    <text x=\"121.4\" y=\"116.0\" font-size=\"16\" fill=\"#241C16\" text-anchor=\"middle\">Si 결정 채널</text>\n    <rect x=\"48\" y=\"144\" width=\"200.3\" height=\"42\" rx=\"21\" fill=\"#D6C6AE\"/>\n    <text x=\"148.2\" y=\"170.0\" font-size=\"16\" fill=\"#241C16\" text-anchor=\"middle\">HfO₂ 게이트 유전체</text>\n    <rect x=\"48\" y=\"198\" width=\"162.9\" height=\"42\" rx=\"21\" fill=\"#D6C6AE\"/>\n    <text x=\"129.4\" y=\"224.0\" font-size=\"16\" fill=\"#241C16\" text-anchor=\"middle\">Cu/Low-k 배선</text>\n  <text x=\"48\" y=\"250\" font-size=\"12\" fill=\"#6B5A4A\">이 계층에서는 이만큼만 알면 된다</text>\n  <line x1=\"424\" y1=\"161\" x2=\"616\" y2=\"161\" stroke=\"#B5761D\" stroke-width=\"3\" marker-end=\"url(#arrow-ch1)\"/>\n  <text x=\"424\" y=\"147\" font-size=\"13\" fill=\"#B5761D\">소자 구조에 강제</text>\n  <defs>\n    <marker id=\"arrow-ch1\" viewBox=\"0 0 10 10\" refX=\"8\" refY=\"5\" markerWidth=\"7\" markerHeight=\"7\" orient=\"auto-start-reverse\">\n      <path d=\"M0,0 L10,5 L0,10 z\" fill=\"#B5761D\"/>\n    </marker>\n  </defs>\n</svg>"
+      },
       "topics": [
         {
           "id": "si-crystal-channel",
@@ -225,6 +228,9 @@
           "children": []
         }
       ],
+      "figure": {
+        "svg": "<svg viewBox=\"0 0 640 300\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"소자 층1 개념도\">\n  <rect width=\"640\" height=\"300\" fill=\"#F6EFE3\"/>\n  <text x=\"28\" y=\"34\" font-size=\"22\" font-weight=\"700\" fill=\"#241C16\">2. 소자</text>\n  <rect x=\"28\" y=\"56\" width=\"380\" height=\"210\" rx=\"14\" fill=\"none\" stroke=\"#2E5E5B\" stroke-width=\"2\" stroke-dasharray=\"7 5\"/>\n\n    <rect x=\"48\" y=\"90\" width=\"236.2\" height=\"42\" rx=\"21\" fill=\"#D6C6AE\"/>\n    <text x=\"166.1\" y=\"116.0\" font-size=\"16\" fill=\"#241C16\" text-anchor=\"middle\">FinFET → GAA 나노시트</text>\n    <rect x=\"48\" y=\"144\" width=\"205.6\" height=\"42\" rx=\"21\" fill=\"#D6C6AE\"/>\n    <text x=\"150.8\" y=\"170.0\" font-size=\"16\" fill=\"#241C16\" text-anchor=\"middle\">DRAM·NAND·SRAM 셀</text>\n  <text x=\"48\" y=\"250\" font-size=\"12\" fill=\"#6B5A4A\">이 계층에서는 이만큼만 알면 된다</text>\n  <line x1=\"424\" y1=\"161\" x2=\"616\" y2=\"161\" stroke=\"#B5761D\" stroke-width=\"3\" marker-end=\"url(#arrow-ch2)\"/>\n  <text x=\"424\" y=\"147\" font-size=\"13\" fill=\"#B5761D\">공정·계측에 강제</text>\n  <defs>\n    <marker id=\"arrow-ch2\" viewBox=\"0 0 10 10\" refX=\"8\" refY=\"5\" markerWidth=\"7\" markerHeight=\"7\" orient=\"auto-start-reverse\">\n      <path d=\"M0,0 L10,5 L0,10 z\" fill=\"#B5761D\"/>\n    </marker>\n  </defs>\n</svg>"
+      },
       "topics": [
         {
           "id": "monolayer-semiconductor-channel",
@@ -374,6 +380,9 @@
           "children": []
         }
       ],
+      "figure": {
+        "svg": "<svg viewBox=\"0 0 640 300\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"공정·계측 층1 개념도\">\n  <rect width=\"640\" height=\"300\" fill=\"#F6EFE3\"/>\n  <text x=\"28\" y=\"34\" font-size=\"22\" font-weight=\"700\" fill=\"#241C16\">3. 공정·계측</text>\n  <rect x=\"28\" y=\"56\" width=\"380\" height=\"210\" rx=\"14\" fill=\"none\" stroke=\"#2E5E5B\" stroke-width=\"2\" stroke-dasharray=\"7 5\"/>\n\n    <rect x=\"48\" y=\"90\" width=\"163.7\" height=\"42\" rx=\"21\" fill=\"#D6C6AE\"/>\n    <text x=\"129.8\" y=\"116.0\" font-size=\"16\" fill=\"#241C16\" text-anchor=\"middle\">EUV 리소그래피</text>\n    <rect x=\"48\" y=\"144\" width=\"213.3\" height=\"42\" rx=\"21\" fill=\"#D6C6AE\"/>\n    <text x=\"154.6\" y=\"170.0\" font-size=\"16\" fill=\"#241C16\" text-anchor=\"middle\">ALD/ALE 원자층 공정</text>\n    <rect x=\"48\" y=\"198\" width=\"212.5\" height=\"42\" rx=\"21\" fill=\"#D6C6AE\"/>\n    <text x=\"154.2\" y=\"224.0\" font-size=\"16\" fill=\"#241C16\" text-anchor=\"middle\">Scatterometry 계측</text>\n  <text x=\"48\" y=\"250\" font-size=\"12\" fill=\"#6B5A4A\">이 계층에서는 이만큼만 알면 된다</text>\n  <line x1=\"424\" y1=\"161\" x2=\"616\" y2=\"161\" stroke=\"#B5761D\" stroke-width=\"3\" marker-end=\"url(#arrow-ch3)\"/>\n  <text x=\"424\" y=\"147\" font-size=\"13\" fill=\"#B5761D\">회로·IP에 강제</text>\n  <defs>\n    <marker id=\"arrow-ch3\" viewBox=\"0 0 10 10\" refX=\"8\" refY=\"5\" markerWidth=\"7\" markerHeight=\"7\" orient=\"auto-start-reverse\">\n      <path d=\"M0,0 L10,5 L0,10 z\" fill=\"#B5761D\"/>\n    </marker>\n  </defs>\n</svg>"
+      },
       "topics": [
         {
           "id": "finfet-gaa-nanosheet",
@@ -578,6 +587,9 @@
           "children": []
         }
       ],
+      "figure": {
+        "svg": "<svg viewBox=\"0 0 640 300\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"회로·IP 층1 개념도\">\n  <rect width=\"640\" height=\"300\" fill=\"#F6EFE3\"/>\n  <text x=\"28\" y=\"34\" font-size=\"22\" font-weight=\"700\" fill=\"#241C16\">4. 회로·IP</text>\n  <rect x=\"28\" y=\"56\" width=\"380\" height=\"210\" rx=\"14\" fill=\"none\" stroke=\"#2E5E5B\" stroke-width=\"2\" stroke-dasharray=\"7 5\"/>\n\n    <rect x=\"48\" y=\"90\" width=\"209.4\" height=\"42\" rx=\"21\" fill=\"#D6C6AE\"/>\n    <text x=\"152.7\" y=\"116.0\" font-size=\"16\" fill=\"#241C16\" text-anchor=\"middle\">RTL+표준셀+P&amp;R+STA</text>\n    <rect x=\"48\" y=\"144\" width=\"163.7\" height=\"42\" rx=\"21\" fill=\"#D6C6AE\"/>\n    <text x=\"129.8\" y=\"170.0\" font-size=\"16\" fill=\"#241C16\" text-anchor=\"middle\">물리 IP 재사용</text>\n  <text x=\"48\" y=\"250\" font-size=\"12\" fill=\"#6B5A4A\">이 계층에서는 이만큼만 알면 된다</text>\n  <line x1=\"424\" y1=\"161\" x2=\"616\" y2=\"161\" stroke=\"#B5761D\" stroke-width=\"3\" marker-end=\"url(#arrow-ch4)\"/>\n  <text x=\"424\" y=\"147\" font-size=\"13\" fill=\"#B5761D\">설계 방법론에 강제</text>\n  <defs>\n    <marker id=\"arrow-ch4\" viewBox=\"0 0 10 10\" refX=\"8\" refY=\"5\" markerWidth=\"7\" markerHeight=\"7\" orient=\"auto-start-reverse\">\n      <path d=\"M0,0 L10,5 L0,10 z\" fill=\"#B5761D\"/>\n    </marker>\n  </defs>\n</svg>"
+      },
       "topics": [
         {
           "id": "sram-cell",
@@ -741,6 +753,9 @@
           "children": []
         }
       ],
+      "figure": {
+        "svg": "<svg viewBox=\"0 0 640 300\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"설계 방법론 층1 개념도\">\n  <rect width=\"640\" height=\"300\" fill=\"#F6EFE3\"/>\n  <text x=\"28\" y=\"34\" font-size=\"22\" font-weight=\"700\" fill=\"#241C16\">5. 설계 방법론</text>\n  <rect x=\"28\" y=\"56\" width=\"380\" height=\"210\" rx=\"14\" fill=\"none\" stroke=\"#2E5E5B\" stroke-width=\"2\" stroke-dasharray=\"7 5\"/>\n\n    <rect x=\"48\" y=\"90\" width=\"207.2\" height=\"42\" rx=\"21\" fill=\"#D6C6AE\"/>\n    <text x=\"151.6\" y=\"116.0\" font-size=\"16\" fill=\"#241C16\" text-anchor=\"middle\">UVM 검증 파이프라인</text>\n    <rect x=\"48\" y=\"144\" width=\"206.4\" height=\"42\" rx=\"21\" fill=\"#D6C6AE\"/>\n    <text x=\"151.2\" y=\"170.0\" font-size=\"16\" fill=\"#241C16\" text-anchor=\"middle\">MMMC/SSTA 사인오프</text>\n  <text x=\"48\" y=\"250\" font-size=\"12\" fill=\"#6B5A4A\">이 계층에서는 이만큼만 알면 된다</text>\n  <line x1=\"424\" y1=\"161\" x2=\"616\" y2=\"161\" stroke=\"#B5761D\" stroke-width=\"3\" marker-end=\"url(#arrow-ch5)\"/>\n  <text x=\"424\" y=\"147\" font-size=\"13\" fill=\"#B5761D\">아키텍처에 강제</text>\n  <defs>\n    <marker id=\"arrow-ch5\" viewBox=\"0 0 10 10\" refX=\"8\" refY=\"5\" markerWidth=\"7\" markerHeight=\"7\" orient=\"auto-start-reverse\">\n      <path d=\"M0,0 L10,5 L0,10 z\" fill=\"#B5761D\"/>\n    </marker>\n  </defs>\n</svg>"
+      },
       "topics": [
         {
           "id": "rtl-design-flow",
@@ -910,6 +925,9 @@
           "children": []
         }
       ],
+      "figure": {
+        "svg": "<svg viewBox=\"0 0 640 300\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"아키텍처 층1 개념도\">\n  <rect width=\"640\" height=\"300\" fill=\"#F6EFE3\"/>\n  <text x=\"28\" y=\"34\" font-size=\"22\" font-weight=\"700\" fill=\"#241C16\">6. 아키텍처</text>\n  <rect x=\"28\" y=\"56\" width=\"380\" height=\"210\" rx=\"14\" fill=\"none\" stroke=\"#2E5E5B\" stroke-width=\"2\" stroke-dasharray=\"7 5\"/>\n\n    <rect x=\"48\" y=\"90\" width=\"271.4\" height=\"42\" rx=\"21\" fill=\"#D6C6AE\"/>\n    <text x=\"183.7\" y=\"116.0\" font-size=\"16\" fill=\"#241C16\" text-anchor=\"middle\">캐시로 은폐한 폰노이만 코어</text>\n    <rect x=\"48\" y=\"144\" width=\"237.8\" height=\"42\" rx=\"21\" fill=\"#D6C6AE\"/>\n    <text x=\"166.9\" y=\"170.0\" font-size=\"16\" fill=\"#241C16\" text-anchor=\"middle\">대역폭·에너지 이중 상한</text>\n  <text x=\"48\" y=\"250\" font-size=\"12\" fill=\"#6B5A4A\">이 계층에서는 이만큼만 알면 된다</text>\n  <line x1=\"424\" y1=\"161\" x2=\"616\" y2=\"161\" stroke=\"#B5761D\" stroke-width=\"3\" marker-end=\"url(#arrow-ch6)\"/>\n  <text x=\"424\" y=\"147\" font-size=\"13\" fill=\"#B5761D\">패키징·집적에 강제</text>\n  <defs>\n    <marker id=\"arrow-ch6\" viewBox=\"0 0 10 10\" refX=\"8\" refY=\"5\" markerWidth=\"7\" markerHeight=\"7\" orient=\"auto-start-reverse\">\n      <path d=\"M0,0 L10,5 L0,10 z\" fill=\"#B5761D\"/>\n    </marker>\n  </defs>\n</svg>"
+      },
       "topics": [
         {
           "id": "von-neumann-cache-hierarchy",
@@ -1109,6 +1127,9 @@
           "children": []
         }
       ],
+      "figure": {
+        "svg": "<svg viewBox=\"0 0 640 300\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"패키징·집적 층1 개념도\">\n  <rect width=\"640\" height=\"300\" fill=\"#F6EFE3\"/>\n  <text x=\"28\" y=\"34\" font-size=\"22\" font-weight=\"700\" fill=\"#241C16\">7. 패키징·집적</text>\n  <rect x=\"28\" y=\"56\" width=\"380\" height=\"210\" rx=\"14\" fill=\"none\" stroke=\"#2E5E5B\" stroke-width=\"2\" stroke-dasharray=\"7 5\"/>\n\n    <rect x=\"48\" y=\"90\" width=\"217.1\" height=\"42\" rx=\"21\" fill=\"#D6C6AE\"/>\n    <text x=\"156.6\" y=\"116.0\" font-size=\"16\" fill=\"#241C16\" text-anchor=\"middle\">2.5D 실리콘 인터포저</text>\n    <rect x=\"48\" y=\"144\" width=\"69.8\" height=\"42\" rx=\"21\" fill=\"#D6C6AE\"/>\n    <text x=\"82.9\" y=\"170.0\" font-size=\"16\" fill=\"#241C16\" text-anchor=\"middle\">HBM</text>\n    <rect x=\"48\" y=\"198\" width=\"178.9\" height=\"42\" rx=\"21\" fill=\"#D6C6AE\"/>\n    <text x=\"137.4\" y=\"224.0\" font-size=\"16\" fill=\"#241C16\" text-anchor=\"middle\">Hybrid Bonding</text>\n  <text x=\"48\" y=\"250\" font-size=\"12\" fill=\"#6B5A4A\">이 계층에서는 이만큼만 알면 된다</text>\n  <line x1=\"424\" y1=\"161\" x2=\"616\" y2=\"161\" stroke=\"#B5761D\" stroke-width=\"3\" marker-end=\"url(#arrow-ch7)\"/>\n  <text x=\"424\" y=\"147\" font-size=\"13\" fill=\"#B5761D\">시스템·SW에 강제</text>\n  <defs>\n    <marker id=\"arrow-ch7\" viewBox=\"0 0 10 10\" refX=\"8\" refY=\"5\" markerWidth=\"7\" markerHeight=\"7\" orient=\"auto-start-reverse\">\n      <path d=\"M0,0 L10,5 L0,10 z\" fill=\"#B5761D\"/>\n    </marker>\n  </defs>\n</svg>"
+      },
       "topics": [
         {
           "id": "ucie",
@@ -1288,6 +1309,9 @@
           "children": []
         }
       ],
+      "figure": {
+        "svg": "<svg viewBox=\"0 0 640 300\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"시스템·SW 층1 개념도\">\n  <rect width=\"640\" height=\"300\" fill=\"#F6EFE3\"/>\n  <text x=\"28\" y=\"34\" font-size=\"22\" font-weight=\"700\" fill=\"#241C16\">8. 시스템·SW</text>\n  <rect x=\"28\" y=\"56\" width=\"380\" height=\"210\" rx=\"14\" fill=\"none\" stroke=\"#2E5E5B\" stroke-width=\"2\" stroke-dasharray=\"7 5\"/>\n\n    <rect x=\"48\" y=\"90\" width=\"252.2\" height=\"42\" rx=\"21\" fill=\"#D6C6AE\"/>\n    <text x=\"174.1\" y=\"116.0\" font-size=\"16\" fill=\"#241C16\" text-anchor=\"middle\">CUDA+PyTorch+NCCL 스택</text>\n    <rect x=\"48\" y=\"144\" width=\"270.6\" height=\"42\" rx=\"21\" fill=\"#D6C6AE\"/>\n    <text x=\"183.3\" y=\"170.0\" font-size=\"16\" fill=\"#241C16\" text-anchor=\"middle\">이론-실측 활용률 격차(MFU)</text>\n  <text x=\"48\" y=\"250\" font-size=\"12\" fill=\"#6B5A4A\">이 계층에서는 이만큼만 알면 된다</text>\n  <line x1=\"424\" y1=\"161\" x2=\"616\" y2=\"161\" stroke=\"#B5761D\" stroke-width=\"3\" marker-end=\"url(#arrow-ch8)\"/>\n  <text x=\"424\" y=\"131\" font-size=\"13\" fill=\"#B5761D\">8개 계층에<tspan x=\"424\" dy=\"16\">되돌아가 요구</tspan></text>\n  <defs>\n    <marker id=\"arrow-ch8\" viewBox=\"0 0 10 10\" refX=\"8\" refY=\"5\" markerWidth=\"7\" markerHeight=\"7\" orient=\"auto-start-reverse\">\n      <path d=\"M0,0 L10,5 L0,10 z\" fill=\"#B5761D\"/>\n    </marker>\n  </defs>\n</svg>"
+      },
       "topics": [
         {
           "id": "wafer-scale-dataflow-architecture",
