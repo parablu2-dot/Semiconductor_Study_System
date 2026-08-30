@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 "use strict";
 /*
- * content/*.md  →  public/data.json
+ * content/*.md  →  docs/data.json (GitHub Pages가 docs/ 를 서빙)
  *
  * 규약 (구현지시서 3, 6-b 참고):
  *   frontmatter: id, no, title, lede (root는 summary도)
@@ -29,7 +29,7 @@ const { marked } = require("marked");
 const ROOT_DIR = __dirname;
 const CONTENT_DIR = path.join(ROOT_DIR, "content");
 const FIGURES_DIR = path.join(ROOT_DIR, "figures");
-const OUT_FILE = path.join(ROOT_DIR, "public", "data.json");
+const OUT_FILE = path.join(ROOT_DIR, "docs", "data.json");
 
 const SOURCE_MARK = "**출처**";
 // CommonMark가 허용하는 백슬래시 이스케이프 대상 구두점

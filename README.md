@@ -6,27 +6,40 @@ Google Drive `반도체교과서/` 원류 md를 GitHub 정본으로 옮기고, �
 ## 파이프라인
 
 ```
-content/*.md  →  build.js  →  public/data.json  →  public/index.html
+content/*.md  →  build.js  →  docs/data.json  →  docs/index.html
 ```
 
 - `content/*.md` — 원문. 사람이 읽고 고치는 유일한 곳(정본). Drive에서 내려받아 여기 넣는다.
 - `figures/<노드id>.svg` — 원리 그림. 미리 만들어 커밋한다(열람 시점 생성 금지).
-- `build.js` — md를 파싱해 `public/data.json` 생성.
-- `public/index.html` — 대시보드. `data.json`을 fetch로 읽는다.
+- `build.js` — md를 파싱해 `docs/data.json` 생성.
+- `docs/index.html` — 대시보드. `data.json`을 fetch로 읽는다.
+- 산출물 폴더가 `docs/`인 이유는 GitHub Pages의 "Deploy from a branch: main /docs" 옵션이
+  바로 이 폴더를 요구하기 때문이다(별도 워크플로 없이 배포하기 위함).
 
 ## 사용법
 
 ```bash
 npm install
-npm run build      # content/*.md → public/data.json
+npm run build      # content/*.md → docs/data.json
 ```
 
-`public/`을 정적 서버(예: GitHub Pages)에 올리면 그대로 열람 가능. 로컬 확인 시에는 `file://`로 열면
+`docs/`를 정적 서버(예: GitHub Pages)에 올리면 그대로 열람 가능. 로컬 확인 시에는 `file://`로 열면
 `fetch`가 막히므로 아무 정적 서버로 띄워야 한다:
 
 ```bash
-npx serve public
+npx serve docs
 ```
+
+## GitHub Pages 배포
+
+1. `npm run build`로 `docs/data.json`을 최신 상태로 만들고 커밋·push한다.
+2. 리포 **Settings → Pages → Build and deployment → Source**를
+   **Deploy from a branch**로, 브랜치는 **main / docs**로 설정한다.
+3. 몇 분 뒤 `https://parablu2-dot.github.io/Semiconductor_Study_System/`에서 열람 가능.
+
+빌드가 CI 없이 로컬에서만 이뤄지므로, **content/md를 고친 뒤에는 반드시 `npm run build`를 다시 돌리고
+`docs/data.json` 변경분까지 커밋해야** 사이트에 반영된다. 이 흐름이 자리잡은 뒤 GitHub Actions로
+자동 빌드·배포를 옮기는 것을 고려할 수 있다(빌드 실패와 배포 실패를 분리해서 진단하기 쉬워짐).
 
 ## md 규약
 
