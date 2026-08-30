@@ -74,14 +74,17 @@ appears_in에 속한 모든 장과의 관계를 각각 문장으로 정리한다
 
 **ch8 시스템·SW** — [cuda-programming-model](cuda-programming-model.md) · [pytorch-jax-framework](pytorch-jax-framework.md) · [mfu-utilization-gap](mfu-utilization-gap.md) · [distributed-training-framework](distributed-training-framework.md) · [llm-serving-optimization](llm-serving-optimization.md) · [cxl-memory-fabric](cxl-memory-fabric.md)(교차 ch6+ch7+ch8)
 
-## 다음 단계 진행 순서 (2026-08-30 사용자 지시)
+## 2026-08-30 진행 순서 — 전부 완료
 
 사용자 지시: "3번(chiplet/UCIe)은 정리했고, 출처는 확실한 것만 연결, 그림은 간단하게, 대시보드는 이 셋을 정리하고 진행."
 
-1. ✅ chiplet-ucie 분리 완료 — 위 참조.
-2. 출처(sources) — `content/*.md` 8장 원문에, 실제로 존재를 확인한 것만 `**출처**` 블록으로 추가(구현지시서 6-b 원칙). 미확인 항목은 신지 않는다.
-3. 그림 — `figures/<장id>.svg` 층1 개념도를 간단한 스타일로 8장분 우선 제작(경계 긋기 목적, 팔레트 고정, 수치 없음, 라벨 6단어 이내).
-4. 대시보드 — 위 세 가지 반영 후 `npm run build`로 `docs/data.json` 재생성·검증, push.
+1. ✅ chiplet-ucie 분리 — [chiplet.md](chiplet.md)(ch7)·[ucie.md](ucie.md)(ch4)로 분리, 14개 문서 링크 재배선(커밋 `9d88220`).
+2. ✅ 출처(sources) — `content/*.md` 8장에 WebSearch로 실존을 확인한 출처 14건 추가(구현지시서 6-b 원칙, 커밋 `9125c0d`).
+   미확인 수치·주장은 신지 않음. 부수 효과로 ch5의 "ISPD 2022" 오기를 실제 발행 연도 "ISPD 2023"으로 정정.
+3. ✅ 그림 — `figures/ch1.svg`~`ch8.svg` 층1 개념도 8장 제작(경계 긋기, 팔레트 고정, 수치 없음, 라벨 6단어 이내,
+   커밋 `ad382ee`). 발행 전 실제 `.figure` 컴포넌트 스타일로 재현한 검수 페이지를 아티팩트로 공유해 사용자 확인 받음.
+4. ✅ 대시보드 — `npm run build`로 `docs/data.json` 재생성(8장 전부 출처+그림 포함 확인), push 완료.
 
-소주제 deepdive 42~43개 자체에 출처·그림을 넣을지는 아직 범위 밖 — 이번 라운드는 build.js가 실제로 읽는
-`content/*.md`(장 문서)에 한정한다. deepdive 문서는 그 뒤 별도 라운드에서 검토.
+**남은 범위 밖 항목**: 교차 소주제 23개(chiplet·ucie 포함)용 층1 SVG는 이번 라운드에 포함하지 않음 — 8개 장
+개념도가 우선순위였고, 교차 소주제 그림은 다음 라운드 대상. 소주제 deepdive 43개 자체에 출처를 넣는 것도
+범위 밖 — build.js가 실제로 읽는 `content/*.md`(장 문서)에만 이번 출처 작업을 한정했다.
