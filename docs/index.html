@@ -69,6 +69,19 @@ h1{font-family:"IBM Plex Serif",serif;font-weight:500;font-size:clamp(27px,3.6vw
 .stat b{display:block;font-family:"IBM Plex Mono",monospace;font-size:23px;font-weight:500;line-height:1}
 .stat span{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft)}
 
+.topics{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:18px 22px;margin-bottom:20px}
+.topics h2{font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:500;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--ink-soft);margin:0 0 12px}
+.topicwrap{display:flex;flex-wrap:wrap;gap:8px}
+.topic-chip{border:1px solid var(--line);background:var(--card-2);border-radius:20px;
+  padding:5px 8px 5px 13px;font-size:12.5px;color:var(--ink);display:flex;align-items:center;gap:6px}
+.topic-chip .t{cursor:help}
+.topic-chip .also{display:flex;gap:3px}
+.topic-chip .also button{border:1px solid var(--line);background:var(--sand);color:var(--ink-soft);
+  font-family:"IBM Plex Mono",monospace;font-size:9.5px;line-height:1;border-radius:50%;
+  width:17px;height:17px;cursor:pointer;padding:0;transition:border-color .16s,color .16s}
+.topic-chip .also button:hover{border-color:var(--brass);color:var(--clay)}
+.topics .hint{font-size:11.5px;color:var(--ink-soft);margin-top:10px;opacity:.8}
 .tools{display:flex;gap:8px;margin-bottom:26px;flex-wrap:wrap}
 .btn{border:1px solid var(--line);background:var(--card);border-radius:var(--r);cursor:pointer;
   font:inherit;font-size:13px;padding:7px 15px;color:var(--ink);display:flex;align-items:center;gap:7px;
@@ -161,6 +174,7 @@ footer{margin-top:44px;padding-top:16px;border-top:1px solid var(--line);
   <h1 id="title"></h1>
   <p class="lede" id="lede"></p>
   <section class="panel" id="panel"></section>
+  <div id="topicsbox"></div>
   <div class="tools" id="tools"></div>
   <div id="figbox"></div>
   <div id="content"></div>
@@ -230,6 +244,25 @@ function render(){
     (sum.length?sum.map(s=>`<p>${s}</p>`).join("")
       :`<p style="color:var(--teal)">아직 비어 있음. content/ md 에서 이 노드의 첫 문단을 채우세요.</p>`)+
     (node.stats?`<div class="stats">${node.stats.map(s=>`<div class="stat"><b>${s.n}</b><span>${s.l}</span></div>`).join("")}</div>`:"");
+
+  // 소주제 색인 — 4문항 제목이 아니라 이 장에서 실제로 다룬 기술 대상 이름.
+  // build.js 가 analysis/subtopics.json 에서 붙여준 값이며, 장 노드에만 있다.
+  const topicsbox=document.getElementById("topicsbox");
+  if(node.topics && node.topics.length){
+    const curCh=parseInt(node.no,10);
+    topicsbox.innerHTML=`<div class="topics"><h2>이 장에서 실제로 다룬 소주제</h2><div class="topicwrap">`+
+      node.topics.map(t=>{
+        const others=(t.appears_in||[]).filter(c=>c!==curCh);
+        const also=others.length?`<span class="also">${others.map(c=>
+          `<button data-ch="ch${c}" title="${c}장에서도 다룸 — 클릭하면 이동">${c}</button>`).join("")}</span>`:"";
+        const ledeAttr=(t.lede||"").replace(/"/g,"&quot;");
+        return `<span class="topic-chip"><span class="t" title="${ledeAttr}">${t.title}</span>${also}</span>`;
+      }).join("")+
+      `</div><p class="hint">숫자 배지는 같은 소주제가 실제로 등장하는 다른 장 — 클릭하면 그 장으로 이동합니다.</p></div>`;
+    topicsbox.querySelectorAll(".also button").forEach(b=>b.onclick=()=>location.hash="#/"+b.dataset.ch);
+  } else {
+    topicsbox.innerHTML="";
+  }
 
   // 원리 그림 버튼
   const tools=document.getElementById("tools"), figbox=document.getElementById("figbox");

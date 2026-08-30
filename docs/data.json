@@ -62,6 +62,97 @@
           "sources": [],
           "children": []
         }
+      ],
+      "topics": [
+        {
+          "id": "si-crystal-channel",
+          "title": "실리콘 결정 채널",
+          "lede": "CZ 성장 단결정 Si 웨이퍼와 캐리어 이동도 — 로직·메모리 공통 채널 재료의 물성적 근거",
+          "home": 1,
+          "appears_in": [
+            1
+          ]
+        },
+        {
+          "id": "high-k-metal-gate-dielectric",
+          "title": "HfO₂/Metal Gate 게이트 유전체",
+          "lede": "SiO₂→HfO₂ high-k 전환과 εr–Eg 트레이드오프, HKMG 스택의 재료적 근거",
+          "home": 1,
+          "appears_in": [
+            1
+          ]
+        },
+        {
+          "id": "cu-low-k-interconnect",
+          "title": "Cu/Low-k 배선",
+          "lede": "Al→Cu 전환, 배선 저항의 벽, Co·Ru·Mo·graphene 배선 대안",
+          "home": 1,
+          "appears_in": [
+            1
+          ]
+        },
+        {
+          "id": "monolayer-semiconductor-channel",
+          "title": "2D 반도체 채널",
+          "lede": "MoS₂·WSe₂·WS₂ 단원자층 채널 — 컨택 저항·웨이퍼 스케일 성장 미해결. [통일] '2D 반도체(MoS₂,WSe₂,WS₂)'(ch1)와 '2D 채널 GAA'(ch2)를 하나로 묶음",
+          "home": 1,
+          "appears_in": [
+            1,
+            2
+          ]
+        },
+        {
+          "id": "ferroelectric-gate-dielectric",
+          "title": "강유전 HfO₂ (FeFET·FeRAM)",
+          "lede": "HfZrO₂ 강유전체와 그 위에 세운 FeFET·1T FeRAM 셀 — endurance 미해결. [통일] '강유전 HfO₂(HfZrO₂, Zr 도핑)'(ch1)와 'FeFET·1T FeRAM'(ch2)를 하나로 묶음",
+          "home": 1,
+          "appears_in": [
+            1,
+            2
+          ]
+        },
+        {
+          "id": "iii-v-ge-channel",
+          "title": "III-V·Ge 채널",
+          "lede": "InGaAs/InAs, Ge/SiGe 화합물 채널 후보 — 이동도는 높으나 집적 결함밀도 미해결",
+          "home": 1,
+          "appears_in": [
+            1
+          ]
+        },
+        {
+          "id": "finfet-gaa-nanosheet",
+          "title": "FinFET → GAA 나노시트",
+          "lede": "로직 트랜지스터 표준 진화 — fin 개수의 이산적 한계를 나노시트로 우회. ch1(재료 한계가 강제한 구조 전환)·ch3(오버레이 예산 산출 근거)에서도 다뤄짐",
+          "home": 2,
+          "appears_in": [
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "id": "cfet",
+          "title": "CFET (Complementary FET)",
+          "lede": "NMOS/PMOS 수직 적층 — 정체된 SRAM 밀도를 다시 여는 후보. ch1(2D 채널 배치 강제)·ch3(열예산 충돌)에서도 다뤄짐",
+          "home": 2,
+          "appears_in": [
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "id": "dram-cell-vertical-stacking",
+          "title": "DRAM 셀 (1T1C → 3D DRAM)",
+          "lede": "pillar 커패시터 aspect ratio 한계와 수평 stacked cell 대안. ch1(유전상수 한계가 강제한 셀 토폴로지)·ch3(HAR 에칭·3D 계측 요구)에서도 다뤄짐",
+          "home": 2,
+          "appears_in": [
+            1,
+            2,
+            3
+          ]
+        }
       ]
     },
     {
@@ -116,6 +207,92 @@
           "body": "<p><strong>아래층의 GAA 나노시트 채널 구조가 위층에 SiGe/Si 초격자 에피택시와 selective SiGe 제거, 그리고 inner spacer 형성이라는 새로운 공정 단계를 강제한다.</strong> FinFET 시대에는 필요 없던 릴리스 에칭 스텝이 필수 공정으로 자리잡으며, 이는 공정 흐름의 재설계이지 옵션이 아니다.</p>\n<p><strong>아래층의 CFET 수직 적층 구조가 위층에 웨이퍼 본딩과 두 번의 트랜지스터 형성 시퀀스, 그리고 하부 소자를 훼손하지 않는 저온 상부 공정을 강제한다.</strong> 이는 열예산 관리가 소자층의 요구에 직접 종속됨을 뜻하며, 파운드리 공정 통합에서 가장 큰 재편을 요구한다.</p>\n<p><strong>아래층의 BSPDN(backside power delivery)이 이전 장에서 재료 한계에 대한 대응으로 강제된 이후, 이 층에서 그것이 확정되는 순간 위층에 웨이퍼 thinning, backside via 형성, carrier wafer 부착·탈착이라는 완전히 새로운 공정 서브플로우를 강제한다.</strong> 프론트엔드·백엔드의 이분 구조가 삼분(front–backside–BEOL) 구조로 재편된다.</p>\n<p><strong>아래층의 DRAM pillar 커패시터 aspect ratio(60:1 이상)가 위층에 high aspect ratio 에칭 장비의 극한 요구(수직도, CD 균일도, 상하부 격차 억제)를 강제하고</strong>, 동시에 계측에는 <strong>깊은 홀 내부의 두께·기울기를 웨이퍼 스케일로 측정할 수 있는 X-ray/CD-SEM 이상의 3D 계측</strong>을 강제한다. 표면 관찰만으로는 셀 실패 원인을 못 잡는다.</p>\n<p><strong>아래층의 3D NAND 수백 층 스택이 위층에 초고 aspect ratio 채널 홀 에칭, 워드라인 슬릿 형성, string stacking 정렬을 강제하고</strong>, 웨이퍼 bow 제어를 위한 stress-balanced 박막 증착 순서를 공정 통합의 제1 제약으로 올려놓는다. <strong>layer overlay</strong>가 계측의 지배 파라미터가 된다.</p>\n<p><strong>아래층의 컨택트 저항 지배 현상이 위층에 wrap-around contact, selective epi 성장, 낮은 실리사이드 배리어를 위한 새로운 실리사이드 재료(NiPt, Ti-based) 통합을 강제한다.</strong> 컨택트 형성이 백엔드의 부속 단계가 아니라 트랜지스터 성능을 결정하는 핵심 공정으로 승격된다.</p>\n<p><strong>아래층의 나노시트 두께·폭 quantization이 위층 계측에 sub-Å 수준의 두께 균일도 측정, 나노시트 단면의 원자 스케일 CD-SEM/TEM 샘플링, 그리고 in-line에서의 tilt·roughness 측정을 강제한다.</strong> 파괴 검사만으로는 웨이퍼 스케일 수율 관리가 불가능해, 비파괴 3D 계측(scatterometry, CD-SAXS, 전자빔 tomography)의 상용화가 소자층의 요구에 의해 앞당겨진다.</p>\n<p><strong>아래층의 소자 변동성(RDF·LER 기인 Vth 분포)이 위층에 공정 단계별 변동 기여를 개별적으로 분해할 수 있는 in-line 통계 계측과 wafer map 단위의 상관 분석을 강제한다.</strong> 즉 계측의 대상이 개별 패턴에서 <strong>분포와 상관구조</strong>로 이동하며, 이는 계측 데이터 인프라의 재설계를 요구한다.</p>\n<p><strong>아래층의 CFET·monolithic 3D 후보들이 위층에 층 간 정렬 계측(overlay를 수직 방향으로 확장)과 매장된 층의 비파괴 관찰 수단을 강제한다.</strong> 표면 계측 중심의 metrology가 매장 구조 계측으로 이동한다는 요구가 소자 로드맵에서 직접 유도된다.</p>\n<p>요약하면, 소자층에서 GAA→CFET→3D DRAM→3D NAND 다층화로 이어지는 진화가 공정·계측에 강제하는 방향은 하나로 수렴한다 — <strong>평면 위주의 공정·계측 체계가 3차원 매장 구조 대응 체계로 재편되는 것</strong>이다. 이는 소자층이 재료층의 실패를 기하학으로 우회한 결과이며, 그 우회의 비용을 상위 계층인 공정과 계측이 부담한다는 인과의 방향(재료 → 소자 → 공정·계측)은 지금까지 뒤집힌 적이 없다. 이 장이 남기는 결론이다.</p>\n<p><strong>다루지 않음.</strong> 회로·아키텍처 관점의 CFET 활용(SRAM 리디자인, 캐시 계층 재편), CIM 아키텍처, chiplet·advanced packaging의 시스템 설계는 다음 계층 장에서 다룬다. 공정 통합 세부와 EUV 노광, 패터닝 다중화의 물리적 한계는 공정 장에서 다룬다.</p>\n",
           "sources": [],
           "children": []
+        }
+      ],
+      "topics": [
+        {
+          "id": "monolayer-semiconductor-channel",
+          "title": "2D 반도체 채널",
+          "lede": "MoS₂·WSe₂·WS₂ 단원자층 채널 — 컨택 저항·웨이퍼 스케일 성장 미해결. [통일] '2D 반도체(MoS₂,WSe₂,WS₂)'(ch1)와 '2D 채널 GAA'(ch2)를 하나로 묶음",
+          "home": 1,
+          "appears_in": [
+            1,
+            2
+          ]
+        },
+        {
+          "id": "ferroelectric-gate-dielectric",
+          "title": "강유전 HfO₂ (FeFET·FeRAM)",
+          "lede": "HfZrO₂ 강유전체와 그 위에 세운 FeFET·1T FeRAM 셀 — endurance 미해결. [통일] '강유전 HfO₂(HfZrO₂, Zr 도핑)'(ch1)와 'FeFET·1T FeRAM'(ch2)를 하나로 묶음",
+          "home": 1,
+          "appears_in": [
+            1,
+            2
+          ]
+        },
+        {
+          "id": "finfet-gaa-nanosheet",
+          "title": "FinFET → GAA 나노시트",
+          "lede": "로직 트랜지스터 표준 진화 — fin 개수의 이산적 한계를 나노시트로 우회. ch1(재료 한계가 강제한 구조 전환)·ch3(오버레이 예산 산출 근거)에서도 다뤄짐",
+          "home": 2,
+          "appears_in": [
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "id": "cfet",
+          "title": "CFET (Complementary FET)",
+          "lede": "NMOS/PMOS 수직 적층 — 정체된 SRAM 밀도를 다시 여는 후보. ch1(2D 채널 배치 강제)·ch3(열예산 충돌)에서도 다뤄짐",
+          "home": 2,
+          "appears_in": [
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "id": "dram-cell-vertical-stacking",
+          "title": "DRAM 셀 (1T1C → 3D DRAM)",
+          "lede": "pillar 커패시터 aspect ratio 한계와 수평 stacked cell 대안. ch1(유전상수 한계가 강제한 셀 토폴로지)·ch3(HAR 에칭·3D 계측 요구)에서도 다뤄짐",
+          "home": 2,
+          "appears_in": [
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "id": "vertical-nand",
+          "title": "3D NAND (V-NAND)",
+          "lede": "charge-trap 기반 수직 채널 적층, string stacking으로 층수 한계 우회. ch3(채널홀 에칭·워드라인 슬릿 요구)에서도 다뤄짐",
+          "home": 2,
+          "appears_in": [
+            2,
+            3
+          ]
+        },
+        {
+          "id": "sram-cell",
+          "title": "SRAM 6T 셀",
+          "lede": "30년 표준 유지, 나노시트 quantization으로 밀도 스케일링 정체. ch3(read/write assist 회로 강제)·ch4(밀도 정체 수치 재확인)에서도 다뤄짐",
+          "home": 2,
+          "appears_in": [
+            2,
+            3,
+            4
+          ]
+        },
+        {
+          "id": "compute-in-memory",
+          "title": "Compute-in-Memory / PIM",
+          "lede": "아날로그 SRAM CIM, HBM-PIM — 8-bit 이상 정밀도 확보 미해결. ch2(RRAM/PCM 물성의 정밀도 한계)에서도 다뤄짐",
+          "home": 6,
+          "appears_in": [
+            2,
+            6
+          ]
         }
       ]
     },
@@ -172,6 +349,142 @@
           "sources": [],
           "children": []
         }
+      ],
+      "topics": [
+        {
+          "id": "finfet-gaa-nanosheet",
+          "title": "FinFET → GAA 나노시트",
+          "lede": "로직 트랜지스터 표준 진화 — fin 개수의 이산적 한계를 나노시트로 우회. ch1(재료 한계가 강제한 구조 전환)·ch3(오버레이 예산 산출 근거)에서도 다뤄짐",
+          "home": 2,
+          "appears_in": [
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "id": "cfet",
+          "title": "CFET (Complementary FET)",
+          "lede": "NMOS/PMOS 수직 적층 — 정체된 SRAM 밀도를 다시 여는 후보. ch1(2D 채널 배치 강제)·ch3(열예산 충돌)에서도 다뤄짐",
+          "home": 2,
+          "appears_in": [
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "id": "dram-cell-vertical-stacking",
+          "title": "DRAM 셀 (1T1C → 3D DRAM)",
+          "lede": "pillar 커패시터 aspect ratio 한계와 수평 stacked cell 대안. ch1(유전상수 한계가 강제한 셀 토폴로지)·ch3(HAR 에칭·3D 계측 요구)에서도 다뤄짐",
+          "home": 2,
+          "appears_in": [
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "id": "vertical-nand",
+          "title": "3D NAND (V-NAND)",
+          "lede": "charge-trap 기반 수직 채널 적층, string stacking으로 층수 한계 우회. ch3(채널홀 에칭·워드라인 슬릿 요구)에서도 다뤄짐",
+          "home": 2,
+          "appears_in": [
+            2,
+            3
+          ]
+        },
+        {
+          "id": "sram-cell",
+          "title": "SRAM 6T 셀",
+          "lede": "30년 표준 유지, 나노시트 quantization으로 밀도 스케일링 정체. ch3(read/write assist 회로 강제)·ch4(밀도 정체 수치 재확인)에서도 다뤄짐",
+          "home": 2,
+          "appears_in": [
+            2,
+            3,
+            4
+          ]
+        },
+        {
+          "id": "euv-lithography",
+          "title": "EUV 리소그래피",
+          "lede": "13.5nm 노광 표준, stochastic 결함 한계와 High-NA half-field 문제",
+          "home": 3,
+          "appears_in": [
+            3
+          ]
+        },
+        {
+          "id": "atomic-layer-process",
+          "title": "ALD/ALE 원자층 공정",
+          "lede": "자기제한 반응(self-limiting)으로 원자 수준 균일도를 확보하는 증착·에칭",
+          "home": 3,
+          "appears_in": [
+            3
+          ]
+        },
+        {
+          "id": "metrology-scatterometry",
+          "title": "계측 (Scatterometry·CD-SEM·Overlay)",
+          "lede": "in-line 비파괴 계측 표준과 3D 매장구조 관찰의 한계",
+          "home": 3,
+          "appears_in": [
+            3
+          ]
+        },
+        {
+          "id": "har-etching",
+          "title": "HAR(고종횡비) 에칭",
+          "lede": "3D NAND·DRAM의 고종횡비 채널홀 에칭 — 방향성과 선택도의 트레이드오프",
+          "home": 3,
+          "appears_in": [
+            3
+          ]
+        },
+        {
+          "id": "lithography-alternatives",
+          "title": "리소그래피 대안 (NIL·DSA)",
+          "lede": "나노임프린트·자기조립 리소그래피 — 결함 전사·형상 자유도 미해결",
+          "home": 3,
+          "appears_in": [
+            3
+          ]
+        },
+        {
+          "id": "chiplet-ucie",
+          "title": "Chiplet · UCIe",
+          "lede": "다이 분할과 D2D 표준화 — 수율·다이크기 한계에서 강제되어 패키징·시스템까지 전파. [통일] '다이 크기 상한→chiplet 강제'(ch3) + 'chiplet 기반 IP 재사용과 UCIe 표준화'(ch4) + 'chiplet 인터페이스 표준화'(ch5) + 'chiplet 기반 아키텍처 분할'(ch6) + 조립·시험 전반(ch7) + 되돌아가는 요구(ch8)를 하나로 묶음",
+          "home": 4,
+          "appears_in": [
+            3,
+            4,
+            5,
+            6,
+            7,
+            8
+          ]
+        },
+        {
+          "id": "mmmc-ssta-signoff",
+          "title": "MMMC/SSTA 사인오프",
+          "lede": "process·voltage·temperature 수백~수천 corner 병렬 검증. ch3(변동성이 강제한 통계적 사인오프 이행)에서도 다뤄짐",
+          "home": 5,
+          "appears_in": [
+            3,
+            5
+          ]
+        },
+        {
+          "id": "logic-stack-hybrid-bonding",
+          "title": "3D 로직 스택 · Hybrid Bonding",
+          "lede": "V-Cache·Foveros의 수직 적층과 이를 구현하는 Cu-Cu 직접 접합. [통일] '3D 로직 스택'(ch6)과 'hybrid bonding(직접 Cu-Cu/SiO₂ 접합)'(ch7)을 하나로 묶음. ch3(열예산 충돌)에서도 다뤄짐",
+          "home": 6,
+          "appears_in": [
+            3,
+            6,
+            7
+          ]
+        }
       ]
     },
     {
@@ -226,6 +539,102 @@
           "body": "<p><strong>아래층의 RTL–물리 격차가 위층에 흐름의 조기 물리화(physicalization shift-left)를 강제한다.</strong> 배선 지연이 게이트 지연을 압도하는 순간부터, 논리 합성 단계에서 배치 정보 없이 만든 넷리스트는 사인오프 타이밍을 예측하지 못한다. 결과적으로 EDA 흐름은 physical-aware synthesis, in-place optimization, ECO(engineering change order) loop 자동화로 재편됐고, 합성·P&amp;R·STA가 별개 단계이던 파이프라인이 서로 침투하는 방향으로 융합됐다. <strong>즉 &quot;합성 후 P&amp;R&quot;이라는 순차 흐름의 가정 자체가 무너지며, EDA 벤더의 제품 경계는 통합 플랫폼(Synopsys Fusion Compiler·Cadence Innovus with iSpatial) 방향으로 재편되도록 강제된다.</strong></p>\n<p><strong>아래층의 statistical 소자 변동성과 노드별 corner 폭증이 위층에 SSTA(Statistical STA)와 다중 corner 사인오프를 강제한다.</strong> 결정론적 worst-case STA로는 변동성 예산을 감당하지 못한다는 이전 장의 결론이 그대로 승계돼, 사인오프는 process·voltage·temperature·aging 조합의 수백~수천 corner를 검증해야 한다. Multi-mode multi-corner(MMMC) 사인오프가 표준이 됐고, <strong>사인오프 실행 시간이 설계 일정의 지배적 성분</strong>이 됐다. 이는 EDA 도구가 분산·클라우드 실행을 1급 요구사항으로 삼도록 강제하며, 검증 인프라의 CapEx가 새로운 진입 장벽이 됐다.</p>\n<p><strong>아래층의 검증 상태 폭발이 위층에 검증 방법론의 계층화·형식화를 강제한다.</strong> 단일 시뮬레이터 실행으로 SoC 전체를 커버할 수 없으므로 검증 흐름은 (a) UVM 기반 constrained-random simulation, (b) 블록 수준 formal property checking, (c) 에뮬레이션(Palladium·Veloce·ZeBu)과 프로토타이핑, (d) post-silicon validation의 다층 파이프라인으로 분해됐다. <strong>각 층은 서로 다른 커버리지 metric·서로 다른 도구·서로 다른 인력을 요구하며, 검증 조직이 설계 조직보다 커진 상태를 강제한다.</strong> 커버리지 신호가 층 사이에서 일관되게 합쳐지는가는 여전히 논쟁 중인 방법론 문제다.</p>\n<p><strong>아래층의 IP 파편화(노드×파운드리×옵션 튜플)가 위층에 IP 데이터베이스와 view 관리의 산업화를 강제한다.</strong> 하나의 IP가 여러 노드·voltage·temperature 조합에 대해 .lib·.lef·.gds·timing model·power model·Liberty variation format(LVF) 등 다중 view로 유지돼야 하며, 이들 view의 일관성 검증이 사인오프의 전제가 된다. <strong>결과적으로 IP lifecycle management, view synchronization, PDK versioning이 EDA 흐름의 1급 시민이 됐고</strong>, Configuration management 도구가 설계 도구와 결합되도록 강제된다. IP 벤더·파운드리·설계 팀 사이의 view 배포·서명·감사 파이프라인이 산업 표준(IP-XACT 등)으로 굳어지는 방향은 이 강제의 결과다.</p>\n<p><strong>아래층의 chiplet 강제화가 위층에 다중 다이 검증과 D2D signoff 흐름을 강제한다.</strong> 회로가 여러 다이로 물리적으로 분할되면 검증은 (a) 각 chiplet의 독립 사인오프, (b) chiplet 간 인터페이스의 시그널 인테그리티·전력 인테그리티 co-simulation, (c) 조립 후 시스템 수준 검증의 세 층으로 확장된다. EDA 흐름은 3D 배선·multi-die STA·multi-die 열 해석을 통합해야 하며, <strong>패키지 시뮬레이터와 실리콘 시뮬레이터의 경계가 무너지도록 강제</strong>된다. D2D 프로토콜·PHY 검증 자체의 세부는 패키징·시스템 장의 몫이지만, EDA 흐름의 통합 압력은 회로·IP 계층에서 이미 확정된다.</p>\n<p><strong>아래층의 BIST·on-die sensor·redundancy 강제 도입이 위층에 DFT(Design for Test)와 ATPG(Automatic Test Pattern Generation)의 지배적 지위를 강제한다.</strong> 이전 장에서 오버헤드 회로가 면적·전력의 상당 몫을 사전 점유한다는 결론을 받았을 때, 그 회로들이 실제로 원하는 대로 동작하는지를 검증하고 시험하기 위한 흐름이 EDA의 별도 축으로 승격된다. Scan insertion, test compression, boundary scan, MBIST(Memory BIST), LBIST(Logic BIST), automotive-grade functional safety(ISO 26262) 관련 fault simulation·safety analysis가 사인오프 체크리스트의 필수 항목이 되며, <strong>테스트 패턴 생성·시험 시간이 제조 원가의 유의미한 항목으로 재계산</strong>되도록 강제한다.</p>\n<p><strong>아래층의 NRE 폭증과 respin 리스크가 위층에 first-silicon-success 압력과 형식 검증·에뮬레이션 투자를 강제한다.</strong> 재작업 한 번의 비용이 회사 존립을 위협하는 수준이 되면, 검증에 투입되는 자본이 검증 실패의 기대 손실보다 작은 한 검증 투자는 정당화된다. 결과적으로 대형 에뮬레이터의 도입, 형식 검증 팀의 확대, 소프트웨어 부트 검증(virtual platform·hybrid emulation)의 shift-left가 표준이 된다. <strong>즉 EDA 예산이 마스크·웨이퍼 예산에 근접하거나 초과하는 구조가 회로 계층에서 위로 강제된다.</strong></p>\n<p><strong>아래층의 아날로그·믹스드시그널 이식성 상실이 위층에 mixed-signal 검증의 별도 사인오프 흐름을 강제한다.</strong> 디지털 STA·SSTA로는 아날로그·RF 블록의 성능을 검증할 수 없으므로 SPICE·FastSPICE·AMS 시뮬레이터가 별도 흐름으로 병렬 유지되며, 디지털-아날로그 경계에서 co-simulation의 시간·정확도 트레이드오프를 관리하는 것이 검증 아키텍처의 핵심 결정이 된다. <strong>아날로그 팀·디지털 팀·시스템 팀이 별도 도구 스택으로 유지되도록 조직 구조까지 강제</strong>되며, 이 분리를 극복하려는 unified mixed-signal signoff 시도는 20년째 계속되고 있지만 완결되지 못했다.</p>\n<p><strong>아래층의 IP 재사용 단위 협소화가 위층에 인테그레이션 검증의 지배적 지위를 강제한다.</strong> IP 자체는 벤더가 검증했다고 해도, 특정 SoC에 통합됐을 때의 timing·power·전력섬(power domain)·클록 도메인 크로싱(CDC)·리셋 도메인 크로싱(RDC)·주소 맵 정합성은 통합 팀이 검증해야 한다. IP 수가 많아질수록 통합 조합이 폭증하며, <strong>CDC/RDC 검증, connectivity checking, register spec 자동 검증(SystemRDL 기반) 이 사인오프의 필수 관문</strong>이 된다. IP 하나를 붙이는 데 드는 통합 검증 비용이 IP 자체의 라이선스 비용을 초과하는 경우가 흔하다는 관찰은 산업 통설에 가깝다.</p>\n<p><strong>아래층의 physical 설계 규칙 축소(단방향 라우팅·forbidden pattern·pitch grid)가 위층에 DRC/LVS/DFM 검증의 폭증을 강제한다.</strong> 규칙 수가 노드마다 지수적으로 늘어(정확한 규칙 수는 파운드리 비공개이나 반복 보고되는 상승 추이는 통설), 규칙 데크(rule deck) 실행 시간·litho hotspot 시뮬레이션·CMP hotspot 시뮬레이션이 사인오프의 별도 관문으로 굳는다. <strong>DFM(Design for Manufacturability) 사인오프가 별개 흐름으로 독립</strong>되며, 파운드리가 배포하는 sign-off deck의 버전 관리가 설계 팀의 relievable하지 못한 관문이 된다.</p>\n<p><strong>아래층의 in-field 신뢰도 관찰 요구가 위층에 silicon lifecycle management(SLM) 데이터 흐름을 EDA에 통합하도록 강제한다.</strong> 설계 단계의 timing margin·voltage droop 예측이 필드에서 관찰된 실제 데이터와 대조 가능해지려면, 설계 데이터베이스가 필드 텔레메트리와 연결돼야 한다. Synopsys SLM·proteanTecs 같은 상용 스택이 이 방향을 상업화하고 있으며, <strong>설계-제조-필드의 데이터 폐루프가 EDA 흐름의 새로운 축으로 편입되도록 강제</strong>된다. 이 폐루프가 실제로 설계 개선으로 되먹이되는지, 아니면 사후 진단에 그치는지는 아직 논쟁 중이다.</p>\n<p>요약하면, 회로·IP 계층이 설계 방법론(EDA·검증)에 강제하는 방향은 세 갈래로 수렴한다. <strong>첫째, EDA 흐름은 순차 파이프라인에서 physical-aware·multi-corner·multi-die가 서로 침투하는 통합 플랫폼으로 재편되도록 강제된다.</strong> <strong>둘째, 검증은 시뮬레이션·형식·에뮬레이션·post-silicon의 다층 파이프라인으로 확장되며, 검증 조직이 설계 조직을 능가하는 구조가 강제된다.</strong> <strong>셋째, IP·PDK·view·규칙 데크의 배포·서명·감사 파이프라인이 EDA와 결합되며, 데이터 관리 자체가 사인오프의 관문으로 승격된다.</strong> 이 세 방향은 EDA 벤더와 검증 팀에게 새로운 기회이자 동시에 감당 불가한 팽창으로 체험되며, 그 팽창의 원천은 회로·IP 계층의 물리·경제 예산이 소자·공정층의 요구를 감당하기 위해 조여진 결과다. 인과의 방향(재료 → 소자 → 공정·계측 → 회로·IP → 설계 방법론)은 이 계층에서도 뒤집히지 않는다. 이 장이 남기는 결론이다.</p>\n<p><strong>다루지 않음.</strong> chiplet 상에서 실행되는 아키텍처 재편(캐시 계층 재설계, CIM/near-memory computing, dataflow accelerator 등)과 명령어 집합·마이크로아키텍처의 진화는 다음 계층(아키텍처) 장에서 다룬다. D2D PHY·프로토콜(UCIe·BoW) 자체의 설계·표준화 정치, advanced packaging(CoWoS·InFO·hybrid bonding)의 기계·열·전기 통합, 인터포저·기판의 신호·전력 무결성은 패키징·시스템 장에서 다룬다. EDA 도구 내부 알고리즘의 진화(ML floorplanning, 강화학습 P&amp;R, GNN 기반 timing 예측)의 알고리즘적 상세는 설계 방법론 장에서 다룬다. 팹리스·EDA 벤더·IP 벤더의 산업 구조·M&amp;A·지정학은 산업 계층 장에서 다룬다.</p>\n",
           "sources": [],
           "children": []
+        }
+      ],
+      "topics": [
+        {
+          "id": "sram-cell",
+          "title": "SRAM 6T 셀",
+          "lede": "30년 표준 유지, 나노시트 quantization으로 밀도 스케일링 정체. ch3(read/write assist 회로 강제)·ch4(밀도 정체 수치 재확인)에서도 다뤄짐",
+          "home": 2,
+          "appears_in": [
+            2,
+            3,
+            4
+          ]
+        },
+        {
+          "id": "rtl-design-flow",
+          "title": "RTL 설계 흐름",
+          "lede": "RTL+표준셀+P&R+STA 사인오프 — 회로 계층의 표준 추상화. ch5(Big 3 EDA 사인오프 스택으로 구체화)에서도 다뤄짐",
+          "home": 4,
+          "appears_in": [
+            4,
+            5
+          ]
+        },
+        {
+          "id": "standard-cell-ip-reuse",
+          "title": "표준 셀·물리 IP 재사용",
+          "lede": "노드별 재특성화가 필요한 soft/firm/hard IP 재사용 구조",
+          "home": 4,
+          "appears_in": [
+            4
+          ]
+        },
+        {
+          "id": "analog-mixed-signal-design",
+          "title": "아날로그·믹스드시그널 설계",
+          "lede": "SPICE 기반 수작업 흐름 — 디지털 자동화와 30년째 분리 유지. ch5(unified mixed-signal signoff 미완결)에서도 다뤄짐",
+          "home": 4,
+          "appears_in": [
+            4,
+            5
+          ]
+        },
+        {
+          "id": "hls-high-level-synthesis",
+          "title": "고수준 합성 (HLS)",
+          "lede": "C/C++/SystemC→RTL 자동 합성 — 특정 도메인은 승리, 범용 대체는 미해결. [통일] ch4·ch5가 각자의 대안 후보 목록에서 동일 기술을 독립적으로 다룸",
+          "home": 4,
+          "appears_in": [
+            4,
+            5
+          ]
+        },
+        {
+          "id": "ml-eda-automation",
+          "title": "ML 기반 EDA 자동화",
+          "lede": "강화학습 배치·배선, DSO.ai류 — 좁은 최적화는 검증됐으나 넓은 대체는 마케팅 단계. [통일] ch4·ch5가 각자의 대안 후보 목록에서 동일 기술을 독립적으로 다룸",
+          "home": 4,
+          "appears_in": [
+            4,
+            5
+          ]
+        },
+        {
+          "id": "chiplet-ucie",
+          "title": "Chiplet · UCIe",
+          "lede": "다이 분할과 D2D 표준화 — 수율·다이크기 한계에서 강제되어 패키징·시스템까지 전파. [통일] '다이 크기 상한→chiplet 강제'(ch3) + 'chiplet 기반 IP 재사용과 UCIe 표준화'(ch4) + 'chiplet 인터페이스 표준화'(ch5) + 'chiplet 기반 아키텍처 분할'(ch6) + 조립·시험 전반(ch7) + 되돌아가는 요구(ch8)를 하나로 묶음",
+          "home": 4,
+          "appears_in": [
+            3,
+            4,
+            5,
+            6,
+            7,
+            8
+          ]
+        },
+        {
+          "id": "uvm-verification",
+          "title": "UVM 검증 방법론",
+          "lede": "constrained-random + functional coverage 표준, 검증 상태 폭발이 강제한 4층 파이프라인. ch4(검증 인력·시간이 설계를 넘어선 원인)에서도 다뤄짐",
+          "home": 5,
+          "appears_in": [
+            4,
+            5
+          ]
+        },
+        {
+          "id": "open-source-eda",
+          "title": "오픈소스 EDA (OpenROAD·Yosys)",
+          "lede": "성숙 노드에서는 상용 도구에 근접, 선단 노드는 PDK 접근 자체가 봉쇄. [통일] ch4·ch5가 각자의 대안 후보 목록에서 동일 기술을 독립적으로 다룸",
+          "home": 5,
+          "appears_in": [
+            4,
+            5
+          ]
         }
       ]
     },
@@ -282,6 +691,101 @@
           "sources": [],
           "children": []
         }
+      ],
+      "topics": [
+        {
+          "id": "rtl-design-flow",
+          "title": "RTL 설계 흐름",
+          "lede": "RTL+표준셀+P&R+STA 사인오프 — 회로 계층의 표준 추상화. ch5(Big 3 EDA 사인오프 스택으로 구체화)에서도 다뤄짐",
+          "home": 4,
+          "appears_in": [
+            4,
+            5
+          ]
+        },
+        {
+          "id": "analog-mixed-signal-design",
+          "title": "아날로그·믹스드시그널 설계",
+          "lede": "SPICE 기반 수작업 흐름 — 디지털 자동화와 30년째 분리 유지. ch5(unified mixed-signal signoff 미완결)에서도 다뤄짐",
+          "home": 4,
+          "appears_in": [
+            4,
+            5
+          ]
+        },
+        {
+          "id": "hls-high-level-synthesis",
+          "title": "고수준 합성 (HLS)",
+          "lede": "C/C++/SystemC→RTL 자동 합성 — 특정 도메인은 승리, 범용 대체는 미해결. [통일] ch4·ch5가 각자의 대안 후보 목록에서 동일 기술을 독립적으로 다룸",
+          "home": 4,
+          "appears_in": [
+            4,
+            5
+          ]
+        },
+        {
+          "id": "ml-eda-automation",
+          "title": "ML 기반 EDA 자동화",
+          "lede": "강화학습 배치·배선, DSO.ai류 — 좁은 최적화는 검증됐으나 넓은 대체는 마케팅 단계. [통일] ch4·ch5가 각자의 대안 후보 목록에서 동일 기술을 독립적으로 다룸",
+          "home": 4,
+          "appears_in": [
+            4,
+            5
+          ]
+        },
+        {
+          "id": "chiplet-ucie",
+          "title": "Chiplet · UCIe",
+          "lede": "다이 분할과 D2D 표준화 — 수율·다이크기 한계에서 강제되어 패키징·시스템까지 전파. [통일] '다이 크기 상한→chiplet 강제'(ch3) + 'chiplet 기반 IP 재사용과 UCIe 표준화'(ch4) + 'chiplet 인터페이스 표준화'(ch5) + 'chiplet 기반 아키텍처 분할'(ch6) + 조립·시험 전반(ch7) + 되돌아가는 요구(ch8)를 하나로 묶음",
+          "home": 4,
+          "appears_in": [
+            3,
+            4,
+            5,
+            6,
+            7,
+            8
+          ]
+        },
+        {
+          "id": "uvm-verification",
+          "title": "UVM 검증 방법론",
+          "lede": "constrained-random + functional coverage 표준, 검증 상태 폭발이 강제한 4층 파이프라인. ch4(검증 인력·시간이 설계를 넘어선 원인)에서도 다뤄짐",
+          "home": 5,
+          "appears_in": [
+            4,
+            5
+          ]
+        },
+        {
+          "id": "mmmc-ssta-signoff",
+          "title": "MMMC/SSTA 사인오프",
+          "lede": "process·voltage·temperature 수백~수천 corner 병렬 검증. ch3(변동성이 강제한 통계적 사인오프 이행)에서도 다뤄짐",
+          "home": 5,
+          "appears_in": [
+            3,
+            5
+          ]
+        },
+        {
+          "id": "open-source-eda",
+          "title": "오픈소스 EDA (OpenROAD·Yosys)",
+          "lede": "성숙 노드에서는 상용 도구에 근접, 선단 노드는 PDK 접근 자체가 봉쇄. [통일] ch4·ch5가 각자의 대안 후보 목록에서 동일 기술을 독립적으로 다룸",
+          "home": 5,
+          "appears_in": [
+            4,
+            5
+          ]
+        },
+        {
+          "id": "hardware-emulation",
+          "title": "하드웨어 에뮬레이션",
+          "lede": "Palladium·Veloce·ZeBu — first-silicon-success 압력이 강제한 검증 인프라",
+          "home": 5,
+          "appears_in": [
+            5
+          ]
+        }
       ]
     },
     {
@@ -336,6 +840,115 @@
           "body": "<p><strong>아래층의 메모리 대역폭 상한이 위층에 2.5D 인터포저와 HBM 근접 배치를 강제한다.</strong> 폰 노이만 코어와 데이터병렬 accelerator가 요구하는 대역폭이 organic 서브스트레이트·PCB의 전기적 상한을 벗어나면, 실리콘 인터포저·RDL 인터포저를 통한 short-reach·high-density 배선이 유일한 해가 된다. 결과적으로 오늘날 최상위 AI accelerator·데이터센터 CPU는 예외 없이 CoWoS·EMIB·Foveros·SoIC 계열의 어드밴스드 패키지에 의존한다. <strong>즉 &quot;대역폭이 필요한 아키텍처는 반드시 특정 패키지 위에서만 존재할 수 있다&quot;는 강제가 형성되며, 패키지 캐파(주로 TSMC CoWoS)가 아키텍처 실현의 병목이 되는 역방향 종속이 발생한다.</strong> 이 종속은 2023~2025년의 CoWoS 캐파 부족 국면이 실증한 통설이다.</p>\n<p><strong>아래층의 데이터 이동 에너지 상한이 위층에 하이브리드 본딩과 3D 스택을 강제한다.</strong> on-die 인접 배선과 근접 스택의 pJ/bit 격차가 자릿수로 벌어지므로, 캐시·SRAM을 로직 다이 위에 수직으로 접는 방식(3D V-Cache류)은 선택이 아니라 필수의 방향이 된다. <strong>결과적으로 패키징은 μbump에서 hybrid bonding(sub-10μm pitch, 궁극적으로는 no-bump direct Cu-Cu)로 이동하도록 강제되며, 다이 사이 배선 밀도·에너지는 아키텍처의 요구가 정한 표적을 따라간다.</strong> TSMC SoIC, 인텔 Foveros Direct, 삼성 X-Cube의 로드맵이 모두 이 강제 아래에서 병렬 진화 중이다. 통설이며, 논쟁은 hybrid bonding이 어느 세대에 μbump를 완전 대체할 것인가에 관한 것이다.</p>\n<p><strong>아래층의 dark silicon과 이질 통합 지배가 위층에 chiplet·타일 조합 패키지를 강제한다.</strong> 활성 실리콘 면적이 상시 제한되고 워크로드마다 켜야 할 accelerator가 달라지므로, 아키텍처는 &quot;필요한 accelerator die만 골라 붙이는&quot; chiplet 조합으로 진화했다(3번 넷째 후보의 상용 지배). 이 진화가 패키지에 강제하는 것은 (a) 이질 다이를 하나의 서브스트레이트·인터포저 위에 정렬할 수 있는 배치 자유도, (b) 각 다이의 서로 다른 공정 노드(N3·N5·N7 혼재)·전력 밀도·열 프로파일을 동시에 감당하는 열·전력 설계, (c) D2D 표준(UCIe·BoW)에 맞는 bump pitch·트레이스 임피던스 통일이다. <strong>즉 패키지는 &quot;고정 배선의 봉합 매체&quot;에서 &quot;이질 다이를 위한 시스템 통합 플랫폼&quot;으로 역할이 강제 이동한다.</strong> 통설이다.</p>\n<p><strong>아래층의 chiplet 분해가 위층에 D2D 인터페이스 표준과 시험(test) 흐름 재편을 강제한다.</strong> 조합 가능한 chiplet 생태계가 성립하려면 다이 간 물리·프로토콜 인터페이스가 표준화돼야 하므로, 패키징은 UCIe(2.0)·BoW·OpenHBI 같은 표준의 물리 계층(bump pitch, 채널 손실, 전력 스펙)을 지원하도록 강제된다. 여기에 더해 조합 전 개별 다이의 known-good-die(KGD) 시험, 조합 후 시스템 시험, 필요시 chiplet 교체 시나리오가 표준 워크플로우로 요구된다. <strong>결과적으로 패키징 공정은 &quot;본딩만 하는 후공정&quot;에서 &quot;시험·수율·재작업까지 감당하는 시스템 조립 라인&quot;으로 재편되며, KGD 시험 커버리지가 조합 수율의 지배 인자가 된다.</strong> 통설이지만, 조합의 개방성(개방형 chiplet 시장 vs. 벤더 사일로) 정도는 논쟁 중이다.</p>\n<p><strong>아래층의 3D 스택 요구가 위층에 백면 전력 전달(backside power delivery)과 열 파티셔닝을 강제한다.</strong> 로직 위 로직·로직 위 캐시·로직 위 메모리 스택의 열 밀도가 표면 냉각만으로 감당 불가능해지면, 전력 전달 경로를 후면으로 이동시켜 표면을 열 경로로 확보해야 한다. 인텔 PowerVia, TSMC BSPDN, 삼성 상응 로드맵이 이 방향으로 수렴하는 이유는 아키텍처(특히 3D 스택·CIM 접근)의 요구가 표면 배선 예산을 잠식했기 때문이다. <strong>결과적으로 패키징·후공정과 미세공정의 경계가 흐려지며, &quot;웨이퍼 후면 처리&quot;가 패키지 워크플로우의 일부로 편입된다.</strong> 이 강제는 통설로 굳어가는 중이지만, 세대·벤더별 도입 시점에 대해서는 논쟁이 남는다.</p>\n<p><strong>아래층의 명시적 메모리 스코프 노출이 위층에 대역폭·용량 계층의 패키지 내 분할을 강제한다.</strong> CUDA류 명시 스코프, HBM-PIM류 니어메모리, CXL류 계층 확장 메모리가 마이크로아키텍처의 새 계층을 노출하면, 패키지는 그 계층을 물리적으로 실현할 자리(예: HBM 스택 슬롯, base-die 위 PIM 로직 영역, CXL 확장을 위한 신호 경로)를 미리 확보해야 한다. <strong>결과적으로 패키지 플로어플랜은 아키텍처의 메모리 계층 결정에 종속되어 설계 시점에 고정되며, 세대 간 메모리 계층 변경은 패키지 재설계를 유발한다.</strong> 이 종속은 최근 세대에서 뚜렷해진 통설이다.</p>\n<p><strong>아래층의 mixed-signal·광 통합 요구가 위층에 이종 공정 다이의 동일 패키지 통합을 강제한다.</strong> Co-packaged optics(광-전 변환기 다이를 로직 옆에 배치), analog CIM 다이의 통합, SerDes 다이 분리 — 이 방향들은 서로 다른 공정 최적점을 갖는 다이를 하나의 패키지 안에서 봉합하도록 강제한다. <strong>결과적으로 패키지는 서로 다른 공정 세대·재료의 다이를 열·전기·기계적으로 감당해야 하며, 인터포저와 서브스트레이트의 신호 무결성 예산이 아키텍처의 신호 요구에 맞춰 상향된다.</strong> 이 방향의 강도·시점은 논쟁 중이지만, 방향 자체는 통설이다.</p>\n<p><strong>아래층의 시스템-패키지 co-optimization 압력이 위층에 아키텍처-패키지 공동 설계 방법론을 강제한다.</strong> 아키텍처가 확정된 뒤 패키징이 봉합하는 순차 흐름은, 대역폭·열·전력 예산이 극한에 접근한 세대에서는 성립하지 않는다. 결과적으로 아키텍처 초기 단계에서 패키지 옵션(HBM 개수, 인터포저 크기, 스택 층수, 열 경로)이 함께 결정돼야 하며, EDA·시뮬레이션 스택은 die-package co-simulation을 지원해야 한다. <strong>즉 패키징은 아키텍처 이후의 단계가 아니라 아키텍처와 동시에 진행되는 단계로 강제 편입되며, 팹리스·OSAT·파운드리 사이의 역할 경계가 흐려진다.</strong> 이 재편은 진행 중인 산업 사실이며, 최종 형태에 대해서는 논쟁이 남는다.</p>\n<p><strong>아래층의 워크로드 특화 accelerator 확장이 위층에 패키지 세대 주기 단축을 강제한다.</strong> 세대 간 워크로드 변화(예: LLM 학습 → 추론 → RAG → agent 파이프라인)가 요구하는 대역폭·용량·연산 조합이 달라지면, 아키텍처 갱신 주기가 짧아지고 패키지도 이 주기를 따라야 한다. <strong>결과적으로 패키지 개발 사이클이 전통적 3<del>5년에서 아키텍처 세대와 동조된 1</del>2년 주기로 압축되도록 강제되며, 이는 캐파 계획·검증·수율 확보에 새 부담을 만든다.</strong> 이 관찰은 최근 세대에서 뚜렷해진 사실이지만, 지속 가능성에 대해서는 논쟁 중이다.</p>\n<p><strong>아래층의 chiplet 개방성 요구가 위층에 패키징의 표준화 정치를 아직 완전히 강제하지 못한다.</strong> 이 항목은 &quot;강제되지 않는다&quot;는 부정형 결론이다. UCIe·BoW 같은 표준이 존재하지만, 실제 상용 chiplet의 대다수는 여전히 벤더 내부 조합에 머무르며, 서로 다른 팹리스의 chiplet을 자유롭게 조합하는 개방형 시장은 형성되지 않았다. <strong>이 부재는 패키징 계층이 아직 아키텍처 계층의 요구를 부분적으로만 흡수하고 있음을 시사하며, 표준·시험·법적 책임의 성숙에 따라 미래에 강제될 잠재적 방향이다</strong> — 이는 예측이지 강제된 사실이 아니다.</p>\n<p>요약하면, 아키텍처 계층이 패키징·집적 방식에 강제하는 방향은 세 갈래로 수렴한다. <strong>첫째, 대역폭·데이터 이동 에너지의 이중 상한이 인터포저·HBM 근접·hybrid bonding·3D 스택을 필수 인프라로 만들며, &quot;패키지 없이 성립하는 아키텍처&quot;라는 선택 폭이 최상위 세그먼트에서 제거된다.</strong> <strong>둘째, 이질 통합과 chiplet 분해가 패키지를 &quot;봉합 매체&quot;에서 &quot;시스템 조립 플랫폼&quot;으로 재정의하며, D2D 표준·KGD 시험·재작업 흐름이 패키지 워크플로우의 일부로 강제 편입된다.</strong> <strong>셋째, 3D 스택·백면 전력·co-packaged optics·mixed-signal 통합이 미세공정과 패키징의 경계를 흐리며, 아키텍처와 패키지가 동시에 결정되는 co-design 방법론이 강제된다.</strong> 이 세 방향은 패키징 엔지니어에게 새로운 창의성의 무대이자 동시에 아키텍처가 미리 확정한 예산 안에서만 움직여야 하는 좁혀진 선택 폭으로 체험되며, 그 좁힘의 원천은 아키텍처 계층이 방법론·회로·소자·재료 계층으로부터 이어받은 이중 상한과 그 상한을 감당하기 위한 이질 통합·chiplet·3D의 압력이다. 인과의 방향(재료 → 소자 → 공정·계측 → 회로·IP → 설계 방법론 → 아키텍처 → 패키징·집적)은 이 계층에서도 뒤집히지 않는다. 이 장이 남기는 결론이다.</p>\n<p><strong>다루지 않음.</strong> 구체적 패키징 기술(CoWoS-S·L·R, EMIB, Foveros Direct, SoIC-X, hybrid bonding 세대별 pitch·수율)과 인터포저 재료(실리콘·유리·유기 RDL)·기판 신호 무결성·전력 무결성·열 관리는 다음 계층(패키징·시스템 집적) 장에서 다룬다. UCIe·BoW·CXL 프로토콜의 전기·물리 계층 표준화 정치와 개방형 chiplet 시장의 산업 구조는 산업 계층 장에서 다룬다. 소프트웨어 스택(컴파일러의 chiplet-aware 스케줄링, 런타임의 명시 스코프 활용, OS의 CXL 계층 인식)은 소프트웨어 계층 장에서 다룬다. 마이크로아키텍처 내부의 상세 진화(분기 예측기 세대, prefetch 정책, cache replacement, VLIW·in-order·OoO의 세부 트레이드오프)는 이 장의 1·2번에서 요약된 수준을 넘지 않으며, 그 세부는 마이크로아키텍처 전문 문헌에 위임한다. 재료·소자·공정·회로·IP·방법론의 하위 계층은 앞선 장들에서 다뤘으므로 이 장에서는 결과만 인용한다.</p>\n",
           "sources": [],
           "children": []
+        }
+      ],
+      "topics": [
+        {
+          "id": "chiplet-ucie",
+          "title": "Chiplet · UCIe",
+          "lede": "다이 분할과 D2D 표준화 — 수율·다이크기 한계에서 강제되어 패키징·시스템까지 전파. [통일] '다이 크기 상한→chiplet 강제'(ch3) + 'chiplet 기반 IP 재사용과 UCIe 표준화'(ch4) + 'chiplet 인터페이스 표준화'(ch5) + 'chiplet 기반 아키텍처 분할'(ch6) + 조립·시험 전반(ch7) + 되돌아가는 요구(ch8)를 하나로 묶음",
+          "home": 4,
+          "appears_in": [
+            3,
+            4,
+            5,
+            6,
+            7,
+            8
+          ]
+        },
+        {
+          "id": "von-neumann-cache-hierarchy",
+          "title": "폰 노이만 코어 + 캐시 계층",
+          "lede": "캐시로 은폐된 순차 실행 모델 — 소프트웨어 생태계 연속성이 승리 원인",
+          "home": 6,
+          "appears_in": [
+            6
+          ]
+        },
+        {
+          "id": "memory-bandwidth-energy-wall",
+          "title": "메모리 대역폭·데이터 이동 에너지 이중 상한",
+          "lede": "roofline memory-bound 한계와 on/off-chip pJ/bit 격차 — 아키텍처 계층 내부에서 해결 불가",
+          "home": 6,
+          "appears_in": [
+            6
+          ]
+        },
+        {
+          "id": "compute-in-memory",
+          "title": "Compute-in-Memory / PIM",
+          "lede": "아날로그 SRAM CIM, HBM-PIM — 8-bit 이상 정밀도 확보 미해결. ch2(RRAM/PCM 물성의 정밀도 한계)에서도 다뤄짐",
+          "home": 6,
+          "appears_in": [
+            2,
+            6
+          ]
+        },
+        {
+          "id": "wafer-scale-dataflow-architecture",
+          "title": "데이터플로우·웨이퍼-스케일 아키텍처",
+          "lede": "Cerebras WSE·Groq LPU — 정적 스케줄링이 general-purpose 워크로드에 열등. [통일] ch6(아키텍처 대안)·ch7(WSI 패키징 대안)·ch8(Dataflow SW 스택)가 동일 사례를 각 계층 관점에서 독립적으로 다룸 — 00_종합 불일치 목록 #2와 같은 지점",
+          "home": 6,
+          "appears_in": [
+            6,
+            7,
+            8
+          ]
+        },
+        {
+          "id": "logic-stack-hybrid-bonding",
+          "title": "3D 로직 스택 · Hybrid Bonding",
+          "lede": "V-Cache·Foveros의 수직 적층과 이를 구현하는 Cu-Cu 직접 접합. [통일] '3D 로직 스택'(ch6)과 'hybrid bonding(직접 Cu-Cu/SiO₂ 접합)'(ch7)을 하나로 묶음. ch3(열예산 충돌)에서도 다뤄짐",
+          "home": 6,
+          "appears_in": [
+            3,
+            6,
+            7
+          ]
+        },
+        {
+          "id": "hbm",
+          "title": "HBM (High Bandwidth Memory)",
+          "lede": "메모리 셀·패키징·인터페이스 세 계층이 동시에 걸리는 사례 — base die 커스텀화로 메모리에서 조립 서브시스템으로 이동. ch6(대역폭 벽의 근거 수치)·ch8(스택 수·pitch 확장 요구)에서도 다뤄짐",
+          "home": 7,
+          "appears_in": [
+            6,
+            7,
+            8
+          ]
+        },
+        {
+          "id": "silicon-interposer",
+          "title": "2.5D 실리콘 인터포저 (CoWoS·EMIB)",
+          "lede": "서브-μm 배선으로 HBM-to-로직 대역폭을 실현하는 유일한 매체. ch6(대역폭 상한이 강제한 인프라)에서도 다뤄짐",
+          "home": 7,
+          "appears_in": [
+            6,
+            7
+          ]
+        },
+        {
+          "id": "co-packaged-optics",
+          "title": "Co-Packaged Optics (CPO)",
+          "lede": "광 트랜시버를 로직 옆에 배치해 pJ/bit를 낮추는 접근 — 온도 민감성·이종 공정 통합 미해결. ch6(광 도메인 우회 후보)·ch8(패키지 내 통합 요구)에서도 다뤄짐",
+          "home": 7,
+          "appears_in": [
+            6,
+            7,
+            8
+          ]
+        },
+        {
+          "id": "cxl-memory-fabric",
+          "title": "CXL 메모리 페이브릭",
+          "lede": "switch·pooling·sharing으로 GPU·CPU·메모리를 묶는 계층 확장 메모리. ch6(명시적 메모리 스코프 노출)·ch7(D2D 프로토콜 인지 강제)에서도 다뤄짐",
+          "home": 8,
+          "appears_in": [
+            6,
+            7,
+            8
+          ]
         }
       ]
     },
@@ -414,6 +1027,105 @@
           "sources": [],
           "children": []
         }
+      ],
+      "topics": [
+        {
+          "id": "chiplet-ucie",
+          "title": "Chiplet · UCIe",
+          "lede": "다이 분할과 D2D 표준화 — 수율·다이크기 한계에서 강제되어 패키징·시스템까지 전파. [통일] '다이 크기 상한→chiplet 강제'(ch3) + 'chiplet 기반 IP 재사용과 UCIe 표준화'(ch4) + 'chiplet 인터페이스 표준화'(ch5) + 'chiplet 기반 아키텍처 분할'(ch6) + 조립·시험 전반(ch7) + 되돌아가는 요구(ch8)를 하나로 묶음",
+          "home": 4,
+          "appears_in": [
+            3,
+            4,
+            5,
+            6,
+            7,
+            8
+          ]
+        },
+        {
+          "id": "wafer-scale-dataflow-architecture",
+          "title": "데이터플로우·웨이퍼-스케일 아키텍처",
+          "lede": "Cerebras WSE·Groq LPU — 정적 스케줄링이 general-purpose 워크로드에 열등. [통일] ch6(아키텍처 대안)·ch7(WSI 패키징 대안)·ch8(Dataflow SW 스택)가 동일 사례를 각 계층 관점에서 독립적으로 다룸 — 00_종합 불일치 목록 #2와 같은 지점",
+          "home": 6,
+          "appears_in": [
+            6,
+            7,
+            8
+          ]
+        },
+        {
+          "id": "logic-stack-hybrid-bonding",
+          "title": "3D 로직 스택 · Hybrid Bonding",
+          "lede": "V-Cache·Foveros의 수직 적층과 이를 구현하는 Cu-Cu 직접 접합. [통일] '3D 로직 스택'(ch6)과 'hybrid bonding(직접 Cu-Cu/SiO₂ 접합)'(ch7)을 하나로 묶음. ch3(열예산 충돌)에서도 다뤄짐",
+          "home": 6,
+          "appears_in": [
+            3,
+            6,
+            7
+          ]
+        },
+        {
+          "id": "hbm",
+          "title": "HBM (High Bandwidth Memory)",
+          "lede": "메모리 셀·패키징·인터페이스 세 계층이 동시에 걸리는 사례 — base die 커스텀화로 메모리에서 조립 서브시스템으로 이동. ch6(대역폭 벽의 근거 수치)·ch8(스택 수·pitch 확장 요구)에서도 다뤄짐",
+          "home": 7,
+          "appears_in": [
+            6,
+            7,
+            8
+          ]
+        },
+        {
+          "id": "silicon-interposer",
+          "title": "2.5D 실리콘 인터포저 (CoWoS·EMIB)",
+          "lede": "서브-μm 배선으로 HBM-to-로직 대역폭을 실현하는 유일한 매체. ch6(대역폭 상한이 강제한 인프라)에서도 다뤄짐",
+          "home": 7,
+          "appears_in": [
+            6,
+            7
+          ]
+        },
+        {
+          "id": "glass-interposer-substrate",
+          "title": "유리 인터포저·서브스트레이트",
+          "lede": "CTE 조정·저유전손실 후보 — TGV 공정 성숙도가 CMOS 그레이드에 미달",
+          "home": 7,
+          "appears_in": [
+            7
+          ]
+        },
+        {
+          "id": "co-packaged-optics",
+          "title": "Co-Packaged Optics (CPO)",
+          "lede": "광 트랜시버를 로직 옆에 배치해 pJ/bit를 낮추는 접근 — 온도 민감성·이종 공정 통합 미해결. ch6(광 도메인 우회 후보)·ch8(패키지 내 통합 요구)에서도 다뤄짐",
+          "home": 7,
+          "appears_in": [
+            6,
+            7,
+            8
+          ]
+        },
+        {
+          "id": "fan-out-mobile-packaging",
+          "title": "Fan-out 패키징 (InFO·PoP)",
+          "lede": "모바일·클라이언트 세그먼트의 사실상 표준 — HBM급 대역폭이 불필요한 영역",
+          "home": 7,
+          "appears_in": [
+            7
+          ]
+        },
+        {
+          "id": "cxl-memory-fabric",
+          "title": "CXL 메모리 페이브릭",
+          "lede": "switch·pooling·sharing으로 GPU·CPU·메모리를 묶는 계층 확장 메모리. ch6(명시적 메모리 스코프 노출)·ch7(D2D 프로토콜 인지 강제)에서도 다뤄짐",
+          "home": 8,
+          "appears_in": [
+            6,
+            7,
+            8
+          ]
+        }
       ]
     },
     {
@@ -468,6 +1180,111 @@
           "body": "<p><strong>시스템·소프트웨어의 X가 패키징·집적 계층에 Y를 요구한다.</strong> MFU 개선의 대부분이 메모리 대역폭·통신 대역폭 병목 해소에서 나오므로, 이 계층은 패키징에 HBM 스택 수 증가(6개 → 8개 → 12개), HBM 근접 배치의 pitch 축소, D2D 대역폭의 세대 상승(UCIe·NVLink 후속), co-packaged optics의 조기 상용화를 요구한다. LLM 서빙의 KV 캐시가 HBM 용량을 압박하므로 HBM 스택 높이 확장(16-Hi 이상)과 3D 스택 밀도 향상을 요구한다. 분산 학습의 fault 빈도가 chiplet redundancy·HBM spare channel의 확대를 요구하고, 서빙 스택의 지연 예산이 광 인터커넥트의 패키지 내 통합을 요구한다. 이 요구들은 패키징 계층에서 CoWoS 캐파 확장, hybrid bonding pitch 축소, 광 인터포저 상용화라는 로드맵 항목으로 되돌아간다.</p>\n<p><strong>시스템·소프트웨어의 X가 아키텍처 계층에 Y를 요구한다.</strong> LLM decoding의 memory-bound 특성이 아키텍처에 산술 강도 재설계, KV cache 전용 하드웨어(NVIDIA H200·Blackwell의 KV cache 최적화 회로가 그 사례), decoding 병렬성을 위한 tensor engine 세분화를 요구한다. MoE의 all-to-all 통신 병목이 아키텍처에 in-network compute·switch 내부 reduction 지원을 요구한다. Straggler 문제와 대규모 학습의 fault tolerance 요구가 아키텍처에 결정론적 실행·gang scheduling·hardware-level fault isolation을 요구한다. FP8·FP4·INT4·MXFP 등 저정밀 유닛의 다양화 요구는 이론 FLOPS를 늘려 격차를 좁히려는 시도이고, 아키텍처에 정밀도별 유닛의 세분화와 dynamic precision switching을 요구한다. Speculative decoding이 draft 모델과 verify 모델의 동시 실행을 요구하므로 이질 코어 스케줄링을 요구한다.</p>\n<p><strong>시스템·소프트웨어의 X가 방법론 계층에 Y를 요구한다.</strong> MFU 격차 자체가 방법론(EDA·시뮬레이션·검증)에 새로운 요구를 넘긴다. 이론값-실측값의 예측 격차를 좁히려면 사전 성능 시뮬레이션이 실측 워크로드(LLM 학습·MoE·서빙)를 반영해야 하고, 방법론 스택은 워크로드 traces 기반의 die-package-system co-simulation을 요구받는다. 대규모 클러스터의 검증은 개별 다이 sign-off에서 rack scale·cluster scale의 emulation·formal verification으로 이동해야 한다. 프레임워크·컴파일러의 auto-tuning 자동화 요구는 방법론에 machine-learning-driven design space exploration을 요구한다. 이 방향은 방법론 계층의 EDA 벤더 재편(Synopsys·Cadence의 AI-driven EDA 흐름)으로 되돌아간다.</p>\n<p><strong>시스템·소프트웨어의 X가 회로·IP 계층에 Y를 요구한다.</strong> HBM 대역폭 실측 이용률 개선 요구가 메모리 컨트롤러 IP의 QoS·prefetch·bank scheduling 정교화를 요구한다. D2D PHY의 지연 최소화·전력 효율 개선이 서빙 지연 예산을 좌우하므로 UCIe·BoW·NVLink PHY IP의 세대 상승을 요구한다. NoC·인터커넥트 IP는 chiplet 간 캐시 일관성·비일관성 도메인 관리를 지원하도록 재설계된다. Confidential computing이 attestation 회로·메모리 암호화 엔진의 고성능 IP를 요구한다. 저전력 SerDes·광 트랜시버 IP는 co-packaged optics의 요구를 받아 mW/Gbps 지표 개선을 요구받는다.</p>\n<p><strong>시스템·소프트웨어의 X가 공정 계층에 Y를 요구한다.</strong> 이론-실측 격차의 원인 중 전력·열 제약을 완화하려면 공정 노드의 미세화(3nm → 2nm → A16 → A14)와 backside power delivery의 상용화가 필요하다. 저정밀 유닛의 밀도 요구는 로직 밀도 향상(GAA 세대의 트랜지스터당 면적 축소)을 요구한다. HBM 대역폭 확대 요구는 DRAM 공정의 미세화(1a → 1b → 1c → 1d 노드)와 3D DRAM 도입 시점 앞당김을 요구한다. 광 인터포저 요구는 실리콘 포토닉스 공정과 CMOS 공정의 통합을 요구한다. 이 요구들은 파운드리·메모리 공정 로드맵의 우선순위 재편으로 되돌아간다.</p>\n<p><strong>시스템·소프트웨어의 X가 소자 계층에 Y를 요구한다.</strong> 저전력·고성능 트랜지스터 요구가 GAA·나노시트에 이어 CFET(Complementary FET)으로의 이행을 정당화한다. 메모리 계층 재편 요구(HBM·CXL·main DRAM 사이의 격차 축소)가 3D DRAM·PCM·MRAM·FeRAM 등 대안 소자의 상용화 압력을 만든다. In-memory computing·near-memory computing의 상용화 요구는 이 격차를 소자 계층에서 우회하려는 시도이고, ReRAM·MRAM 기반 compute-in-memory의 재조명으로 되돌아간다. 광 소자 요구는 실리콘 포토닉스 소자(변조기·검출기)의 상용 성숙을 요구한다. 이 요구들은 소자 계층의 R&amp;D 우선순위에 반영된다.</p>\n<p><strong>시스템·소프트웨어의 X가 재료 계층에 Y를 요구한다.</strong> 700W·1000W 패키지의 열 밀도가 TIM·인터포저·서브스트레이트 재료에 새 사양을 요구한다. HBM 스택 높이 확대 요구가 유리 코어 서브스트레이트·저손실 유전체·저휨 인터포저 재료를 요구한다. 광 인터포저 요구가 저손실 실리콘 도파관·광섬유 결합 재료를 요구한다. 저정밀·저전력 소자 요구가 채널 재료(2D 재료, 게르마늄 채널)·게이트 유전체(고유전율 재료)의 대안을 요구한다. 3D 스택의 hybrid bonding 요구가 저결함 구리 접합 재료·CMP 슬러리·정렬용 재료를 요구한다. 이 요구들은 재료 계층의 최상단으로 되돌아가 사슬을 닫는다.</p>\n<p><strong>되돌아가는 사슬을 요약하면 네 갈래로 정리된다.</strong> <strong>첫째, 이론-실측 격차의 원인 대부분이 메모리·통신 병목이므로, 이 계층은 패키징·소자·공정에 HBM 세대 상승·D2D 대역폭 확대·광 통합·3D 메모리 상용화를 요구한다.</strong> <strong>둘째, LLM·MoE·서빙의 워크로드 특성이 아키텍처·회로에 KV cache 전용 회로·in-network compute·저정밀 유닛 다양화·이질 코어 스케줄링 지원을 요구한다.</strong> <strong>셋째, 대규모 분산 학습의 fault tolerance·straggler·경제 격차 요구가 아키텍처·방법론·공정에 결정론적 실행·redundancy·rack scale co-simulation·backside power delivery를 요구한다.</strong> <strong>넷째, 벤더 다변화·자체 SoC 흐름이 방법론·회로·IP·재료에 chiplet 개방성·EDA 자동화·저손실 재료·표준화된 D2D IP를 요구한다.</strong></p>\n<p><strong>이 되돌아가는 요구가 실제로 아래 층을 움직이는가는 논쟁 지점이다.</strong> 통설은 하이퍼스케일러(구글·아마존·마이크로소프트·메타)의 자본 지출 규모와 자체 SoC 로드맵이 이 요구를 실질적 강제로 만든다는 것이고, 논쟁은 이 요구의 파급이 재료 계층까지 완전히 도달하는 데 걸리는 시간(재료·소자의 R&amp;D 주기가 5~10년임을 고려)과 재료 계층이 실제로 응답할 수 있는가에 관한 것이다. 인과의 화살표는 재료 → 소자 → 공정 → 회로·IP → 방법론 → 아키텍처 → 패키징 → 시스템·소프트웨어의 순서로 흐르지만, 시스템·소프트웨어의 요구가 이 화살표를 거슬러 재료까지 되돌아가 우선순위를 재조정하는 피드백 루프가 성립할 때에만 격차 축소의 산업 로드맵이 완성된다. 이 피드백 루프가 이 장, 그리고 이 8장 사슬 전체의 결론이다.</p>\n<p><strong>다루지 않음.</strong> 개별 프레임워크(PyTorch·JAX)의 내부 그래프 IR 설계, 커널 컴파일러(Triton·CUTLASS·MLIR)의 optimization pass 세부, 분산 학습 전략(3D parallelism·ZeRO stage)의 알고리즘 세부, 서빙 스택(vLLM·SGLang)의 스케줄러 세부, CXL·UCIe·NVLink 프로토콜의 표준 세부, 클라우드 사업자의 인스턴스 가격 정책, LLM 학습 데이터셋·모델 아키텍처의 세부는 이 장의 범위를 벗어나므로 각각 소프트웨어 엔지니어링·분산 시스템·산업 계층의 별도 논의로 넘긴다. 자체 SoC(Trainium·TPU·Maia)의 개별 아키텍처 세부와 채택 규모, 하이퍼스케일러 간 인프라 경쟁 구도, 벤더 시장 점유율 변동은 산업 계층 장에서 다룬다. 재료·소자·공정·회로·IP·방법론·아키텍처·패키징의 세부는 앞선 일곱 장에서 다뤘으므로 여기서는 결과와 되돌아가는 요구만 정리했다. MFU·goodput의 정확한 워크로드별 수치, 벤더별 실측 데이터의 편차, 미래 성능 예측치는 벤더·연구기관 발표 사이의 편차가 크므로 본문에서 인용을 자제했고, 구체 데이터가 필요한 경우 MLPerf 벤치마크·MLCommons 리포트·하이퍼스케일러 학습 리포트(PaLM, Llama, Gemini)를 1차 자료로 참조해야 한다.</p>\n",
           "sources": [],
           "children": []
+        }
+      ],
+      "topics": [
+        {
+          "id": "chiplet-ucie",
+          "title": "Chiplet · UCIe",
+          "lede": "다이 분할과 D2D 표준화 — 수율·다이크기 한계에서 강제되어 패키징·시스템까지 전파. [통일] '다이 크기 상한→chiplet 강제'(ch3) + 'chiplet 기반 IP 재사용과 UCIe 표준화'(ch4) + 'chiplet 인터페이스 표준화'(ch5) + 'chiplet 기반 아키텍처 분할'(ch6) + 조립·시험 전반(ch7) + 되돌아가는 요구(ch8)를 하나로 묶음",
+          "home": 4,
+          "appears_in": [
+            3,
+            4,
+            5,
+            6,
+            7,
+            8
+          ]
+        },
+        {
+          "id": "wafer-scale-dataflow-architecture",
+          "title": "데이터플로우·웨이퍼-스케일 아키텍처",
+          "lede": "Cerebras WSE·Groq LPU — 정적 스케줄링이 general-purpose 워크로드에 열등. [통일] ch6(아키텍처 대안)·ch7(WSI 패키징 대안)·ch8(Dataflow SW 스택)가 동일 사례를 각 계층 관점에서 독립적으로 다룸 — 00_종합 불일치 목록 #2와 같은 지점",
+          "home": 6,
+          "appears_in": [
+            6,
+            7,
+            8
+          ]
+        },
+        {
+          "id": "hbm",
+          "title": "HBM (High Bandwidth Memory)",
+          "lede": "메모리 셀·패키징·인터페이스 세 계층이 동시에 걸리는 사례 — base die 커스텀화로 메모리에서 조립 서브시스템으로 이동. ch6(대역폭 벽의 근거 수치)·ch8(스택 수·pitch 확장 요구)에서도 다뤄짐",
+          "home": 7,
+          "appears_in": [
+            6,
+            7,
+            8
+          ]
+        },
+        {
+          "id": "co-packaged-optics",
+          "title": "Co-Packaged Optics (CPO)",
+          "lede": "광 트랜시버를 로직 옆에 배치해 pJ/bit를 낮추는 접근 — 온도 민감성·이종 공정 통합 미해결. ch6(광 도메인 우회 후보)·ch8(패키지 내 통합 요구)에서도 다뤄짐",
+          "home": 7,
+          "appears_in": [
+            6,
+            7,
+            8
+          ]
+        },
+        {
+          "id": "cuda-programming-model",
+          "title": "CUDA/GPU 프로그래밍 모델",
+          "lede": "SIMT 기반 벤더 종속 스택 — OpenCL·ROCm·SYCL 대비 라이브러리 축적의 승리",
+          "home": 8,
+          "appears_in": [
+            8
+          ]
+        },
+        {
+          "id": "pytorch-jax-framework",
+          "title": "PyTorch/JAX 프레임워크",
+          "lede": "동적 그래프 디버깅 경험이 TensorFlow를 밀어낸 2018~2020년 전환",
+          "home": 8,
+          "appears_in": [
+            8
+          ]
+        },
+        {
+          "id": "mfu-utilization-gap",
+          "title": "MFU (이론-실측 활용률 격차)",
+          "lede": "이론 FLOPS와 유효 처리량의 구조적 괴리 — accelerator TCO의 절반 이상이 미활용",
+          "home": 8,
+          "appears_in": [
+            8
+          ]
+        },
+        {
+          "id": "distributed-training-framework",
+          "title": "분산 학습 프레임워크 (DeepSpeed·FSDP·Megatron)",
+          "lede": "ZeRO 파라미터 shard·파이프라인 병렬화 — 자동 병렬 전략 탐색은 아직 수작업이 우세",
+          "home": 8,
+          "appears_in": [
+            8
+          ]
+        },
+        {
+          "id": "llm-serving-optimization",
+          "title": "LLM 서빙 최적화 (vLLM·PagedAttention)",
+          "lede": "KV 캐시 단편화·배치 균질성 문제를 공략한 continuous batching·speculative decoding",
+          "home": 8,
+          "appears_in": [
+            8
+          ]
+        },
+        {
+          "id": "cxl-memory-fabric",
+          "title": "CXL 메모리 페이브릭",
+          "lede": "switch·pooling·sharing으로 GPU·CPU·메모리를 묶는 계층 확장 메모리. ch6(명시적 메모리 스코프 노출)·ch7(D2D 프로토콜 인지 강제)에서도 다뤄짐",
+          "home": 8,
+          "appears_in": [
+            6,
+            7,
+            8
+          ]
         }
       ]
     }

@@ -17,6 +17,10 @@
  *     본문 전체는 body(HTML)로 그대로 렌더링한다.
  *   원문은 마크다운 특수문자가 백슬래시로 이스케이프된 상태로 올 수 있다
  *     (Drive 딥 리서치 산출물 관례) — 파싱 전에 그대로 풀어준다.
+ *   analysis/subtopics.json 이 있으면(없어도 무방) 각 장 노드에
+ *     `topics: [{id,title,lede,home,appears_in}]` 를 덧붙인다. 4문항 제목이
+ *     아니라 그 장에서 실제로 다뤄진 기술 대상 이름의 소주제 색인이며,
+ *     appears_in 은 이 소주제가 실제로 등장하는 다른 장 번호(1~8)를 담는다.
  *
  * content/ 가 비어 있어도 실패하지 않고 빈 트리를 낸다.
  */
@@ -29,6 +33,7 @@ const { marked } = require("marked");
 const ROOT_DIR = __dirname;
 const CONTENT_DIR = path.join(ROOT_DIR, "content");
 const FIGURES_DIR = path.join(ROOT_DIR, "figures");
+const SUBTOPICS_FILE = path.join(ROOT_DIR, "analysis", "subtopics.json");
 const OUT_FILE = path.join(ROOT_DIR, "docs", "data.json");
 
 const SOURCE_MARK = "**출처**";
@@ -52,6 +57,27 @@ function readFigure(id) {
   const p = path.join(FIGURES_DIR, `${id}.svg`);
   if (!fs.existsSync(p)) return null;
   return { svg: fs.readFileSync(p, "utf8").trim() };
+}
+
+// analysis/subtopics.json — 4문항 제목이 아니라 실제 기술 대상 이름으로
+// 뽑은 소주제 색인(장간 통일·appears_in 포함). 없어도 실패하지 않는다.
+function readSubtopics() {
+  if (!fs.existsSync(SUBTOPICS_FILE)) return [];
+  try {
+    const list = JSON.parse(fs.readFileSync(SUBTOPICS_FILE, "utf8"));
+    return Array.isArray(list) ? list : [];
+  } catch (e) {
+    console.warn(`analysis/subtopics.json 파싱 실패 — 소주제 없이 진행: ${e.message}`);
+    return [];
+  }
+}
+
+// 주어진 장 번호(1~8)가 등장하는 소주제만 골라, 그 장 페이지에 필요한
+// 필드만 남긴다. home은 그 소주제가 원래 속한(가장 먼저 다뤄진) 장.
+function topicsForChapter(subtopics, chapterNo) {
+  return subtopics
+    .filter((t) => Array.isArray(t.appears_in) && t.appears_in.includes(chapterNo))
+    .map((t) => ({ id: t.id, title: t.title, lede: t.lede || "", home: t.ch, appears_in: t.appears_in }));
 }
 
 function plainify(s) {
@@ -260,6 +286,15 @@ function main() {
 
   const root = parseRoot(files);
   root.children = chapterFiles.map(parseChapter);
+
+  const subtopics = readSubtopics();
+  if (subtopics.length) {
+    root.children.forEach((chapter, i) => {
+      const chapterNo = parseInt(chapter.no, 10) || i + 1;
+      const topics = topicsForChapter(subtopics, chapterNo);
+      if (topics.length) chapter.topics = topics;
+    });
+  }
 
   const totalNodes = root.children.reduce((s, c) => s + countNodes(c), 0);
   const totalSources = countSources(root);
