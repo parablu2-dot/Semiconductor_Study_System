@@ -18,12 +18,12 @@
   { "ch": 3, "id": "har-etching", "title": "HAR(고종횡비) 에칭", "lede": "3D NAND·DRAM의 고종횡비 채널홀 에칭 — 방향성과 선택도의 트레이드오프", "appears_in": [3], "researched": true },
   { "ch": 3, "id": "lithography-alternatives", "title": "리소그래피 대안 (NIL·DSA)", "lede": "나노임프린트·자기조립 리소그래피 — 결함 전사·형상 자유도 미해결", "appears_in": [3], "researched": true },
 
-  { "ch": 4, "id": "rtl-design-flow", "title": "RTL 설계 흐름", "lede": "RTL+표준셀+P&R+STA 사인오프 — 회로 계층의 표준 추상화. ch5(Big 3 EDA 사인오프 스택으로 구체화)에서도 다뤄짐", "appears_in": [4, 5], "researched": false },
-  { "ch": 4, "id": "standard-cell-ip-reuse", "title": "표준 셀·물리 IP 재사용", "lede": "노드별 재특성화가 필요한 soft/firm/hard IP 재사용 구조", "appears_in": [4], "researched": false },
-  { "ch": 4, "id": "analog-mixed-signal-design", "title": "아날로그·믹스드시그널 설계", "lede": "SPICE 기반 수작업 흐름 — 디지털 자동화와 30년째 분리 유지. ch5(unified mixed-signal signoff 미완결)에서도 다뤄짐", "appears_in": [4, 5], "researched": false },
-  { "ch": 4, "id": "hls-high-level-synthesis", "title": "고수준 합성 (HLS)", "lede": "C/C++/SystemC→RTL 자동 합성 — 특정 도메인은 승리, 범용 대체는 미해결. [통일] ch4·ch5가 각자의 대안 후보 목록에서 동일 기술을 독립적으로 다룸", "appears_in": [4, 5], "researched": false },
-  { "ch": 4, "id": "ml-eda-automation", "title": "ML 기반 EDA 자동화", "lede": "강화학습 배치·배선, DSO.ai류 — 좁은 최적화는 검증됐으나 넓은 대체는 마케팅 단계. [통일] ch4·ch5가 각자의 대안 후보 목록에서 동일 기술을 독립적으로 다룸", "appears_in": [4, 5], "researched": false },
-  { "ch": 4, "id": "chiplet-ucie", "title": "Chiplet · UCIe", "lede": "다이 분할과 D2D 표준화 — 수율·다이크기 한계에서 강제되어 패키징·시스템까지 전파. [통일] '다이 크기 상한→chiplet 강제'(ch3) + 'chiplet 기반 IP 재사용과 UCIe 표준화'(ch4) + 'chiplet 인터페이스 표준화'(ch5) + 'chiplet 기반 아키텍처 분할'(ch6) + 조립·시험 전반(ch7) + 되돌아가는 요구(ch8)를 하나로 묶음", "appears_in": [3, 4, 5, 6, 7, 8], "researched": false },
+  { "ch": 4, "id": "rtl-design-flow", "title": "RTL 설계 흐름", "lede": "RTL+표준셀+P&R+STA 사인오프 — 회로 계층의 표준 추상화. ch5(Big 3 EDA 사인오프 스택으로 구체화)에서도 다뤄짐", "appears_in": [4, 5], "researched": true },
+  { "ch": 4, "id": "standard-cell-ip-reuse", "title": "표준 셀·물리 IP 재사용", "lede": "노드별 재특성화가 필요한 soft/firm/hard IP 재사용 구조", "appears_in": [4], "researched": true },
+  { "ch": 4, "id": "analog-mixed-signal-design", "title": "아날로그·믹스드시그널 설계", "lede": "SPICE 기반 수작업 흐름 — 디지털 자동화와 30년째 분리 유지. ch5(unified mixed-signal signoff 미완결)에서도 다뤄짐", "appears_in": [4, 5], "researched": true },
+  { "ch": 4, "id": "hls-high-level-synthesis", "title": "고수준 합성 (HLS)", "lede": "C/C++/SystemC→RTL 자동 합성 — 특정 도메인은 승리, 범용 대체는 미해결. [통일] ch4·ch5가 각자의 대안 후보 목록에서 동일 기술을 독립적으로 다룸", "appears_in": [4, 5], "researched": true },
+  { "ch": 4, "id": "ml-eda-automation", "title": "ML 기반 EDA 자동화", "lede": "강화학습 배치·배선, DSO.ai류 — 좁은 최적화는 검증됐으나 넓은 대체는 마케팅 단계. [통일] ch4·ch5가 각자의 대안 후보 목록에서 동일 기술을 독립적으로 다룸", "appears_in": [4, 5], "researched": true },
+  { "ch": 4, "id": "chiplet-ucie", "title": "Chiplet · UCIe", "lede": "다이 분할과 D2D 표준화 — 수율·다이크기 한계에서 강제되어 패키징·시스템까지 전파. [통일] '다이 크기 상한→chiplet 강제'(ch3) + 'chiplet 기반 IP 재사용과 UCIe 표준화'(ch4) + 'chiplet 인터페이스 표준화'(ch5) + 'chiplet 기반 아키텍처 분할'(ch6) + 조립·시험 전반(ch7) + 되돌아가는 요구(ch8)를 하나로 묶음", "appears_in": [3, 4, 5, 6, 7, 8], "researched": true },
 
   { "ch": 5, "id": "uvm-verification", "title": "UVM 검증 방법론", "lede": "constrained-random + functional coverage 표준, 검증 상태 폭발이 강제한 4층 파이프라인. ch4(검증 인력·시간이 설계를 넘어선 원인)에서도 다뤄짐", "appears_in": [4, 5], "researched": false },
   { "ch": 5, "id": "mmmc-ssta-signoff", "title": "MMMC/SSTA 사인오프", "lede": "process·voltage·temperature 수백~수천 corner 병렬 검증. ch3(변동성이 강제한 통계적 사인오프 이행)에서도 다뤄짐", "appears_in": [3, 5], "researched": false },
