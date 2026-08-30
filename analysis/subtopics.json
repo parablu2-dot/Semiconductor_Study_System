@@ -25,10 +25,10 @@
   { "ch": 4, "id": "ml-eda-automation", "title": "ML 기반 EDA 자동화", "lede": "강화학습 배치·배선, DSO.ai류 — 좁은 최적화는 검증됐으나 넓은 대체는 마케팅 단계. [통일] ch4·ch5가 각자의 대안 후보 목록에서 동일 기술을 독립적으로 다룸", "appears_in": [4, 5], "researched": true },
   { "ch": 4, "id": "chiplet-ucie", "title": "Chiplet · UCIe", "lede": "다이 분할과 D2D 표준화 — 수율·다이크기 한계에서 강제되어 패키징·시스템까지 전파. [통일] '다이 크기 상한→chiplet 강제'(ch3) + 'chiplet 기반 IP 재사용과 UCIe 표준화'(ch4) + 'chiplet 인터페이스 표준화'(ch5) + 'chiplet 기반 아키텍처 분할'(ch6) + 조립·시험 전반(ch7) + 되돌아가는 요구(ch8)를 하나로 묶음", "appears_in": [3, 4, 5, 6, 7, 8], "researched": true },
 
-  { "ch": 5, "id": "uvm-verification", "title": "UVM 검증 방법론", "lede": "constrained-random + functional coverage 표준, 검증 상태 폭발이 강제한 4층 파이프라인. ch4(검증 인력·시간이 설계를 넘어선 원인)에서도 다뤄짐", "appears_in": [4, 5], "researched": false },
-  { "ch": 5, "id": "mmmc-ssta-signoff", "title": "MMMC/SSTA 사인오프", "lede": "process·voltage·temperature 수백~수천 corner 병렬 검증. ch3(변동성이 강제한 통계적 사인오프 이행)에서도 다뤄짐", "appears_in": [3, 5], "researched": false },
-  { "ch": 5, "id": "open-source-eda", "title": "오픈소스 EDA (OpenROAD·Yosys)", "lede": "성숙 노드에서는 상용 도구에 근접, 선단 노드는 PDK 접근 자체가 봉쇄. [통일] ch4·ch5가 각자의 대안 후보 목록에서 동일 기술을 독립적으로 다룸", "appears_in": [4, 5], "researched": false },
-  { "ch": 5, "id": "hardware-emulation", "title": "하드웨어 에뮬레이션", "lede": "Palladium·Veloce·ZeBu — first-silicon-success 압력이 강제한 검증 인프라", "appears_in": [5], "researched": false },
+  { "ch": 5, "id": "uvm-verification", "title": "UVM 검증 방법론", "lede": "constrained-random + functional coverage 표준, 검증 상태 폭발이 강제한 4층 파이프라인. ch4(검증 인력·시간이 설계를 넘어선 원인)에서도 다뤄짐", "appears_in": [4, 5], "researched": true },
+  { "ch": 5, "id": "mmmc-ssta-signoff", "title": "MMMC/SSTA 사인오프", "lede": "process·voltage·temperature 수백~수천 corner 병렬 검증. ch3(변동성이 강제한 통계적 사인오프 이행)에서도 다뤄짐", "appears_in": [3, 5], "researched": true },
+  { "ch": 5, "id": "open-source-eda", "title": "오픈소스 EDA (OpenROAD·Yosys)", "lede": "성숙 노드에서는 상용 도구에 근접, 선단 노드는 PDK 접근 자체가 봉쇄. [통일] ch4·ch5가 각자의 대안 후보 목록에서 동일 기술을 독립적으로 다룸", "appears_in": [4, 5], "researched": true },
+  { "ch": 5, "id": "hardware-emulation", "title": "하드웨어 에뮬레이션", "lede": "Palladium·Veloce·ZeBu — first-silicon-success 압력이 강제한 검증 인프라", "appears_in": [5], "researched": true },
 
   { "ch": 6, "id": "von-neumann-cache-hierarchy", "title": "폰 노이만 코어 + 캐시 계층", "lede": "캐시로 은폐된 순차 실행 모델 — 소프트웨어 생태계 연속성이 승리 원인", "appears_in": [6], "researched": false },
   { "ch": 6, "id": "memory-bandwidth-energy-wall", "title": "메모리 대역폭·데이터 이동 에너지 이중 상한", "lede": "roofline memory-bound 한계와 on/off-chip pJ/bit 격차 — 아키텍처 계층 내부에서 해결 불가", "appears_in": [6], "researched": false },
