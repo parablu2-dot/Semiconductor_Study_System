@@ -290,7 +290,13 @@ function main() {
   const subtopics = readSubtopics();
   if (subtopics.length) {
     root.children.forEach((chapter, i) => {
-      const chapterNo = parseInt(chapter.no, 10) || i + 1;
+      // 장 번호(no)가 아니라 frontmatter id(ch5, ch6 ...)로 매칭한다.
+      // no는 파일명에서 온 표시용 라벨일 뿐이고, id가 그 장의 실제 정체성이다.
+      // 화면 순서와 subtopics.json의 ch 번호가 어긋나는 개편이 생겨도
+      // (예: 화면 순서만 바뀌고 content/*.md id는 그대로일 때) 번호 매칭은
+      // 조용히 틀린 장에 소주제를 붙일 수 있지만, id 매칭은 그렇지 않다.
+      const idMatch = String(chapter.id || "").match(/^ch(\d+)$/);
+      const chapterNo = idMatch ? parseInt(idMatch[1], 10) : parseInt(chapter.no, 10) || i + 1;
       const topics = topicsForChapter(subtopics, chapterNo);
       if (topics.length) chapter.topics = topics;
     });
