@@ -101,7 +101,18 @@ h1{font-family:"IBM Plex Serif",serif;font-weight:500;font-size:clamp(27px,3.6vw
   justify-content:space-between;font-family:"IBM Plex Mono",monospace;font-size:10.5px;
   letter-spacing:.08em;color:var(--ink-soft)}
 .card .go{color:var(--brass)} .empty{color:var(--teal)}
-.body-copy{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:24px 26px}
+.body-copy{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:24px 26px;margin-bottom:20px}
+.body-copy h2{font-family:"IBM Plex Serif",serif;font-size:19px;font-weight:500;margin:28px 0 10px}
+.body-copy h2:first-child{margin-top:0}
+.body-copy p{margin:0 0 12px;line-height:1.7}
+.body-copy hr{border:none;border-top:1px solid var(--line);margin:22px 0}
+.body-copy table{display:block;overflow-x:auto;border-collapse:collapse;width:100%;font-size:13.5px;margin:0 0 16px}
+.body-copy th,.body-copy td{border:1px solid var(--line);padding:7px 10px;text-align:left;vertical-align:top}
+.body-copy th{background:var(--card-2);font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.04em}
+.body-copy pre{background:var(--card-2);border:1px solid var(--line);border-radius:var(--r);
+  padding:14px 16px;overflow-x:auto;font-family:"IBM Plex Mono",monospace;font-size:12px;line-height:1.6;margin:0 0 16px}
+.body-copy code{font-family:"IBM Plex Mono",monospace;font-size:.92em;background:var(--card-2);padding:1px 4px;border-radius:2px}
+.body-copy pre code{background:none;padding:0}
 .placeholder{border:1px dashed var(--line);border-radius:var(--r);padding:20px 22px;color:var(--ink-soft);font-size:14px}
 .placeholder code{font-family:"IBM Plex Mono",monospace;font-size:12.5px;color:var(--clay)}
 
@@ -240,21 +251,24 @@ function render(){
       :`<p class="none">아직 출처가 없습니다. 공개 자료만 싣는 사이트이므로 본문보다 출처를 먼저 채우세요.</p>`)+
       `</section>`;
   };
+  const boardHTML = kids.length ? `<div class="board">${kids.map((c,k)=>{
+    const deep=(c.children||[]).length, filled=(c.summary||[]).length||c.body;
+    return `<button class="card" data-id="${c.id}" style="--bar:${path.length===1?BAR[k%BAR.length]:bar}">
+      <div class="no">${c.no?"CH "+c.no:"소주제 "+(k+1)}</div>
+      <h3>${c.title}</h3><p>${c.lede||""}</p>
+      <div class="foot"><span class="${filled?"":"empty"}">${filled?"작성됨":"비어 있음"}</span>
+      <span class="src">출처 ${(c.sources||[]).length||"—"}</span>
+      <span class="go">${deep?deep+"개 →":"열기 →"}</span></div></button>`;}).join("")}</div>` : "";
+  // body는 잎 노드의 본문이자, root(종합)처럼 children이 있어도 그 자체로
+  // 교차분석 본문을 갖는 노드를 위해 항상 함께 렌더링한다.
+  const bodyHTML = node.body ? `<div class="body-copy">${node.body}</div>` : "";
+  const placeholderHTML = (!kids.length && !node.body)
+    ? `<div class="placeholder">본문이 아직 없습니다. content/ md 에 본문을 채우거나,
+        <code>### basis:</code> 절을 추가하면 여기에 대시보드가 한 겹 더 펼쳐집니다.</div>` : "";
+  content.innerHTML = boardHTML + bodyHTML + placeholderHTML;
   if(kids.length){
-    content.innerHTML=`<div class="board">${kids.map((c,k)=>{
-      const deep=(c.children||[]).length, filled=(c.summary||[]).length||c.body;
-      return `<button class="card" data-id="${c.id}" style="--bar:${path.length===1?BAR[k%BAR.length]:bar}">
-        <div class="no">${c.no?"CH "+c.no:"소주제 "+(k+1)}</div>
-        <h3>${c.title}</h3><p>${c.lede||""}</p>
-        <div class="foot"><span class="${filled?"":"empty"}">${filled?"작성됨":"비어 있음"}</span>
-        <span class="src">출처 ${(c.sources||[]).length||"—"}</span>
-        <span class="go">${deep?deep+"개 →":"열기 →"}</span></div></button>`;}).join("")}</div>`;
     content.querySelectorAll(".card").forEach(el=>el.onclick=()=>
       location.hash=href(path.concat([kids.find(k=>k.id===el.dataset.id)])));
-  } else {
-    content.innerHTML=node.body?`<div class="body-copy">${node.body}</div>`
-      :`<div class="placeholder">본문이 아직 없습니다. content/ md 에 본문을 채우거나,
-        <code>### basis:</code> 절을 추가하면 여기에 대시보드가 한 겹 더 펼쳐집니다.</div>`;
   }
   content.insertAdjacentHTML("beforeend", srcHTML(node));
   scrollTo({top:0,behavior:"instant"});
