@@ -42,10 +42,10 @@
   { "ch": 7, "id": "co-packaged-optics", "title": "Co-Packaged Optics (CPO)", "lede": "광 트랜시버를 로직 옆에 배치해 pJ/bit를 낮추는 접근 — 온도 민감성·이종 공정 통합 미해결. ch6(광 도메인 우회 후보)·ch8(패키지 내 통합 요구)에서도 다뤄짐", "appears_in": [6, 7, 8], "researched": true },
   { "ch": 7, "id": "fan-out-mobile-packaging", "title": "Fan-out 패키징 (InFO·PoP)", "lede": "모바일·클라이언트 세그먼트의 사실상 표준 — HBM급 대역폭이 불필요한 영역", "appears_in": [7], "researched": true },
 
-  { "ch": 8, "id": "cuda-programming-model", "title": "CUDA/GPU 프로그래밍 모델", "lede": "SIMT 기반 벤더 종속 스택 — OpenCL·ROCm·SYCL 대비 라이브러리 축적의 승리", "appears_in": [8], "researched": false },
-  { "ch": 8, "id": "pytorch-jax-framework", "title": "PyTorch/JAX 프레임워크", "lede": "동적 그래프 디버깅 경험이 TensorFlow를 밀어낸 2018~2020년 전환", "appears_in": [8], "researched": false },
-  { "ch": 8, "id": "mfu-utilization-gap", "title": "MFU (이론-실측 활용률 격차)", "lede": "이론 FLOPS와 유효 처리량의 구조적 괴리 — accelerator TCO의 절반 이상이 미활용", "appears_in": [8], "researched": false },
-  { "ch": 8, "id": "distributed-training-framework", "title": "분산 학습 프레임워크 (DeepSpeed·FSDP·Megatron)", "lede": "ZeRO 파라미터 shard·파이프라인 병렬화 — 자동 병렬 전략 탐색은 아직 수작업이 우세", "appears_in": [8], "researched": false },
-  { "ch": 8, "id": "llm-serving-optimization", "title": "LLM 서빙 최적화 (vLLM·PagedAttention)", "lede": "KV 캐시 단편화·배치 균질성 문제를 공략한 continuous batching·speculative decoding", "appears_in": [8], "researched": false },
-  { "ch": 8, "id": "cxl-memory-fabric", "title": "CXL 메모리 페이브릭", "lede": "switch·pooling·sharing으로 GPU·CPU·메모리를 묶는 계층 확장 메모리. ch6(명시적 메모리 스코프 노출)·ch7(D2D 프로토콜 인지 강제)에서도 다뤄짐", "appears_in": [6, 7, 8], "researched": false }
+  { "ch": 8, "id": "cuda-programming-model", "title": "CUDA/GPU 프로그래밍 모델", "lede": "SIMT 기반 벤더 종속 스택 — OpenCL·ROCm·SYCL 대비 라이브러리 축적의 승리", "appears_in": [8], "researched": true },
+  { "ch": 8, "id": "pytorch-jax-framework", "title": "PyTorch/JAX 프레임워크", "lede": "동적 그래프 디버깅 경험이 TensorFlow를 밀어낸 2018~2020년 전환", "appears_in": [8], "researched": true },
+  { "ch": 8, "id": "mfu-utilization-gap", "title": "MFU (이론-실측 활용률 격차)", "lede": "이론 FLOPS와 유효 처리량의 구조적 괴리 — accelerator TCO의 절반 이상이 미활용", "appears_in": [8], "researched": true },
+  { "ch": 8, "id": "distributed-training-framework", "title": "분산 학습 프레임워크 (DeepSpeed·FSDP·Megatron)", "lede": "ZeRO 파라미터 shard·파이프라인 병렬화 — 자동 병렬 전략 탐색은 아직 수작업이 우세", "appears_in": [8], "researched": true },
+  { "ch": 8, "id": "llm-serving-optimization", "title": "LLM 서빙 최적화 (vLLM·PagedAttention)", "lede": "KV 캐시 단편화·배치 균질성 문제를 공략한 continuous batching·speculative decoding", "appears_in": [8], "researched": true },
+  { "ch": 8, "id": "cxl-memory-fabric", "title": "CXL 메모리 페이브릭", "lede": "switch·pooling·sharing으로 GPU·CPU·메모리를 묶는 계층 확장 메모리. ch6(명시적 메모리 스코프 노출)·ch7(D2D 프로토콜 인지 강제)에서도 다뤄짐", "appears_in": [6, 7, 8], "researched": true }
 ]

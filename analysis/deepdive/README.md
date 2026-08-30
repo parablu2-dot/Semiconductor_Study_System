@@ -39,26 +39,39 @@ appears_in에 속한 모든 장과의 관계를 각각 문장으로 정리한다
 | 계층 | 소주제 수 | 완료 | 상태 |
 |---|---|---|---|
 | ch1 재료·물성 | 6 | 6 | ✅ 완료 (2026-08-30) |
-| ch2 소자 | 5 | 0 | 다음 차례 |
-| ch3 공정·계측 | 5 | 0 | 대기 |
-| ch4 회로·IP | 6 | 0 | 대기 (chiplet-ucie 포함) |
-| ch5 설계방법론 | 4 | 0 | 대기 |
-| ch6 아키텍처 | 5 | 0 | 대기 |
-| ch7 패키징·집적 | 5 | 0 | 대기 |
-| ch8 시스템·SW | 6 | 0 | 대기 |
+| ch2 소자 | 5 | 5 | ✅ 완료 (2026-08-30) |
+| ch3 공정·계측 | 5 | 5 | ✅ 완료 (2026-08-30) |
+| ch4 회로·IP | 6 | 6 | ✅ 완료 (2026-08-30, chiplet-ucie 포함) |
+| ch5 설계방법론 | 4 | 4 | ✅ 완료 (2026-08-30) |
+| ch6 아키텍처 | 5 | 5 | ✅ 완료 (2026-08-30) |
+| ch7 패키징·집적 | 5 | 5 | ✅ 완료 (2026-08-30) |
+| ch8 시스템·SW | 6 | 6 | ✅ 완료 (2026-08-30) |
 
-완료 표시는 `analysis/subtopics.json`의 `researched: true`로도 동일하게 추적한다.
+**42/42 완료.** 완료 표시는 `analysis/subtopics.json`의 `researched: true`로도 동일하게 추적한다(전량 `true`).
 
-### ch1 완료 문서 (6개)
+### 전체 문서 목록 (계층순)
 
-- [si-crystal-channel.md](si-crystal-channel.md) — 실리콘 결정 채널
-- [high-k-metal-gate-dielectric.md](high-k-metal-gate-dielectric.md) — HfO₂/Metal Gate 게이트 유전체
-- [cu-low-k-interconnect.md](cu-low-k-interconnect.md) — Cu/Low-k 배선
-- [monolayer-semiconductor-channel.md](monolayer-semiconductor-channel.md) — 2D 반도체 채널 (교차: ch1+ch2)
-- [ferroelectric-gate-dielectric.md](ferroelectric-gate-dielectric.md) — 강유전 HfO₂ (교차: ch1+ch2)
-- [iii-v-ge-channel.md](iii-v-ge-channel.md) — III-V·Ge 채널
+**ch1 재료·물성** — [si-crystal-channel](si-crystal-channel.md) · [high-k-metal-gate-dielectric](high-k-metal-gate-dielectric.md) · [cu-low-k-interconnect](cu-low-k-interconnect.md) · [monolayer-semiconductor-channel](monolayer-semiconductor-channel.md)(교차 ch1+ch2) · [ferroelectric-gate-dielectric](ferroelectric-gate-dielectric.md)(교차 ch1+ch2) · [iii-v-ge-channel](iii-v-ge-channel.md)
 
-## 다음 세션
+**ch2 소자** — [finfet-gaa-nanosheet](finfet-gaa-nanosheet.md)(교차 ch1+ch2+ch3) · [cfet](cfet.md)(교차 ch1+ch2+ch3) · [dram-cell-vertical-stacking](dram-cell-vertical-stacking.md)(교차 ch1+ch2+ch3) · [vertical-nand](vertical-nand.md)(교차 ch2+ch3) · [sram-cell](sram-cell.md)(교차 ch2+ch3+ch4)
 
-ch2(소자) 5개 소주제 연구. 이 중 `finfet-gaa-nanosheet`·`cfet`·`dram-cell-vertical-stacking`은 교차 소주제이므로
-ch1에서 이미 언급된 재료 제약을 전제로 놓고 "소자 구조" 관점만 새로 쓴다(재료 물성 재설명 금지 — 링크로 대체).
+**ch3 공정·계측** — [euv-lithography](euv-lithography.md) · [atomic-layer-process](atomic-layer-process.md) · [metrology-scatterometry](metrology-scatterometry.md) · [har-etching](har-etching.md) · [lithography-alternatives](lithography-alternatives.md)
+
+**ch4 회로·IP** — [rtl-design-flow](rtl-design-flow.md)(교차 ch4+ch5) · [standard-cell-ip-reuse](standard-cell-ip-reuse.md) · [analog-mixed-signal-design](analog-mixed-signal-design.md)(교차 ch4+ch5) · [hls-high-level-synthesis](hls-high-level-synthesis.md)(교차 ch4+ch5) · [ml-eda-automation](ml-eda-automation.md)(교차 ch4+ch5) · [chiplet-ucie](chiplet-ucie.md)(극단 교차 ch3~ch8, 6개 장)
+
+**ch5 설계방법론** — [uvm-verification](uvm-verification.md)(교차 ch4+ch5) · [mmmc-ssta-signoff](mmmc-ssta-signoff.md)(교차 ch3+ch5) · [open-source-eda](open-source-eda.md)(교차 ch4+ch5) · [hardware-emulation](hardware-emulation.md)
+
+**ch6 아키텍처** — [von-neumann-cache-hierarchy](von-neumann-cache-hierarchy.md) · [memory-bandwidth-energy-wall](memory-bandwidth-energy-wall.md) · [compute-in-memory](compute-in-memory.md)(교차 ch2+ch6) · [wafer-scale-dataflow-architecture](wafer-scale-dataflow-architecture.md)(교차 ch6+ch7+ch8) · [logic-stack-hybrid-bonding](logic-stack-hybrid-bonding.md)(교차 ch3+ch6+ch7)
+
+**ch7 패키징·집적** — [hbm](hbm.md)(교차 ch6+ch7+ch8) · [silicon-interposer](silicon-interposer.md)(교차 ch6+ch7) · [glass-interposer-substrate](glass-interposer-substrate.md) · [co-packaged-optics](co-packaged-optics.md)(교차 ch6+ch7+ch8) · [fan-out-mobile-packaging](fan-out-mobile-packaging.md)
+
+**ch8 시스템·SW** — [cuda-programming-model](cuda-programming-model.md) · [pytorch-jax-framework](pytorch-jax-framework.md) · [mfu-utilization-gap](mfu-utilization-gap.md) · [distributed-training-framework](distributed-training-framework.md) · [llm-serving-optimization](llm-serving-optimization.md) · [cxl-memory-fabric](cxl-memory-fabric.md)(교차 ch6+ch7+ch8)
+
+## 다음 단계 (착수 전 — 그림 작업)
+
+소주제별 심화 연구(주 작업)가 42/42 완료됐다. 사용자 지시에 따라 **그림(층1 SVG 개념도 + 층2 외부 링크) 작업은 이번 세션에서 시작하지 않고 다음 세션으로 넘긴다.**
+
+그림 착수 전 남은 선택지(다음 세션에서 결정):
+1. `chiplet-ucie`를 "축을 관통하는 주제"로 별도 카테고리화할지 — [chiplet-ucie.md](chiplet-ucie.md) 하단에 미결정으로 표시해둠.
+2. 출처(sources) 보강을 그림 작업 전/후 어느 시점에 넣을지 — 구현지시서 6-b 원칙(링크 확인 후에만 게재)에 따라 42개 문서 전체가 아직 출처 0건.
+3. 층1 SVG 대상은 계층 8개 + 교차 소주제 22개로 이미 확정돼 있음(사용자 확정 사항) — 이번 42개 심화 문서가 그 SVG의 "경계 긋기" 내용 소스가 된다.
