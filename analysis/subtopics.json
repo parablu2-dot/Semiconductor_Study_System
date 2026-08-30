@@ -30,11 +30,11 @@
   { "ch": 5, "id": "open-source-eda", "title": "오픈소스 EDA (OpenROAD·Yosys)", "lede": "성숙 노드에서는 상용 도구에 근접, 선단 노드는 PDK 접근 자체가 봉쇄. [통일] ch4·ch5가 각자의 대안 후보 목록에서 동일 기술을 독립적으로 다룸", "appears_in": [4, 5], "researched": true },
   { "ch": 5, "id": "hardware-emulation", "title": "하드웨어 에뮬레이션", "lede": "Palladium·Veloce·ZeBu — first-silicon-success 압력이 강제한 검증 인프라", "appears_in": [5], "researched": true },
 
-  { "ch": 6, "id": "von-neumann-cache-hierarchy", "title": "폰 노이만 코어 + 캐시 계층", "lede": "캐시로 은폐된 순차 실행 모델 — 소프트웨어 생태계 연속성이 승리 원인", "appears_in": [6], "researched": false },
-  { "ch": 6, "id": "memory-bandwidth-energy-wall", "title": "메모리 대역폭·데이터 이동 에너지 이중 상한", "lede": "roofline memory-bound 한계와 on/off-chip pJ/bit 격차 — 아키텍처 계층 내부에서 해결 불가", "appears_in": [6], "researched": false },
-  { "ch": 6, "id": "compute-in-memory", "title": "Compute-in-Memory / PIM", "lede": "아날로그 SRAM CIM, HBM-PIM — 8-bit 이상 정밀도 확보 미해결. ch2(RRAM/PCM 물성의 정밀도 한계)에서도 다뤄짐", "appears_in": [2, 6], "researched": false },
-  { "ch": 6, "id": "wafer-scale-dataflow-architecture", "title": "데이터플로우·웨이퍼-스케일 아키텍처", "lede": "Cerebras WSE·Groq LPU — 정적 스케줄링이 general-purpose 워크로드에 열등. [통일] ch6(아키텍처 대안)·ch7(WSI 패키징 대안)·ch8(Dataflow SW 스택)가 동일 사례를 각 계층 관점에서 독립적으로 다룸 — 00_종합 불일치 목록 #2와 같은 지점", "appears_in": [6, 7, 8], "researched": false },
-  { "ch": 6, "id": "logic-stack-hybrid-bonding", "title": "3D 로직 스택 · Hybrid Bonding", "lede": "V-Cache·Foveros의 수직 적층과 이를 구현하는 Cu-Cu 직접 접합. [통일] '3D 로직 스택'(ch6)과 'hybrid bonding(직접 Cu-Cu/SiO₂ 접합)'(ch7)을 하나로 묶음. ch3(열예산 충돌)에서도 다뤄짐", "appears_in": [3, 6, 7], "researched": false },
+  { "ch": 6, "id": "von-neumann-cache-hierarchy", "title": "폰 노이만 코어 + 캐시 계층", "lede": "캐시로 은폐된 순차 실행 모델 — 소프트웨어 생태계 연속성이 승리 원인", "appears_in": [6], "researched": true },
+  { "ch": 6, "id": "memory-bandwidth-energy-wall", "title": "메모리 대역폭·데이터 이동 에너지 이중 상한", "lede": "roofline memory-bound 한계와 on/off-chip pJ/bit 격차 — 아키텍처 계층 내부에서 해결 불가", "appears_in": [6], "researched": true },
+  { "ch": 6, "id": "compute-in-memory", "title": "Compute-in-Memory / PIM", "lede": "아날로그 SRAM CIM, HBM-PIM — 8-bit 이상 정밀도 확보 미해결. ch2(RRAM/PCM 물성의 정밀도 한계)에서도 다뤄짐", "appears_in": [2, 6], "researched": true },
+  { "ch": 6, "id": "wafer-scale-dataflow-architecture", "title": "데이터플로우·웨이퍼-스케일 아키텍처", "lede": "Cerebras WSE·Groq LPU — 정적 스케줄링이 general-purpose 워크로드에 열등. [통일] ch6(아키텍처 대안)·ch7(WSI 패키징 대안)·ch8(Dataflow SW 스택)가 동일 사례를 각 계층 관점에서 독립적으로 다룸 — 00_종합 불일치 목록 #2와 같은 지점", "appears_in": [6, 7, 8], "researched": true },
+  { "ch": 6, "id": "logic-stack-hybrid-bonding", "title": "3D 로직 스택 · Hybrid Bonding", "lede": "V-Cache·Foveros의 수직 적층과 이를 구현하는 Cu-Cu 직접 접합. [통일] '3D 로직 스택'(ch6)과 'hybrid bonding(직접 Cu-Cu/SiO₂ 접합)'(ch7)을 하나로 묶음. ch3(열예산 충돌)에서도 다뤄짐", "appears_in": [3, 6, 7], "researched": true },
 
   { "ch": 7, "id": "hbm", "title": "HBM (High Bandwidth Memory)", "lede": "메모리 셀·패키징·인터페이스 세 계층이 동시에 걸리는 사례 — base die 커스텀화로 메모리에서 조립 서브시스템으로 이동. ch6(대역폭 벽의 근거 수치)·ch8(스택 수·pitch 확장 요구)에서도 다뤄짐", "appears_in": [6, 7, 8], "researched": false },
   { "ch": 7, "id": "silicon-interposer", "title": "2.5D 실리콘 인터포저 (CoWoS·EMIB)", "lede": "서브-μm 배선으로 HBM-to-로직 대역폭을 실현하는 유일한 매체. ch6(대역폭 상한이 강제한 인프라)에서도 다뤄짐", "appears_in": [6, 7], "researched": false },
