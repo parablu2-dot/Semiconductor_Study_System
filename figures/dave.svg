@@ -1,0 +1,46 @@
+<svg viewBox="0 0 760 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="DAVE 전체 흐름: 자연어에서 App까지">
+  <rect width="760" height="320" fill="#F6EFE3"/>
+  <text x="28" y="34" font-size="22" font-weight="700" fill="#241C16">DAVE — 자연어에서 App까지</text>
+
+  <rect x="28" y="58" width="96" height="42" rx="21" fill="#D6C6AE"/>
+  <text x="76" y="84" font-size="15" fill="#241C16" text-anchor="middle">자연어 요구</text>
+
+  <rect x="164" y="58" width="88" height="42" rx="21" fill="#D6C6AE"/>
+  <text x="208" y="84" font-size="15" fill="#241C16" text-anchor="middle">Spec</text>
+
+  <rect x="292" y="58" width="88" height="42" rx="21" fill="#D6C6AE"/>
+  <text x="336" y="84" font-size="15" fill="#241C16" text-anchor="middle">RTL</text>
+
+  <rect x="420" y="58" width="96" height="42" rx="21" fill="#D6C6AE"/>
+  <text x="468" y="84" font-size="15" fill="#241C16" text-anchor="middle">검증</text>
+
+  <line x1="124" y1="79" x2="160" y2="79" stroke="#B5761D" stroke-width="3" marker-end="url(#arrow-dave)"/>
+  <line x1="252" y1="79" x2="288" y2="79" stroke="#B5761D" stroke-width="3" marker-end="url(#arrow-dave)"/>
+  <line x1="380" y1="79" x2="416" y2="79" stroke="#B5761D" stroke-width="3" marker-end="url(#arrow-dave)"/>
+
+  <path d="M468,100 C468,140 300,140 262,168" fill="none" stroke="#2E5E5B" stroke-width="2.5" marker-end="url(#arrow-dave-b)"/>
+  <path d="M468,100 C468,140 636,140 674,168" fill="none" stroke="#2E5E5B" stroke-width="2.5" marker-end="url(#arrow-dave-b)"/>
+
+  <rect x="120" y="176" width="150" height="52" rx="16" fill="none" stroke="#2E5E5B" stroke-width="2" stroke-dasharray="6 5"/>
+  <text x="195" y="197" font-size="13" fill="#6B5A4A" text-anchor="middle">Track A</text>
+  <text x="195" y="216" font-size="15" fill="#241C16" text-anchor="middle" font-weight="600">FPGA 실물</text>
+
+  <rect x="522" y="176" width="150" height="52" rx="16" fill="none" stroke="#2E5E5B" stroke-width="2" stroke-dasharray="6 5"/>
+  <text x="597" y="197" font-size="13" fill="#6B5A4A" text-anchor="middle">Track B</text>
+  <text x="597" y="216" font-size="15" fill="#241C16" text-anchor="middle" font-weight="600">ASIC PnR·Sign-off</text>
+
+  <path d="M195,228 C195,262 310,262 332,280" fill="none" stroke="#B5761D" stroke-width="2.5" marker-end="url(#arrow-dave)"/>
+  <path d="M597,228 C597,262 470,262 448,280" fill="none" stroke="#B5761D" stroke-width="2.5" marker-end="url(#arrow-dave)"/>
+
+  <rect x="336" y="264" width="88" height="42" rx="21" fill="#D6C6AE"/>
+  <text x="380" y="290" font-size="15" fill="#241C16" text-anchor="middle">App</text>
+
+  <defs>
+    <marker id="arrow-dave" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#B5761D"/>
+    </marker>
+    <marker id="arrow-dave-b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#2E5E5B"/>
+    </marker>
+  </defs>
+</svg>

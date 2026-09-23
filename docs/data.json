@@ -1434,5 +1434,1965 @@
       "n": "14",
       "l": "출처"
     }
-  ]
+  ],
+  "dave": {
+    "id": "dave",
+    "title": "DAVE 실습 — CustomSoC PoC",
+    "lede": "자연어 요구 → RTL → cocotb → Yosys 폐루프를 114개 세션에 걸쳐 완결한 1인기업 PoC 기록.",
+    "summary": [
+      "'CustomSoC(Dave)'는 오픈소스 RISC-V 코어(PicoRV32)를 자연어 요구로 커스터마이징하는 1인기업 PoC다. spec.json 자동 해석부터 RTL 생성, cocotb·형식 등가검사(eqy) 검증, FPGA 실물(Track A)·ASIC PnR·Sign-off(Track B) 두 트랙, 그리고 7개 App까지 — 아래 대주제 순서(환경·도구 → 자연어→Spec → Spec→RTL → 검증 → FPGA 실물 → ASIC PnR → App → 회고)가 실제 진행 순서와 같다."
+    ],
+    "children": [
+      {
+        "id": "d0",
+        "no": "0",
+        "title": "환경·도구",
+        "lede": "WSL2, OSS CAD Suite, Windows 서브프로세스·PATH 문제와 그 해결",
+        "summary": [
+          "이 프로젝트의 기반 환경(WSL2, OSS CAD Suite, gh CLI)을 갖추는 과정과, Windows 네이티브 환경에서 반복적으로 튀어나온 서브프로세스·PATH 함정, 그리고 그 함정을 고치는 자동화 자체의 버그를 정리한다. RTL 로직과 무관하지만, 114개 세션을 쉬지 않고 이어가기 위한 실제 비용이었다."
+        ],
+        "body": "",
+        "sources": [],
+        "children": [
+          {
+            "id": "d0-q1",
+            "title": "환경 구축·PR1 머지",
+            "lede": "",
+            "summary": [
+              "1인기업 PoC로서 범위를 정하고(검증된 오픈소스 코어 커스터마이징 + 소형 모듈 생성 + 자동 검증 폐루프), Stage 0 환경을 구축해 GitHub에 반영, PR #1 머지까지를 첫 매듭으로 삼았다. 이후 모든 세션은 이 시점의 picorv32 벤더링과 저장소 구조를 전제로 진행된다."
+            ],
+            "body": "",
+            "sources": [],
+            "children": [
+              {
+                "id": "s001",
+                "title": "S1 PoC 1인기업 포지셔닝 기획 (재구성)",
+                "lede": "",
+                "summary": [
+                  "LLM 자연어→RTL의 현실 한계(NVIDIA CVDP 기준 SOTA도 낮은 성공률)를 근거로 '검증된 오픈소스 코어 커스터마이징+소형 모듈 생성+자동 검증 폐루프'로 PoC 범위를 정했다. 원문: Dave (커밋 미태깅 세션 — README/프로젝트 기록 기준)"
+                ],
+                "body": "",
+                "sources": [],
+                "children": []
+              },
+              {
+                "id": "s003",
+                "title": "S3 PoC 기획서 확정",
+                "lede": "",
+                "summary": [
+                  "1차 PoC 기획서를 확정해 이후 모든 세션의 기준 문서로 삼았다. 원문: Dave (커밋 미태깅 세션 — README/프로젝트 기록 기준)"
+                ],
+                "body": "",
+                "sources": [],
+                "children": []
+              },
+              {
+                "id": "s004",
+                "title": "S4 0단계 환경 구축 + GitHub 반영·PR 생성",
+                "lede": "",
+                "summary": [
+                  "Stage 0 환경 구축 산출물을 GitHub parablu2-dot/Dave에 반영하고 PR #1을 생성했다. 원문: Dave (커밋 미태깅 세션 — README/프로젝트 기록 기준)"
+                ],
+                "body": "",
+                "sources": [],
+                "children": []
+              },
+              {
+                "id": "s005",
+                "title": "S5 PR #1 검증·머지 완료",
+                "lede": "",
+                "summary": [
+                  "gh CLI를 설치·인증하고 PR #1을 검증해 머지, 로컬 클론(C:\\Users\\parab\\Dave)을 확정했다. 원문: Dave (커밋 미태깅 세션 — README/프로젝트 기록 기준)"
+                ],
+                "body": "",
+                "sources": [],
+                "children": []
+              }
+            ]
+          },
+          {
+            "id": "d0-q2",
+            "title": "Windows·서브프로세스 환경 버그",
+            "lede": "",
+            "summary": [
+              "Windows에서 subprocess.run(shell=True, timeout=...)을 쓰면 타임아웃 시 표준 라이브러리가 최상위 cmd.exe만 죽이고 그 자식(claude.cmd→claude.exe)은 orphan으로 남는다. 같은 종류의 함정(PATH에 도구 번들을 추가하면 그 안의 실행파일이 시스템 것을 shadow)이 세션을 달리하며 반복 재발했다 — 한 번 고친 환경 버그도 다른 맥락에서 다시 걸릴 수 있다는 교훈."
+            ],
+            "body": "",
+            "sources": [],
+            "children": [
+              {
+                "id": "s046",
+                "title": "S46 Windows subprocess orphan claude.exe 버그 근본 수정",
+                "lede": "",
+                "summary": [
+                  "shell=True + timeout 조합에서 kill()이 최상위 cmd.exe만 죽이고 자식 claude.cmd가 orphan으로 남는 구조적 버그를 근본 수정했다. 반복 패턴: Windows subprocess kill()이 자식 프로세스까지 안 죽이는 구조적 함정 원문: Dave @a5afb09"
+                ],
+                "body": "",
+                "sources": [],
+                "children": [],
+                "pattern": "Windows subprocess kill()이 자식 프로세스까지 안 죽이는 구조적 함정"
+              },
+              {
+                "id": "s086",
+                "title": "S86 i2c_slave_burst B조(timeout 2배) 재현 10회 + PATH 환경버그 재발견/수정",
+                "lede": "",
+                "summary": [
+                  "S38에서 이미 한 번 고쳐졌던 DLL_NOT_FOUND 버그(oss-cad-suite/lib PATH 누락)가 재발한 것을 발견해 다시 고쳤다. 반복 패턴: 이미 고친 환경 버그가 다른 세션 맥락에서 재발 — 수정을 영구화할 장치 필요 원문: Dave (커밋 미태깅 세션 — README/프로젝트 기록 기준)"
+                ],
+                "body": "",
+                "sources": [],
+                "children": [],
+                "also_in": [
+                  "d3"
+                ],
+                "pattern": "이미 고친 환경 버그가 다른 세션 맥락에서 재발 — 수정을 영구화할 장치 필요"
+              }
+            ]
+          },
+          {
+            "id": "d0-q3",
+            "title": "자동화 훅 버그",
+            "lede": "",
+            "summary": [
+              "세션 종료 시 기술 용어집을 자동 갱신하는 SessionEnd 훅을 만들었으나, 프로젝트 루트 판정 조건이 좁아 여러 세션 동안 조용히 실행되지 않았다. 자동화 훅은 실패해도 겉으로 드러나지 않으므로, 도입 직후 end-to-end로 실제 실행 여부를 확인하는 습관이 필요하다는 것을 두 번에 걸쳐 배웠다."
+            ],
+            "body": "",
+            "sources": [],
+            "children": [
+              {
+                "id": "s047",
+                "title": "S47 SessionEnd 훅",
+                "lede": "세션 종료 시 용어집 자동 갱신",
+                "summary": [
+                  "세션에서 새로 등장한 기술 용어를 자동으로 용어집에 덧붙이는 SessionEnd 훅을 구성했다. 원문: Dave @0185e84"
+                ],
+                "body": "",
+                "sources": [],
+                "children": []
+              },
+              {
+                "id": "s060",
+                "title": "S60 용어집 SessionEnd 훅 미실행 버그 근본 수정",
+                "lede": "",
+                "summary": [
+                  "S47의 훅이 S48부터 12개 세션 내내 한 번도 실행되지 않았음을 발견 — 프로젝트 루트가 저장소 자체일 때만 로드되는 설정 스코프 문제였다. 반복 패턴: 자동화 훅이 조용히 실행되지 않아도 겉으로는 드러나지 않음 원문: Dave @925ce14"
+                ],
+                "body": "",
+                "sources": [],
+                "children": [],
+                "pattern": "자동화 훅이 조용히 실행되지 않아도 겉으로는 드러나지 않음"
+              },
+              {
+                "id": "s061",
+                "title": "S61 용어집 SessionEnd 훅 가드 버그 수정",
+                "lede": "S60이 남긴 사각지대",
+                "summary": [
+                  "S60의 가드가 '저장소의 부모 디렉터리에서 연 세션'을 여전히 놓치던 사각지대를 transcript 경로 매칭 폴백으로 메웠다. 반복 패턴: 자동화 훅이 조용히 실행되지 않아도 겉으로는 드러나지 않음 원문: Dave @477258c"
+                ],
+                "body": "",
+                "sources": [],
+                "children": [],
+                "pattern": "자동화 훅이 조용히 실행되지 않아도 겉으로는 드러나지 않음"
+              }
+            ]
+          },
+          {
+            "id": "d0-q4",
+            "title": "프로젝트 운영·정리",
+            "lede": "",
+            "summary": [
+              "워크트리 잠금 정리, 백로그·로드맵 문서화, README 누락 세션 보강처럼 RTL을 직접 건드리지 않는 프로젝트 운영 작업들. 기술 산출물은 아니지만 100개가 넘는 세션을 이어가기 위한 유지보수 비용이었다."
+            ],
+            "body": "",
+            "sources": [],
+            "children": [
+              {
+                "id": "s053",
+                "title": "S53 방치된 orphan 워크트리 정리",
+                "lede": "",
+                "summary": [
+                  "21시간 이상 유휴 상태이던 잠금 프로세스를 종료하고 워크트리·브랜치 잔재를 정리했다. 원문: Dave (커밋 미태깅 세션 — README/프로젝트 기록 기준)"
+                ],
+                "body": "",
+                "sources": [],
+                "children": []
+              },
+              {
+                "id": "s089",
+                "title": "S89 Dave 백로그 + PPA + 'Dave2' 방향성 정리 문서화",
+                "lede": "",
+                "summary": [
+                  "canonical 교체 여부를 재논의(교체 안 함 유지)한 뒤, 사용자 요청으로 다음 프로젝트를 겨냥한 종합 백로그/로드맵 문서를 작성했다. 원문: Dave (커밋 미태깅 세션 — README/프로젝트 기록 기준)"
+                ],
+                "body": "",
+                "sources": [],
+                "children": [],
+                "also_in": [
+                  "d9"
+                ]
+              },
+              {
+                "id": "s090",
+                "title": "S90 README 공백 보강",
+                "lede": "누락 세션 8개 절 삽입",
+                "summary": [
+                  "S50/S52/S53/S61/S85~S88 등 README에 누락돼 있던 8개 세션 절을 시간순으로 채워 넣었다(RTL 무변경). 원문: Dave (커밋 미태깅 세션 — README/프로젝트 기록 기준)"
+                ],
+                "body": "",
+                "sources": [],
+                "children": [],
+                "also_in": [
+                  "d9"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "d1",
+        "no": "1",
+        "title": "자연어 → Spec",
+        "lede": "spec.json 해석, 페르소나 구조, 자연어 요구사항 템플릿",
+        "summary": [
+          "\"자연어 요구 문장을 구조화된 spec.json으로 바꾸는\" 첫 단계. 페르소나·운영 틀을 먼저 잡고, spec-interpreter를 로컬 Claude CLI 호출로 자동화한 뒤, 새 모듈마다 사람이 먼저 설계를 굳히고 그 설계를 거꾸로 자연어 템플릿으로 표현하는 절차를 반복했다."
+        ],
+        "body": "",
+        "sources": [],
+        "children": [
+          {
+            "id": "d1-q1",
+            "title": "페르소나·거버넌스 설계",
+            "lede": "",
+            "summary": [
+              "프로젝트 운영에 쓸 페르소나 구조와 주간 리뷰 템플릿을 가장 먼저 설계했다 — 이후 모든 자동화 세션이 이 틀 위에서 진행된다."
+            ],
+            "body": "",
+            "sources": [],
+            "children": [
+              {
+                "id": "s002",
+                "title": "S2 페르소나 설계 + Weekly Review 템플릿 (재구성)",
+                "lede": "",
+                "summary": [
+                  "프로젝트 운영에 쓸 페르소나 구조와 주간 리뷰 템플릿을 설계했다. 원문: Dave (커밋 미태깅 세션 — README/프로젝트 기록 기준)"
+                ],
+                "body": "",
+                "sources": [],
+                "children": [],
+                "also_in": [
+                  "d0"
+                ]
+              }
+            ]
+          },
+          {
+            "id": "d1-q2",
+            "title": "spec-interpreter 자동화",
+            "lede": "",
+            "summary": [
+              "'자연어 요구 문장 → spec.json' 해석을 사람 손이 아니라 로컬 claude CLI 서브프로세스 호출로 자동화했다. API 키 없이 이미 인증된 CLI를 그대로 재사용하는 것이 1인기업 PoC에 맞는 선택이었다."
+            ],
+            "body": "",
+            "sources": [],
+            "children": [
+              {
+                "id": "s006",
+                "title": "S6 spec-interpreter 자동화",
+                "lede": "",
+                "summary": [
+                  "'요구 문장 → spec.json' 해석을 로컬 claude CLI 서브프로세스 호출로 자동화했다(API 키 불필요). 원문: Dave @e51a631"
+                ],
+                "body": "",
+                "sources": [],
+                "children": []
+              }
+            ]
+          },
+          {
+            "id": "d1-q3",
+            "title": "자연어 요구사항 템플릿",
+            "lede": "",
+            "summary": [
+              "새 모듈을 만들 때마다 먼저 사람이 레지스터 맵을 손으로 설계해 'spec.json→RTL' 자동화만 검증하고, 그 설계를 거꾸로 자연어 문장으로 표현하는 템플릿은 한 라운드 뒤에 따로 만드는 2단계 절차가 UART/SPI부터 FIFO·인터럽트·SPI 슬레이브·cdc_sync까지 반복됐다. 절차 신뢰도가 쌓인 뒤에는(PWM부터) 두 단계를 한 라운드에 합쳤다."
+            ],
+            "body": "",
+            "sources": [],
+            "children": [
+              {
+                "id": "s011",
+                "title": "S11 UART/SPI 자연어 요구사항 템플릿",
+                "lede": "",
+                "summary": [
+                  "S10에서 손으로 쓴 spec.json을 거꾸로 자연어 문장으로 표현하는 템플릿을 만들어 spec-interpreter 단계까지 포함한 전체 체인을 검증했다. 원문: Dave (커밋 미태깅 세션 — README/프로젝트 기록 기준)"
+                ],
+                "body": "",
+                "sources": [],
+                "children": [],
+                "also_in": [
+                  "d2"
+                ]
+              },
+              {
+                "id": "s014",
+                "title": "S14 FIFO/IRQ 자연어 요구사항 템플릿",
+                "lede": "",
+                "summary": [
+                  "S12/S13의 spec.json을 자연어 템플릿으로 거꾸로 표현해 spec-interpreter v4로 확장했다. 원문: Dave (커밋 미태깅 세션 — README/프로젝트 기록 기준)"
+                ],
+                "body": "",
+                "sources": [],
+                "children": [],
+                "also_in": [
+                  "d2"
+                ]
+              },
+              {
+                "id": "s027",
+                "title": "S27 SPI 슬레이브 자연어 템플릿",
+                "lede": "",
+                "summary": [
+                  "S26이 다음 라운드로 미룬 자연어 템플릿+spec-interpreter 확장을 1차 시도로 성공시켰다. 원문: Dave @c21c9da"
+                ],
+                "body": "",
+                "sources": [],
+                "children": [],
+                "also_in": [
+                  "d2"
+                ]
+              },
+              {
+                "id": "s029",
+                "title": "S29 cdc_sync 자연어 템플릿",
+                "lede": "",
+                "summary": [
+                  "S28이 미뤄둔 자연어 템플릿+spec-interpreter 확장을 마무리했다. 원문: Dave @cbbba18"
+                ],
+                "body": "",
+                "sources": [],
+                "children": [],
+                "also_in": [
+                  "d2"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "d2",
+        "no": "2",
+        "title": "Spec → RTL",
+        "lede": "15개 모듈 생성과 PicoRV32 soc_top 통합",
+        "summary": [
+          "이 프로젝트의 본체 — spec.json에서 실제 RTL을 생성해 표준 주변장치 15개를 만들고, PicoRV32 코어와 함께 하나의 버스(soc_top)로 통합한 뒤, ss 코너 타이밍 문제에 대응해 코어 파라미터·리타이밍까지 손댄 과정. 37개 세션으로 이 프로젝트에서 가장 많은 비중을 차지한다."
+        ],
+        "body": "",
+        "sources": [],
+        "children": [
+          {
+            "id": "d2-q1",
+            "title": "RTL 생성 자동화·폐루프",
+            "lede": "",
+            "summary": [
+              "'spec.json → RTL' 생성도 같은 방식(로컬 CLI 호출)으로 자동화한 뒤, interpret_spec.py → generate_rtl.py → validate_generated_rtl.py를 한 커맨드로 잇는 run_full_loop.py로 '자연어 요구 문장 하나 → 검증까지 끝난 RTL'이 사람 개입 없이 한 번에 도는 폐루프를 완성했다. 이 프로젝트가 처음부터 목표로 한 핵심 고리다."
+            ],
+            "body": "",
+            "sources": [],
+            "children": [
+              {
+                "id": "s007",
+                "title": "S7 RTL 생성기 자동화",
+                "lede": "",
+                "summary": [
+                  "'spec.json → RTL' 생성도 같은 방식으로 자동화해, 자연어→RTL 전체가 LLM 호출 두 번으로 끝나게 됐다. 원문: Dave @bfec66f"
+                ],
+                "body": "",
+                "sources": [],
+                "children": [],
+                "also_in": [
+                  "d1"
+                ]
+              },
+              {
+                "id": "s008",
+                "title": "S8 폐루프 오케스트레이션",
+                "lede": "",
+                "summary": [
+                  "interpret_spec → generate_rtl → validate를 한 커맨드로 잇는 run_full_loop.py로 '자연어 요구 → 검증까지' 완전 자동화를 완결했다. 원문: Dave @29d41bb"
+                ],
+                "body": "",
+                "sources": [],
+                "children": [],
+                "also_in": [
+                  "d1"
+                ]
+              }
+            ]
+          },
+          {
+            "id": "d2-q2",
+            "title": "표준 주변장치 모듈 생성",
+            "lede": "",
+            "summary": [
+              "타이머·UART·FIFO·인터럽트 컨트롤러·PWM·WDT·I2C 마스터/슬레이브(+멀티바이트)·다중 인스턴스·SPI 슬레이브·CDC 브리지까지 15개 모듈을 순서대로 생성했다. 매번 이전에 없던 구조 패턴(읽기 부작용 re, 양방향 포트, 리액티브 FSM, 1-대-N/N-대-1 배선, 2클럭 CDC)을 하나씩 새로 다루며 스펙 스키마와 생성 규칙(v2→v16+)을 계속 확장했고, 뒤로 갈수록 제로샷 성공률이 올라갔다."
+            ],
+            "body": "",
+            "sources": [],
+            "children": [
+              {
+                "id": "s009",
+                "title": "S9 2번째 모듈: 타이머/카운터",
+                "lede": "",
+                "summary": [
+                  "스스로 값이 바뀌는 다운카운터 패턴을 다루기 위해 스펙/생성 규칙을 v2로 확장했다. 원문: Dave (커밋 미태깅 세션 — README/프로젝트 기록 기준)"
+                ],
+                "body": "",
+                "sources": [],
+                "children": []
+              },
+              {
+                "id": "s010",
+                "title": "S10 3번째 모듈: UART 송신부",
+                "lede": "",
+                "summary": [
+                  "시리얼 FSM이라는 새 인터페이스 모양에 맞춰, 이번엔 사람이 먼저 레지스터 맵을 확정한 뒤 RTL 생성을 자동화했다(rtl-generator v3). 원문: Dave (커밋 미태깅 세션 — README/프로젝트 기록 기준)"
+                ],
+                "body": "",
+                "sources": [],
+                "children": []
+              },
+              {
+                "id": "s012",
+                "title": "S12 5번째 모듈: 동기식 FIFO",
+                "lede": "",
+                "summary": [
+                  "단일 레지스터가 아닌 메모리 배열 저장소와 읽기 부작용(re) 신호를 처음 다뤘다 — 제로샷 성공. 원문: Dave (커밋 미태깅 세션 — README/프로젝트 기록 기준)"
+                ],
+                "body": "",
+                "sources": [],
+                "children": []
+              },
+              {
+                "id": "s013",
+                "title": "S13 6번째 모듈: 인터럽트 컨트롤러",
+                "lede": "",
+                "summary": [
+                  "여러 인터럽트 소스를 모으는 N-대-1 집계 구조 — 제로샷 성공. 원문: Dave (커밋 미태깅 세션 — README/프로젝트 기록 기준)"
+                ],
+                "body": "",
+                "sources": [],
+                "children": []
+              },
+              {
+                "id": "s015",
+                "title": "S15 7번째 모듈: 다중 채널 PWM 생성기",
+                "lede": "",
+                "summary": [
+                  "카운터 하나를 여러 채널이 구독하는 1-대-N 구조 — RTL 생성과 자연어 템플릿을 같은 라운드에 마쳤다. 원문: Dave @ac9e5c7"
+                ],
+                "body": "",
+                "sources": [],
+                "children": []
+              },
+              {
+                "id": "s016",
+                "title": "S16 8번째 모듈: 워치독 타이머",
+                "lede": "",
+                "summary": [
+                  "타이머의 다운카운터 골격에 물리 리셋 펄스와 '쓰기 자체가 트리거'인 KICK 레지스터를 더해 표준 주변장치 10종을 채웠다. 원문: Dave @e9fef0a"
+                ],
+                "body": "",
+                "sources": [],
+                "children": []
+              },
+              {
+                "id": "s018",
+                "title": "S18 9번째 모듈: I2C 마스터",
+                "lede": "",
+                "summary": [
+                  "SDA 3포트(o/oe/i) 양방향 신호와 7단계 FSM을 다룬 최초의 양방향 포트 모듈 — 싱글 마스터·7비트 주소·1바이트로 범위를 좁혔다. 원문: Dave @00bd420"
+                ],
+                "body": "",
+                "sources": [],
+                "children": []
+              },
+              {
+                "id": "s019",
+                "title": "S19 10번째 모듈: 다중 인스턴스(듀얼 GPIO)",
+                "lede": "",
+                "summary": [
+                  "새 프로토콜 발명 대신 기존 gpio.v를 그대로 2번 인스턴스화해 위험도를 낮췄다 — 표준 주변장치 10종 완성. 원문: Dave @16fc0e8"
+                ],
+                "body": "",
+                "sources": [],
+                "children": []
+              },
+              {
+                "id": "s020",
+                "title": "S20 11번째 모듈: I2C 슬레이브",
+                "lede": "",
+                "summary": [
+                  "자체 클럭 없이 외부 SCL/SDA에 반응만 하는 최초의 순수 리액티브 FSM. 원문: Dave @2f8991a"
+                ],
+                "body": "",
+                "sources": [],
+                "children": []
+              },
+              {
+                "id": "s021",
+                "title": "S21 12번째 모듈: I2C 마스터 멀티바이트 확장",
+                "lede": "",
+                "summary": [
+                  "검증된 i2c_master는 무수정, 새 확장 필드(i2c_master_burst)로 멀티바이트 전송을 추가했다(LEN=1이면 완전한 상위 호환). 원문: Dave @c0beaf2"
+                ],
+                "body": "",
+                "sources": [],
+                "children": []
+              },
+              {
+                "id": "s024",
+                "title": "S24 13번째 모듈: I2C 슬레이브 멀티바이트 확장",
+                "lede": "",
+                "summary": [
+                  "i2c_slave는 무수정, 클럭 스트레칭이 없어 ACK/NACK·STOP만으로 멀티바이트를 처리하는 i2c_slave_burst를 추가했다. 원문: Dave @af4cd05"
+                ],
+                "body": "",
+                "sources": [],
+                "children": []
+              },
+              {
+                "id": "s026",
+                "title": "S26 14번째 모듈: SPI 슬레이브",
+                "lede": "",
+                "summary": [
+                  "풀-듀플렉스(SPI 마스터)+자체클럭없음(I2C 슬레이브)의 교집합 — 가장 단순한 리액티브 FSM으로 완성. 원문: Dave @bbc873e"
+                ],
+                "body": "",
+                "sources": [],
+                "children": []
+              },
+              {
+                "id": "s028",
+                "title": "S28 15번째 모듈: 클럭 도메인 교차 브리지 cdc_sync",
+                "lede": "",
+                "summary": [
+                  "두 번째 자유구동 클럭(aux_clk)을 다루는 최초의 모듈 — 2단 동기화+엣지검출과 토글 핸드셰이크 두 CDC 기법을 각각 구현했다. 원문: Dave @cce3930"
+                ],
+                "body": "",
+                "sources": [],
+                "children": []
+              }
+            ]
+          },
+          {
+            "id": "d2-q3",
+            "title": "코어 파라미터 구성",
+            "lede": "",
+            "summary": [
+              "새 RTL을 생성하는 대신, Stage 0에서 이미 검증·고정한 picorv32.v(무수정)의 파라미터 조합을 자연어로부터 제안하고 얇은 래퍼로 인스턴스화하는, 지금까지와 다른 성격의 트랙을 열었다."
+            ],
+            "body": "",
+            "sources": [],
+            "children": [
+              {
+                "id": "s017",
+                "title": "S17 PicoRV32 파라미터 구성 제안 자동화",
+                "lede": "",
+                "summary": [
+                  "새 RTL을 생성하는 대신, 이미 검증·고정한 picorv32.v의 파라미터 조합을 자연어로부터 제안하는 트랙을 열었다. 원문: Dave @f0349f7"
+                ],
+                "body": "",
+                "sources": [],
+                "children": [],
+                "also_in": [
+                  "d1"
+                ]
+              }
+            ]
+          },
+          {
+            "id": "d2-q4",
+            "title": "soc_top 통합(MMIO 조립)",
+            "lede": "",
+            "summary": [
+              "검증된 15개 모듈을 하나의 버스(PicoRV32 MMIO)로 묶는 축 — RTL을 새로 생성하지 않고 기존 모듈을 그대로 인스턴스화 + 디코더만 확장하는 방식으로, gpio/timer/uart_tx 3개에서 시작해 14개 표준 주변장치 + cdc_sync + uart_rx(16개)까지, 그리고 인터럽트 실배선까지 마쳤다. 모듈마다 새 버스 패턴(읽기 부작용, 외부 입력 핀, 5비트 서브주소, 양방향 SDA)이 하나씩 추가됐다."
+            ],
+            "body": "",
+            "sources": [],
+            "children": [
+              {
+                "id": "s030",
+                "title": "S30 soc_top 최초 조립: PicoRV32 + gpio/timer/uart_tx",
+                "lede": "",
+                "summary": [
+                  "15개 모듈이 전부 폐루프 완결된 상태에서 '여러 모듈을 하나의 버스로 묶기'라는 새 구조 축(3단계 SoC 조립)에 처음 착수했다. 원문: Dave @2f4b585"
+                ],
+                "body": "",
+                "sources": [],
+                "children": []
+              },
+              {
+                "id": "s031",
+                "title": "S31 soc_top에 5번째 모듈 추가: spi_master",
+                "lede": "",
+                "summary": [
+                  "spi_master를 오프셋 0x30에 추가 — 기존 버스 관례라 디코더 확장이 최소한으로 끝났다. 원문: Dave @eeecb91"
+                ],
+                "body": "",
+                "sources": [],
+                "children": []
+              },
+              {
+                "id": "s032",
+                "title": "S32 soc_top에 6번째 모듈 추가: pwm_gen",
+                "lede": "",
+                "summary": [
+                  "STATUS 폴링이 없는 순수 조합 출력 모듈이라는 첫 사례 — 검증 방식을 새로 설계했다. 원문: Dave @2f89a9e"
+                ],
+                "body": "",
+                "sources": [],
+                "children": []
+              },
+              {
+                "id": "s033",
+                "title": "S33 soc_top에 7번째 모듈 추가: wdt",
+                "lede": "",
+                "summary": [
+                  "write-only KICK 레지스터와 1클럭 폭 리셋 펄스라는 두 새 패턴을 다뤘다. 원문: Dave @425b996"
+                ],
+                "body": "",
+                "sources": [],
+                "children": []
+              },
+              {
+                "id": "s034",
+                "title": "S34 soc_top에 8번째 모듈 추가: sync_fifo",
+                "lede": "",
+                "summary": [
+                  "읽기 자체가 부작용(pop)을 일으키는 re 신호를 버스에 처음 배선했다. 원문: Dave @4bcd44c"
+                ],
+                "body": "",
+                "sources": [],
+                "children": []
+              },
+              {
+                "id": "s035",
+                "title": "S35 soc_top에 9번째 모듈 추가: spi_slave",
+                "lede": "",
+                "summary": [
+                  "soc_top 최상위에 진짜 외부 입력 핀이 필요한 최초의 모듈 — 타이밍 동기화가 핵심 난제였다. 원문: Dave @ce14632"
+                ],
+                "body": "",
+                "sources": [],
+                "children": []
+              },
+              {
+                "id": "s036",
+                "title": "S36 soc_top에 10번째 모듈 추가: irq_ctrl",
+                "lede": "",
+                "summary": [
+                  "irq_in/irq_out을 노출하되 코어 irq 결선 자체는 이번 라운드 범위 밖으로 남겼다. 원문: Dave @3c140eb"
+                ],
+                "body": "",
+                "sources": [],
+                "children": []
+              },
+              {
+                "id": "s037",
+                "title": "S37 soc_top에 11번째 모듈 추가: i2c_master",
+                "lede": "",
+                "summary": [
+                  "레지스터 7개라 5비트 서브주소가 필요해, 32바이트 슬롯이라는 새 디코더 관례를 처음 도입했다. 원문: Dave @2bb3104"
+                ],
+                "body": "",
+                "sources": [],
+                "children": []
+              },
+              {
+                "id": "s038",
+                "title": "S38 soc_top에 12번째 모듈 추가: i2c_slave",
+                "lede": "",
+                "summary": [
+                  "i2c_master와 정반대 성격(리액티브 FSM)이라 물리 핀 방향도 반대로 배선했다. 원문: Dave @82d4701"
+                ],
+                "body": "",
+                "sources": [],
+                "children": []
+              },
+              {
+                "id": "s039",
+                "title": "S39 soc_top에 13번째 모듈 추가: i2c_master_burst",
+                "lede": "",
+                "summary": [
+                  "i2c_master의 상위 호환 확장이라 디코더·물리 핀 전략을 그대로 재사용했다. 원문: Dave @a979d47"
+                ],
+                "body": "",
+                "sources": [],
+                "children": []
+              },
+              {
+                "id": "s040",
+                "title": "S40 soc_top에 14번째 모듈 추가: i2c_slave_burst",
+                "lede": "14개 통합 완료",
+                "summary": [
+                  "표준 주변장치 14종 전부의 MMIO 통합을 완료했다. 원문: Dave @cfb6ddc"
+                ],
+                "body": "",
+                "sources": [],
+                "children": []
+              },
+              {
+                "id": "s041",
+                "title": "S41 soc_top에 16번째 모듈 추가: cdc_sync",
+                "lede": "통합 축 완결",
+                "summary": [
+                  "최초의 2-클럭 모듈 통합으로 S30부터 이어진 SoC 조립 축을 완결했다. 원문: Dave @936541d"
+                ],
+                "body": "",
+                "sources": [],
+                "children": []
+              },
+              {
+                "id": "s048",
+                "title": "S48 soc_top 인터럽트 실배선",
+                "lede": "",
+                "summary": [
+                  "S36이 범위 밖으로 남긴 'irq_ctrl_irq_out을 코어 irq에 배선'을 채워, 인터럽트가 실제로 CPU를 깨우는 것을 처음 증명했다. 원문: Dave @abdd1fa"
+                ],
+                "body": "",
+                "sources": [],
+                "children": []
+              },
+              {
+                "id": "s101",
+                "title": "S101 uart_rx 신규 생성",
+                "lede": "serial_rx 규칙(rtl-generator v16) 신설",
+                "summary": [
+                  "serial_tx(능동)와 i2c_slave(리액티브)를 섞은 하이브리드 패턴으로 새 프로토콜 규칙을 하나 더 추가했다. 원문: Dave @b3de0d8"
+                ],
+                "body": "",
+                "sources": [],
+                "children": [],
+                "also_in": [
+                  "d6"
+                ]
+              },
+              {
+                "id": "s102",
+                "title": "S102 soc_top에 uart_rx MMIO 통합 + iCESugar 물리 핀(RX) 배선",
+                "lede": "",
+                "summary": [
+                  "16번째 모듈로 통합, 기존 15개 모듈 배선은 무수정으로 유지했다. 원문: Dave @1ebff86"
+                ],
+                "body": "",
+                "sources": [],
+                "children": [],
+                "also_in": [
+                  "d4"
+                ]
+              }
+            ]
+          },
+          {
+            "id": "d2-q5",
+            "title": "코어 파라미터·PPA 개선",
+            "lede": "",
+            "summary": [
+              "ss 코너 타이밍 문제(d5)에 대응해 미사용 카운터 제거, ALU/비교 2사이클 파이프라이닝, PC 경로 리타이밍(코어 본체 최초 수정)까지 여러 라운드의 RTL 개선을 시도했다. 개선의 실제 효과는 PnR 다이 면적 산정 방식에 크게 좌우된다는 것이 나중(d5 DIE_AREA 스윕)에 드러난다."
+            ],
+            "body": "",
+            "sources": [],
+            "children": [
+              {
+                "id": "s062",
+                "title": "S62 ENABLE_COUNTERS64=0",
+                "lede": "미사용 64비트 카운터 제거",
+                "summary": [
+                  "펌웨어가 안 쓰는 rdcycleh/rdinstrh 경로(ss 코너 위반의 12%)를 파라미터 하나로 제거했다. 원문: Dave @c8827c5"
+                ],
+                "body": "",
+                "sources": [],
+                "children": [],
+                "also_in": [
+                  "d5"
+                ]
+              },
+              {
+                "id": "s066",
+                "title": "S66 mem_rdata 리드먹스 OR-트리 재구성",
+                "lede": "등가검사 크래시로 미검증 보류",
+                "summary": [
+                  "ss 코너 최악경로 24단 체인의 진짜 정체가 PicoRV32 구조가 아니라 soc_top의 14단 선형 우선순위 리드먹스였음을 게이트 단위로 확인, OR-트리로 재구성했다. 반복 패턴: 이전 세션 진단(S59)이 틀렸음을 게이트 단위 직접 확인으로 정정 원문: Dave @0e0fe45"
+                ],
+                "body": "",
+                "sources": [],
+                "children": [],
+                "also_in": [
+                  "d5"
+                ],
+                "pattern": "이전 세션 진단(S59)이 틀렸음을 게이트 단위 직접 확인으로 정정"
+              },
+              {
+                "id": "s069",
+                "title": "S69 TWO_CYCLE_ALU/COMPARE",
+                "lede": "PC/ALU 임계경로 실개선 시도",
+                "summary": [
+                  "코어 본체 재설계 대신 공식 지원 파이프라이닝 스위치를 켜 긴 조합 체인을 레지스터 경계로 끊었다. 원문: Dave @a487721"
+                ],
+                "body": "",
+                "sources": [],
+                "children": [],
+                "also_in": [
+                  "d5"
+                ]
+              },
+              {
+                "id": "s072",
+                "title": "S72 ENABLE_COUNTERS=0 + TWO_CYCLE 되돌림",
+                "lede": "S71 근거 반영",
+                "summary": [
+                  "S71 결과를 반영해 파라미터 3개를 조정, 셀 수를 추가로 줄였다. 원문: Dave @bf6f3b8"
+                ],
+                "body": "",
+                "sources": [],
+                "children": [],
+                "also_in": [
+                  "d5"
+                ]
+              },
+              {
+                "id": "s075",
+                "title": "S75 코어 config를 S68 기준선으로 되돌림",
+                "lede": "",
+                "summary": [
+                  "재설계 착수 전, 실측으로 확인된 최선 상태(S68)를 명확한 출발점으로 재확정했다. 원문: Dave @b3c789d"
+                ],
+                "body": "",
+                "sources": [],
+                "children": []
+              },
+              {
+                "id": "s077",
+                "title": "S77 reg_pc_plus4 리타이밍 실반영",
+                "lede": "코어 본체 최초 수정",
+                "summary": [
+                  "third_party/picorv32/picorv32.v를 이 프로젝트에서 처음으로 직접 수정해 PC 경로를 리타이밍했다. 원문: Dave @54d4543"
+                ],
+                "body": "",
+                "sources": [],
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "d3",
+        "no": "3",
+        "title": "검증",
+        "lede": "cocotb 폐루프, 형식 등가검사(eqy), 재현성 실험으로 도구 버그를 잡아낸 과정",
+        "summary": [
+          "\"검증됐다\"는 말의 층위를 넓혀 온 축 — 기능 검증(cocotb)만으로는 \"합성 결과가 원본과 논리적으로 동일하다\"를 보장하지 못한다는 빈틈을 형식 등가검사(eqy)로 채웠고, 가장 복잡한 리액티브 FSM의 재현 불안정성을 수십 회 실험으로 정량화했다. 검증 도구 자체의 버그(Windows 스택 오버플로, eqy 파티션 크래시)를 잡아낸 세션도 여럿이다."
+        ],
+        "body": "",
+        "sources": [],
+        "children": [
+          {
+            "id": "d3-q1",
+            "title": "코어 기능검증",
+            "lede": "",
+            "summary": [
+              "새 RTL 생성이 아니라 이미 벤더링된 picorv32.v(무수정)의 인터럽트 경로를 손으로 짠 RISC-V 어셈블리 펌웨어로 기능 검증했다."
+            ],
+            "body": "",
+            "sources": [],
+            "children": [
+              {
+                "id": "s022",
+                "title": "S22 PicoRV32 인터럽트 경로 기능 시뮬레이션",
+                "lede": "",
+                "summary": [
+                  "ENABLE_IRQ 경로(getq/setq/retirq 등)를 손으로 짠 RISC-V 어셈블리로 기능 검증했다 — RTL 생성이 아닌 벤더링된 코어 자체 검증. 원문: Dave @8a62f64"
+                ],
+                "body": "",
+                "sources": [],
+                "children": [],
+                "also_in": [
+                  "d2"
+                ]
+              }
+            ]
+          },
+          {
+            "id": "d3-q2",
+            "title": "검증 스크립트·환경 방어",
+            "lede": "",
+            "summary": [
+              "검증 스크립트 자체가 Windows 환경에서 도구 종료 방식을 오판정하지 않도록 방어 로직을 추가했다 — RTL 버그가 아니라 검증 파이프라인 자체의 견고성 문제."
+            ],
+            "body": "",
+            "sources": [],
+            "children": [
+              {
+                "id": "s023",
+                "title": "S23 검증 스크립트에 Windows vvp 종료 크래시 방어 추가",
+                "lede": "",
+                "summary": [
+                  "validate_generated_rtl.py가 Windows에서 vvp 종료 시 크래시를 오판정하지 않도록 방어 로직을 추가했다. 반복 패턴: Windows 서브프로세스 종료 처리를 로직 버그로 오인하기 쉬움 원문: Dave @e1b62e4"
+                ],
+                "body": "",
+                "sources": [],
+                "children": [],
+                "also_in": [
+                  "d0"
+                ],
+                "pattern": "Windows 서브프로세스 종료 처리를 로직 버그로 오인하기 쉬움"
+              }
+            ]
+          },
+          {
+            "id": "d3-q3",
+            "title": "인스턴스 일반화 검증",
+            "lede": "",
+            "summary": [
+              "다중 인스턴스 패턴(2개, d2)이 3개 이상에서도 그대로 일반화되는지 1회성으로 확인한 순수 검증 세션."
+            ],
+            "body": "",
+            "sources": [],
+            "children": [
+              {
+                "id": "s025",
+                "title": "S25 instance_array 3-인스턴스 일반화 검증",
+                "lede": "",
+                "summary": [
+                  "다중 인스턴스 패턴(S19)이 2개를 넘어 3개에서도 일반화되는지 triple_gpio로 1회성 검증했다. 원문: Dave @97daf15"
+                ],
+                "body": "",
+                "sources": [],
+                "children": [],
+                "also_in": [
+                  "d2"
+                ]
+              }
+            ]
+          },
+          {
+            "id": "d3-q4",
+            "title": "형식 등가검사(eqy)",
+            "lede": "",
+            "summary": [
+              "'합성이 성공했다'와 '합성 결과가 원본과 논리적으로 동일하다'는 다른 주장이라는 빈틈을 채우는 4번째 검증 게이트를 도입했다. gpio 1개 파일럿(rename 스크립트가 비동기 리셋 DFF를 놓치는 버그 발견) → 14개 모듈 전체 → soc_top 전체(Windows 스택 오버플로 → WSL 이전 → gold/gate 메모리 비대칭 수정 → PASS) → CI 자동 연결까지 확장했고, 이후 코어 파라미터·RTL이 바뀔 때마다(d2 PPA 개선, d5 sign-off) 재실행해 회귀를 지켰다. 도중 eqy 자체의 bind 파티션 크래시를 gdb+core dump로 근본 수정한 것도 이 축에서 나왔다."
+            ],
+            "body": "",
+            "sources": [],
+            "children": [
+              {
+                "id": "s042",
+                "title": "S42 4번째 검증 게이트 신설: 형식 등가검사(eqy)",
+                "lede": "",
+                "summary": [
+                  "'합성 성공'과 '합성 결과가 원본과 논리적으로 동일'은 다른 주장이라는 빈틈을, gpio 1개 모듈 파일럿으로 채웠다. 원문: Dave @4f5d4d2"
+                ],
+                "body": "",
+                "sources": [],
+                "children": []
+              },
+              {
+                "id": "s043",
+                "title": "S43 형식 등가검사를 나머지 14개 모듈로 확장",
+                "lede": "",
+                "summary": [
+                  "S42의 rename 스크립트가 비동기 리셋 DFF를 놓치는 버그였음을 발견·수정하고 14개 전부 PASS시켰다. 원문: Dave @cf90a6a"
+                ],
+                "body": "",
+                "sources": [],
+                "children": []
+              },
+              {
+                "id": "s044",
+                "title": "S44 형식 등가검사를 soc_top 전체로 확장 시도",
+                "lede": "",
+                "summary": [
+                  "13614셀 규모에서 eqy 파티션 단계가 Windows 네이티브 스택 오버플로로 죽는 것을 확인, PASS를 억지로 만들지 않고 정직하게 보고했다. 원문: Dave @d9192e6"
+                ],
+                "body": "",
+                "sources": [],
+                "children": [],
+                "also_in": [
+                  "d0"
+                ]
+              },
+              {
+                "id": "s045",
+                "title": "S45 soc_top 등가검사 WSL 재시도",
+                "lede": "gold/gate 메모리 비대칭 발견·수정, 최종 PASS",
+                "summary": [
+                  "WSL/Linux로 옮겨 스택 문제를 피하고, gold/gate 넷리스트의 메모리 모델 비대칭을 고쳐 최종 PASS를 받았다. 원문: Dave (커밋 미태깅 세션 — README/프로젝트 기록 기준)"
+                ],
+                "body": "",
+                "sources": [],
+                "children": [],
+                "also_in": [
+                  "d0"
+                ]
+              },
+              {
+                "id": "s049",
+                "title": "S49 CI에 4번째 게이트(형식 등가검사) 회귀 파이프라인 연결",
+                "lede": "",
+                "summary": [
+                  "lint→cocotb→synth→형식등가검사 4개 게이트를 매 push/PR마다 자동으로 도는 파이프라인으로 묶었다. 원문: Dave @e83005e"
+                ],
+                "body": "",
+                "sources": [],
+                "children": [],
+                "also_in": [
+                  "d0"
+                ]
+              },
+              {
+                "id": "s051",
+                "title": "S51 soc_top 전체 등가검사, 새 picorv32_soc 코어 기준 재실행",
+                "lede": "",
+                "summary": [
+                  "인터럽트 지원 코어로 교체된 뒤 처음으로 soc_top 전체 등가검사를 재실행해 2시간26분 만에 PASS했다. 원문: Dave @df7eb34"
+                ],
+                "body": "",
+                "sources": [],
+                "children": []
+              },
+              {
+                "id": "s063",
+                "title": "S63 soc_top 전체 등가검사 재실행",
+                "lede": "COUNTERS64=0 기준",
+                "summary": [
+                  "S62 변경을 반영해 재검증 — PASS, bind 단계가 S51 대비 약 40% 단축됐다. 원문: Dave @e4abeb1"
+                ],
+                "body": "",
+                "sources": [],
+                "children": []
+              },
+              {
+                "id": "s067",
+                "title": "S67 eqy bind 파티션 크래시 근본원인 규명",
+                "lede": "soc_top 등가검사 PASS",
+                "summary": [
+                  "gdb+core dump로 끝까지 추적한 결과 S66의 '환경 회귀'가 아니라 처음부터 있던 결정론적 버그(서브모듈 경계 이름의 null wire 참조)였음을 확정·수정했다. 반복 패턴: 이전 세션 진단(S66)이 틀렸음을 gdb 코어덤프 분석으로 정정 원문: Dave @72377fa"
+                ],
+                "body": "",
+                "sources": [],
+                "children": [],
+                "pattern": "이전 세션 진단(S66)이 틀렸음을 gdb 코어덤프 분석으로 정정"
+              },
+              {
+                "id": "s070",
+                "title": "S70 등가검사 재실행",
+                "lede": "TWO_CYCLE_ALU/COMPARE 기준",
+                "summary": [
+                  "PASS, bind 단계 2시간1분52초로 S67보다 느려짐(상태공간 증가와 일치). 원문: Dave @0de0718"
+                ],
+                "body": "",
+                "sources": [],
+                "children": []
+              },
+              {
+                "id": "s073",
+                "title": "S73 등가검사 재실행",
+                "lede": "S72 기준",
+                "summary": [
+                  "PASS, bind 1시간3분40초로 다시 빨라짐(셀수 감소→상태공간 감소 패턴 재확인). 원문: Dave @0d79ea2"
+                ],
+                "body": "",
+                "sources": [],
+                "children": []
+              },
+              {
+                "id": "s078",
+                "title": "S78 등가검사 재실행",
+                "lede": "reg_pc_plus4 리타이밍 기준",
+                "summary": [
+                  "코어 본체 RTL이 처음 바뀐 라운드의 PASS — 수작업 리타이밍이 합성 단계에서 의도대로 매핑됐음을 형식적으로 확인했다. 원문: Dave @e6a8e3d"
+                ],
+                "body": "",
+                "sources": [],
+                "children": []
+              }
+            ]
+          },
+          {
+            "id": "d3-q5",
+            "title": "i2c_slave_burst 재현성 실험",
+            "lede": "",
+            "summary": [
+              "가장 복잡한 다상태 리액티브 FSM(i2c_slave_burst)의 '자연어 → RTL' 자동 생성이 확률적으로 얼마나 불안정한지를 누적 수십 회 재현으로 정량화했다. 실패의 상당수가 RTL 로직이 아니라 PATH 환경 함정(같은 종류의 버그가 여러 세션에 걸쳐 재발)이었다는 것을 교란변수 분리로 확인해, 최종 baseline 성공률(약 60%)을 확정했다."
+            ],
+            "body": "",
+            "sources": [],
+            "children": [
+              {
+                "id": "s050",
+                "title": "S50 i2c_slave_burst 재현 13회 전부 실패 + 실패로그 자동기록 정책",
+                "lede": "",
+                "summary": [
+                  "복잡한 다상태 리액티브 FSM은 LLM 호출이 확률적으로 실패한다는 것을 13회 전부 실패로 재확인, 실패를 자동 기록하는 정책을 신설했다. 반복 패턴: LLM 기반 RTL 생성의 재현 불안정성 — 복잡한 리액티브 FSM일수록 실패율 상승 원문: Dave @a7367ab"
+                ],
+                "body": "",
+                "sources": [],
+                "children": [],
+                "pattern": "LLM 기반 RTL 생성의 재현 불안정성 — 복잡한 리액티브 FSM일수록 실패율 상승"
+              },
+              {
+                "id": "s052",
+                "title": "S52 i2c_slave_burst 재현 이어감",
+                "lede": "새 환경 함정 해결",
+                "summary": [
+                  "oss-cad-suite bin을 PATH에 더하면 번들 파이썬이 시스템 python3를 shadow하는 함정을 발견·해결(cocotb는 항상 시스템 파이썬으로 고정 호출). 반복 패턴: PATH에 도구 번들 bin을 추가하면 그 안의 파이썬이 시스템 파이썬을 shadow 원문: Dave @f0d4a4c"
+                ],
+                "body": "",
+                "sources": [],
+                "children": [],
+                "also_in": [
+                  "d0"
+                ],
+                "pattern": "PATH에 도구 번들 bin을 추가하면 그 안의 파이썬이 시스템 파이썬을 shadow"
+              },
+              {
+                "id": "s054",
+                "title": "S54 i2c_slave_burst 재현 이어감 (누적 19회, 성공 1회)",
+                "lede": "",
+                "summary": [
+                  "S52의 PATH 해법을 그대로 적용해 재발 없이 4회 추가 시도했다. 원문: Dave @66a2fbb"
+                ],
+                "body": "",
+                "sources": [],
+                "children": []
+              },
+              {
+                "id": "s085",
+                "title": "S85 i2c_slave_burst 재현 10회 추가",
+                "lede": "PATH 부재 함정 신규 발견",
+                "summary": [
+                  "이번 세션 셸 PATH에 oss-cad-suite가 아예 없었던(S52와는 다른 종류의) 환경 함정을 발견했다. 반복 패턴: 환경 PATH 문제가 매 세션 새로운 방식으로 재발 원문: Dave (커밋 미태깅 세션 — README/프로젝트 기록 기준)"
+                ],
+                "body": "",
+                "sources": [],
+                "children": [],
+                "also_in": [
+                  "d0"
+                ],
+                "pattern": "환경 PATH 문제가 매 세션 새로운 방식으로 재발"
+              },
+              {
+                "id": "s087",
+                "title": "S87 과거 실패의 PATH 버그 오염 여부 소급 재검증",
+                "lede": "",
+                "summary": [
+                  "logs/failure_log.md 전체를 재확인해 과거 실패가 S86이 찾은 버그로 오염됐다는 증거가 없음을 확인한 순수 조사 세션. 원문: Dave (커밋 미태깅 세션 — README/프로젝트 기록 기준)"
+                ],
+                "body": "",
+                "sources": [],
+                "children": []
+              },
+              {
+                "id": "s088",
+                "title": "S88 i2c_slave_burst C조(PATH 단독) 재현 10회",
+                "lede": "교란변수 분리",
+                "summary": [
+                  "PATH 수정과 timeout 연장을 분리해 각각의 기여를 확정 — PATH 수정 자체는 4/10(40%)로 유효했다. 원문: Dave (커밋 미태깅 세션 — README/프로젝트 기록 기준)"
+                ],
+                "body": "",
+                "sources": [],
+                "children": []
+              },
+              {
+                "id": "s091",
+                "title": "S91 i2c_slave_burst baseline 20회 재현 + run_full_loop 계측 신설",
+                "lede": "",
+                "summary": [
+                  "Track A 보드 통관 대기 중 백로그를 진행 — PATH+timeout 1200s 고정 조건으로 정식 baseline을 좁혔다. 원문: Dave @9901328"
+                ],
+                "body": "",
+                "sources": [],
+                "children": []
+              }
+            ]
+          },
+          {
+            "id": "d3-q6",
+            "title": "Track A 게이트레벨 등가검사",
+            "lede": "",
+            "summary": [
+              "ASIC 트랙(eqy)과는 다른 방식으로, ice40 프리미티브 비트정확 시뮬레이션 모델과 기존 cocotb 테스트벤치를 그대로 재사용해 FPGA 합성 결과(RTL vs synth_ice40)가 완전히 일치함을 확인했다."
+            ],
+            "body": "",
+            "sources": [],
+            "children": [
+              {
+                "id": "s096",
+                "title": "S96 Track A 게이트레벨 등가검사",
+                "lede": "RTL vs synth_ice40",
+                "summary": [
+                  "ice40 프리미티브 비트정확 시뮬레이션 모델과 기존 cocotb 테스트벤치로 RTL과 합성 결과가 56580ns 완전히 일치함을 확인했다. 원문: Dave @028b181"
+                ],
+                "body": "",
+                "sources": [],
+                "children": [],
+                "also_in": [
+                  "d4"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "d4",
+        "no": "4",
+        "title": "FPGA 실물 (Track A)",
+        "lede": "iCESugar 보드에서 비트스트림과 실물 배선까지",
+        "summary": [
+          "시뮬레이션과 게이트 레벨 검증을 다 통과한 RTL이 실제 iCESugar(iCE40UP5K) 보드 위에서 정말로 동작하는지 확인하는 축. 비트스트림 재현성 검증부터, 실물에서만 드러나는 배선·빌드스크립트 버그 사냥, AP4의 재부팅 하드웨어 잠금 문제까지 — 시뮬레이션만으로는 절대 잡히지 않는 종류의 문제들이 여기 모여 있다."
+        ],
+        "body": "",
+        "sources": [],
+        "children": [
+          {
+            "id": "d4-q1",
+            "title": "PCF·PnR·비트스트림",
+            "lede": "",
+            "summary": [
+              "soc_top은 포트 수가 SG48 패키지의 가용 IO를 넘어서, 의미 있게 연결 가능한 최소 서브셋만 노출하는 새 최상위 래퍼와 4KB 온칩 RAM을 설계해 iCESugar용 PnR·비트스트림 dry run을 성공시켰다."
+            ],
+            "body": "",
+            "sources": [],
+            "children": [
+              {
+                "id": "s084",
+                "title": "S84 iCESugar PCF 확보 + nextpnr-ice40 PnR + 비트스트림 dry run",
+                "lede": "",
+                "summary": [
+                  "60개+ 포트를 SG48 패키지 가용 IO에 맞게 최소 서브셋으로 노출하는 새 최상위 icesugar_top.v를 만들고 4KB 온칩 RAM을 새로 설계했다. 원문: Dave @c8d6109"
+                ],
+                "body": "",
+                "sources": [],
+                "children": []
+              }
+            ]
+          },
+          {
+            "id": "d4-q2",
+            "title": "비트스트림 재현성·핀 확장 검토",
+            "lede": "",
+            "summary": [
+              "산출물이 byte-for-byte 결정론적으로 재현되는지 SHA-256으로 검증하고, 남은 핀 여유(실질 22개)를 세어 향후 주변장치 확장 가능성만 사전 검토했다(실제 배선은 하지 않음)."
+            ],
+            "body": "",
+            "sources": [],
+            "children": [
+              {
+                "id": "s092",
+                "title": "S92 Track A 비트스트림 재현성(byte-for-byte) 검증",
+                "lede": "",
+                "summary": [
+                  "S84 산출물을 독립적으로 두 번 빌드해 SHA-256으로 완전히 동일함을 확인했다. 원문: Dave (커밋 미태깅 세션 — README/프로젝트 기록 기준)"
+                ],
+                "body": "",
+                "sources": [],
+                "children": []
+              },
+              {
+                "id": "s093",
+                "title": "S93 물리 핀 미배선 주변장치 확장 가능성 검토 (RTL 미반영)",
+                "lede": "",
+                "summary": [
+                  "PCF 여유 핀을 정확히 세어 실질 가용치 22개를 확인 — 실제 배선은 하지 않은 사전 검토. 원문: Dave @3f932d3"
+                ],
+                "body": "",
+                "sources": [],
+                "children": []
+              }
+            ]
+          },
+          {
+            "id": "d4-q3",
+            "title": "실물 부팅·배선 버그",
+            "lede": "",
+            "summary": [
+              "실물 보드에서 두 차례에 걸쳐 '논리 버그처럼 보이는 배선/빌드스크립트 문제'를 만났다 — 처음엔 RGB LED가 파란색 고정으로 보여 부팅 실패를 의심했으나 실제 원인은 특정 핀이 일반 GPIO가 아닌 RGB 드라이버 전용 패드였던 것, 두 번째는 모든 RTL·펌웨어를 배제해도 재현돼 결국 빌드 스크립트 자체의 문제로 판명났다. 둘 다 시뮬레이션 3단 대조나 체계적 배제 같은 실측 기반 절차로 풀었다."
+            ],
+            "body": "",
+            "sources": [],
+            "children": [
+              {
+                "id": "s094",
+                "title": "S94 iCESugar 실물 보드 최초 부팅 확인 + RGB LED 드라이버 버그 수정",
+                "lede": "",
+                "summary": [
+                  "RGB LED가 파란색 고정으로 보여 부팅 실패를 의심했으나, 핀 39/40/41이 SB_RGBA_DRV 전용 패드였다는 배선 문제였음을 시뮬레이션 3단 대조로 규명했다. 반복 패턴: 환경/배선 문제를 논리(부팅 실패) 버그로 오인 원문: Dave @31c0c97"
+                ],
+                "body": "",
+                "sources": [],
+                "children": [],
+                "also_in": [
+                  "d6"
+                ],
+                "pattern": "환경/배선 문제를 논리(부팅 실패) 버그로 오인"
+              },
+              {
+                "id": "s105",
+                "title": "S105 RGB LED '빨강+파랑 고정' 버그 사냥",
+                "lede": "진짜 원인은 build_bitstream.sh",
+                "summary": [
+                  "RTL·펌웨어를 전부 배제한 뒤에도 재현돼, 결국 빌드 스크립트 자체의 문제였음을 체계적 배제로 규명했다. 반복 패턴: 환경/배선/빌드스크립트 문제를 RTL 로직 버그로 오인 — 산출물 diff로 검증 필요 원문: Dave (커밋 미태깅 세션 — README/프로젝트 기록 기준)"
+                ],
+                "body": "",
+                "sources": [],
+                "children": [],
+                "pattern": "환경/배선/빌드스크립트 문제를 RTL 로직 버그로 오인 — 산출물 diff로 검증 필요"
+              }
+            ]
+          },
+          {
+            "id": "d4-q4",
+            "title": "UART 물리 루프백",
+            "lede": "",
+            "summary": [
+              "USB-TTL 어댑터 없이 점퍼선 하나(핀4-핀6 직결)로 uart_tx→uart_rx 왕복을 실보드에서 자체판정하는 최소 검증법을 썼다."
+            ],
+            "body": "",
+            "sources": [],
+            "children": [
+              {
+                "id": "s104",
+                "title": "S104 UART 물리 루프백 자체판정",
+                "lede": "점퍼선 실보드 검증",
+                "summary": [
+                  "핀4-핀6 점퍼선만으로 uart_tx→uart_rx 왕복을 실보드에서 검증, COM4는 soc_top UART와 무관함을 확인했다. 원문: Dave @bb6ef10"
+                ],
+                "body": "",
+                "sources": [],
+                "children": [],
+                "also_in": [
+                  "d6"
+                ]
+              }
+            ]
+          },
+          {
+            "id": "d4-q5",
+            "title": "AP4 실보드 검증",
+            "lede": "",
+            "summary": [
+              "Timer+WDT 데모의 실보드 검증에서 재부팅 시 피드백이 잠기는 현상을 발견했으나 원인을 확정하지 못해 이월했고, 다음 세션에서 이전 가설을 RTL 구조 분석으로 반증한 뒤 진짜 원인을 규명·수정해 재검증까지 완료했다."
+            ],
+            "body": "",
+            "sources": [],
+            "children": [
+              {
+                "id": "s110",
+                "title": "S110 AP4 실보드 검증",
+                "lede": "재부팅 피드백 하드웨어 잠금 발견 (미해결)",
+                "summary": [
+                  "재부팅 시 피드백이 잠기는 현상을 발견했으나 이 세션에서는 원인을 확정하지 못하고 다음 세션으로 이월했다. 원문: Dave @7d253e3"
+                ],
+                "body": "",
+                "sources": [],
+                "children": [],
+                "also_in": [
+                  "d6"
+                ]
+              },
+              {
+                "id": "s111",
+                "title": "S111 AP4 근본 원인 규명 + 수정 + 실보드 재검증 완료",
+                "lede": "",
+                "summary": [
+                  "S110의 'AND-리덕션 글리치' 가설을 RTL 구조 분석으로 반증하고 실제 원인을 규명·수정, 실보드 재검증까지 완료했다. 반복 패턴: 이전 세션 가설(S110)을 RTL 구조 직접 분석으로 반증 원문: Dave @61672d4"
+                ],
+                "body": "",
+                "sources": [],
+                "children": [],
+                "also_in": [
+                  "d6"
+                ],
+                "pattern": "이전 세션 가설(S110)을 RTL 구조 직접 분석으로 반증"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "d5",
+        "no": "5",
+        "title": "ASIC PnR·Sign-off (Track B)",
+        "lede": "OpenLane2로 배치·배선부터 9코너 sign-off까지, ss 코너 타이밍과의 씨름",
+        "summary": [
+          "OpenLane2(Nix)로 soc_top을 실제 실리콘 관점에서 배치·배선하고 sign-off까지 밀어붙인 축. ss 코너 setup 위반을 처음 발견한 이후, d2의 RTL 개선마다 sign-off를 재실행해 실제 효과를 측정했는데 — 결과가 반복적으로 반직관적이었고, 그 원인이 RTL이 아니라 PnR의 자동 다이 면적 재산정이었다는 것을 DIE_AREA 스윕으로 확증한 것이 이 축의 핵심 발견이다."
+        ],
+        "body": "",
+        "sources": [],
+        "children": [
+          {
+            "id": "d5-q1",
+            "title": "OpenLane2 착수·Floorplan·Placement",
+            "lede": "",
+            "summary": [
+              "FPGA 트랙(보드 배송 대기)을 보류하고 ASIC PnR 트랙을 먼저 착수 — Nix로 OpenLane2를 설치하고, 이 규모(15k셀, 매크로 없음)에서는 수동 배치 우선순위를 정할 대상 자체가 없다는 것을 확인한 뒤 멀티클럭을 지원하는 정식 SDC로 넘어갔다."
+            ],
+            "body": "",
+            "sources": [],
+            "children": [
+              {
+                "id": "s055",
+                "title": "S55 Track B 착수: OpenLane2(Nix) 설치 + soc_top 1차 Floorplan",
+                "lede": "",
+                "summary": [
+                  "FPGA 트랙(보드 배송 대기)을 보류하고 ASIC PnR 트랙을 먼저 착수 — Nix로 OpenLane2를 설치하고 Floorplan을 성공시켰다. 원문: Dave @63cc613"
+                ],
+                "body": "",
+                "sources": [],
+                "children": []
+              },
+              {
+                "id": "s056",
+                "title": "S56 soc_top 정식 SDC 제약 + Placement",
+                "lede": "",
+                "summary": [
+                  "이 규모에선 수동 배치 우선순위를 정할 대상이 없다는 것을 확인하고, 멀티클럭(aux_clk)을 지원하는 정식 SDC로 넘어갔다. 원문: Dave @7e692cd"
+                ],
+                "body": "",
+                "sources": [],
+                "children": []
+              }
+            ]
+          },
+          {
+            "id": "d5-q2",
+            "title": "STA·Sign-off 최초 실행",
+            "lede": "",
+            "summary": [
+              "CTS 직후 순수 post-CTS 타이밍을 먼저 확인한 뒤, OpenLane2 Classic flow 78단계를 처음부터 끝까지 실행해 DRC/LVS는 통과했지만 ss 코너 3개 전부 setup 위반이라는 이 프로젝트의 핵심 병목을 처음 발견했다."
+            ],
+            "body": "",
+            "sources": [],
+            "children": [
+              {
+                "id": "s057",
+                "title": "S57 soc_top post-CTS STA 확인",
+                "lede": "",
+                "summary": [
+                  "CTS 직후 순수 post-CTS 시점의 타이밍을 확인했다. 원문: Dave @9998f5d"
+                ],
+                "body": "",
+                "sources": [],
+                "children": []
+              },
+              {
+                "id": "s058",
+                "title": "S58 soc_top 최종 sign-off 전체 플로우 최초 실행",
+                "lede": "ss 코너 setup/hold 실패 발견",
+                "summary": [
+                  "OpenLane2 Classic flow 78단계를 처음부터 끝까지 실행 — DRC/LVS는 통과했으나 ss 코너 3개 전부 setup 위반을 발견했다. 반복 패턴: WSL 백그라운드(nohup)를 wsl.exe 종료 후 방치하면 VM 유휴타임아웃으로 프로세스 전멸 원문: Dave @0f45825"
+                ],
+                "body": "",
+                "sources": [],
+                "children": [],
+                "pattern": "WSL 백그라운드(nohup)를 wsl.exe 종료 후 방치하면 VM 유휴타임아웃으로 프로세스 전멸"
+              },
+              {
+                "id": "s059",
+                "title": "S59 ss 코너 setup 위반 소스 레지스터 역추적",
+                "lede": "",
+                "summary": [
+                  "위반 137건이 '고팬아웃 클럭 트리 리프 버퍼'이지 지목한 신호 자체의 문제가 아님을 직접 카운트로 확인했다. 원문: Dave @a5c6705"
+                ],
+                "body": "",
+                "sources": [],
+                "children": []
+              }
+            ]
+          },
+          {
+            "id": "d5-q3",
+            "title": "PPA 실측 사이클",
+            "lede": "",
+            "summary": [
+              "카운터 제거·2사이클 파이프라이닝·되돌림·리타이밍 등 d2에서 시도한 RTL 개선마다 sign-off를 재실행해 실제 효과를 측정했다. 결과는 반복적으로 반직관적이었다 — 셀 수가 줄어도 타이밍이 나빠지거나, 개선을 겨냥한 변경의 순편익이 기대와 정반대로 나오는 경우가 여러 차례였는데, 원인은 RTL 자체가 아니라 PnR 자동 다이 면적 재산정이었다(DIE_AREA 스윕에서 확증)."
+            ],
+            "body": "",
+            "sources": [],
+            "children": [
+              {
+                "id": "s064",
+                "title": "S64 soc_top 최종 sign-off 재실행",
+                "lede": "COUNTERS64=0 기준",
+                "summary": [
+                  "ss 코너 setup 위반 폭이 크게 줄었지만 여전히 실패, DRC/LVS는 유지됐다. 원문: Dave @ff1639b"
+                ],
+                "body": "",
+                "sources": [],
+                "children": []
+              },
+              {
+                "id": "s065",
+                "title": "S65 sign-off 재실행",
+                "lede": "Antenna 재현성 검증, S64 해석 반증",
+                "summary": [
+                  "동일 RTL을 재실행해 antenna 위반 증가가 PnR 변동성이 아니라 S62 RTL 변경의 결정론적 부수효과임을 확정했다. 반복 패턴: PnR 결과 변화를 '변동성'으로 성급히 결론짓기 쉬움 — 재실행 재현으로 검증 필요 원문: Dave @4cc74e3"
+                ],
+                "body": "",
+                "sources": [],
+                "children": [],
+                "pattern": "PnR 결과 변화를 '변동성'으로 성급히 결론짓기 쉬움 — 재실행 재현으로 검증 필요"
+              },
+              {
+                "id": "s068",
+                "title": "S68 sign-off 재실행",
+                "lede": "mem_rdata OR-tree 반영 후 ss 코너 실측",
+                "summary": [
+                  "Setup WNS -4.512→-2.724ns(40% 개선), fmax 약 69→79MHz로 이 프로젝트 최고 실측치를 기록했다. 원문: Dave @47daed1"
+                ],
+                "body": "",
+                "sources": [],
+                "children": []
+              },
+              {
+                "id": "s071",
+                "title": "S71 sign-off 재실행",
+                "lede": "TWO_CYCLE 기준, 기대와 달리 개선 미미",
+                "summary": [
+                  "Setup WNS는 거의 무변화인데 TNS는 18% 악화, ss 코너 위반은 24% 증가 — 순편익이 거의 없었다. 원문: Dave @a006891"
+                ],
+                "body": "",
+                "sources": [],
+                "children": []
+              },
+              {
+                "id": "s074",
+                "title": "S74 sign-off 재실행",
+                "lede": "ENABLE_COUNTERS=0 기준, 예상과 정반대로 대폭 악화",
+                "summary": [
+                  "셀 수·면적이 가장 작은데도 타이밍은 가장 나쁜 역설적 결과 — fmax 약 78.6→53.5MHz. 반복 패턴: 셀 수 감소가 항상 타이밍 개선으로 이어지지는 않음 — 배치 결과에 따라 역전 가능 원문: Dave @8d75457"
+                ],
+                "body": "",
+                "sources": [],
+                "children": [],
+                "pattern": "셀 수 감소가 항상 타이밍 개선으로 이어지지는 않음 — 배치 결과에 따라 역전 가능"
+              },
+              {
+                "id": "s079",
+                "title": "S79 sign-off 재실행",
+                "lede": "리타이밍 기준, 또다시 대폭 악화",
+                "summary": [
+                  "fmax 약 78.6→59.7MHz — S72와 같은 패턴(자동 다이 재산정)이 재현됐다. 원문: Dave @3a10428"
+                ],
+                "body": "",
+                "sources": [],
+                "children": []
+              }
+            ]
+          },
+          {
+            "id": "d5-q4",
+            "title": "PC 경로 분석·리타이밍 설계",
+            "lede": "",
+            "summary": [
+              "실측 최악 경로를 게이트 단위로 직접 열어 구체적인 리타이밍 수정안을 설계한 분석 전용 세션 — RTL은 이 세션에서 반영하지 않았다."
+            ],
+            "body": "",
+            "sources": [],
+            "children": [
+              {
+                "id": "s076",
+                "title": "S76 PC 경로 재설계",
+                "lede": "게이트 단위 근거 재확인 (분석 전용)",
+                "summary": [
+                  "S68 자신의 라우팅 결과를 직접 열어 최악경로가 카운터 경로였음을 재확인, 구체적 수정안을 설계했다. 원문: Dave @40a1729"
+                ],
+                "body": "",
+                "sources": [],
+                "children": []
+              }
+            ]
+          },
+          {
+            "id": "d5-q5",
+            "title": "DIE_AREA 스윕",
+            "lede": "",
+            "summary": [
+              "다이 면적을 고정하자 RTL 개선(리타이밍)의 진짜 효과가 드러났다 — 자동 다이 재산정이 그동안 개선 효과를 가려 역설적 악화로 보이게 했던 것. 반대로 다이를 더 타이트하게 줄이면 오히려 배치기가 혼잡도 해소를 위해 더 나쁜 배선으로 수렴한다는 것도 실측으로 확인해, '넉넉하게 고정 후 점진적으로 줄여나가는' 스윕이 정석이라는 결론에 도달했다."
+            ],
+            "body": "",
+            "sources": [],
+            "children": [
+              {
+                "id": "s080",
+                "title": "S80 DIE_AREA 고정",
+                "lede": "리타이밍의 진짜 효과가 드러남",
+                "summary": [
+                  "다이 면적을 고정(650×650µm)하자 TNS 79.6% 개선 — S69/S72/S77이 매번 악화로 보였던 원인이 자동 다이 재산정이었음을 확증했다. 반복 패턴: PnR 자동 다이 면적 재산정이 RTL 개선 효과를 가려 역설적 악화로 보이게 함 원문: Dave @74efc8c"
+                ],
+                "body": "",
+                "sources": [],
+                "children": [],
+                "pattern": "PnR 자동 다이 면적 재산정이 RTL 개선 효과를 가려 역설적 악화로 보이게 함"
+              },
+              {
+                "id": "s081",
+                "title": "S81 고정 다이에서 리타이밍 순수 효과 분리",
+                "lede": "",
+                "summary": [
+                  "같은 고정 다이에서 리타이밍 유무만 비교 — WNS는 소폭 악화지만 TNS/위반 건수는 뚜렷이 개선되는 순이익을 확인했다. 원문: Dave @b60fe0b"
+                ],
+                "body": "",
+                "sources": [],
+                "children": []
+              },
+              {
+                "id": "s082",
+                "title": "S82 다이 크기 스윕",
+                "lede": "더 타이트한 560×560, 예상과 반대로 대폭 악화",
+                "summary": [
+                  "'타이트하게 줄이면 배선이 짧아져 좋아질 것'이라는 가정과 반대로 전 지표가 악화 — 12% 여유는 너무 타이트했다. 반복 패턴: 다이를 무작정 타이트하게 줄이면 배치기가 혼잡도 해소를 위해 오히려 악화된 배선으로 수렴 원문: Dave @9f63958"
+                ],
+                "body": "",
+                "sources": [],
+                "children": [],
+                "pattern": "다이를 무작정 타이트하게 줄이면 배치기가 혼잡도 해소를 위해 오히려 악화된 배선으로 수렴"
+              }
+            ]
+          },
+          {
+            "id": "d5-q6",
+            "title": "PPA 이월 확정",
+            "lede": "",
+            "summary": [
+              "타이밍/PPA 추가 최적화는 별도 미래 프로젝트로 이월하고 현재 baseline(fmax 약 77~79MHz, 목표 100MHz 미달)을 확정한 뒤, 원래 PoC 완료 기준(Track A→펌웨어→App)에 맞춰 Track A로 복귀했다."
+            ],
+            "body": "",
+            "sources": [],
+            "children": [
+              {
+                "id": "s083",
+                "title": "S83 PPA 최적화 이월 + Track A(FPGA) 재개",
+                "lede": "",
+                "summary": [
+                  "타이밍/PPA 추가 최적화는 별도 미래 프로젝트로 이월하고 S82 결과를 baseline으로 확정, Track A로 복귀했다. 원문: Dave @f73d830"
+                ],
+                "body": "",
+                "sources": [],
+                "children": [],
+                "also_in": [
+                  "d4"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "d6",
+        "no": "6",
+        "title": "App",
+        "lede": "런타임 기반부터 AP1~AP7 앱까지, '자연어 요구 → RTL' 폐루프의 실전 활용",
+        "summary": [
+          "RTL·검증·PnR이 전부 끝난 뒤 \"그래서 이 SoC로 무엇을 할 수 있는가\"에 답하는 마지막 축. 운영 체계를 자동진행으로 바꾸고 최소 런타임(crt0)·드라이버부터 다진 뒤, UART 셸(AP1)을 공통 진입점 삼아 계산기(AP2)로 원 PoC의 MVP를 달성했고, GPIO·PWM(AP3)·Timer+WDT(AP4)를 거쳐 부품 추가 조달 없이 OLED 인터페이스 3종을 에뮬레이션(AP5~AP7)하는 것으로 체크리스트를 전부 완료했다."
+        ],
+        "body": "",
+        "sources": [],
+        "children": [
+          {
+            "id": "d6-q1",
+            "title": "자동진행 체계·런타임 다지기",
+            "lede": "",
+            "summary": [
+              "'dave' 한 단어만 입력하면 매번 AskUserQuestion으로 후보를 고르던 관행을 끝내고, 체크리스트(CLAUDE.md) 최상단 미완료 항목을 자동으로 이어서 실행하는 체계로 전환했다. 이 체계 위에서 빌드체계 재사용성 판정 → MMIO 헤더 통합 → 공유 crt0(스택 초기화·bss 클리어) → UART 드라이버/printf → UART 에코까지, App을 만들기 전 런타임 기반을 순서대로 다졌다."
+            ],
+            "body": "",
+            "sources": [],
+            "children": [
+              {
+                "id": "s095",
+                "title": "S95 CLAUDE.md 신설",
+                "lede": "dave 트리거 자동진행 체계",
+                "summary": [
+                  "'dave' 입력 시 후보선택 없이 체크리스트 최상단 미완료 항목을 자동으로 이어서 진행하는 운영 체계로 전환했다. 원문: Dave @b3203f0"
+                ],
+                "body": "",
+                "sources": [],
+                "children": [],
+                "also_in": [
+                  "d1"
+                ]
+              },
+              {
+                "id": "s097",
+                "title": "S97 기존 mem0~3.hex 빌드체계 판정",
+                "lede": "",
+                "summary": [
+                  "S84의 빌드 파이프라인이 soc_smoke 전용이 아니라 이후 App 단계에도 재사용 가능함을 순수 조사로 판정했다. 원문: Dave @c0a155b"
+                ],
+                "body": "",
+                "sources": [],
+                "children": [],
+                "also_in": [
+                  "d4"
+                ]
+              },
+              {
+                "id": "s098",
+                "title": "S98 메모리맵/링커스크립트 정리",
+                "lede": "",
+                "summary": [
+                  "두 곳에 따로 있던 MMIO 주소 맵을 mmio_map.h 공유 헤더로 통합했다. 원문: Dave @573769d"
+                ],
+                "body": "",
+                "sources": [],
+                "children": []
+              },
+              {
+                "id": "s099",
+                "title": "S99 최소 런타임(crt0) 신규 + poison RAM 검증",
+                "lede": "",
+                "summary": [
+                  "스택 초기화·bss 클리어를 링커 심볼 기반 공유 crt0.S로 옮기고 poison 패턴으로 검증했다. 원문: Dave @02dcf2f"
+                ],
+                "body": "",
+                "sources": [],
+                "children": []
+              },
+              {
+                "id": "s100",
+                "title": "S100 UART 드라이버 + 최소 printf",
+                "lede": "",
+                "summary": [
+                  "실제로 쓸모 있는 첫 공유 드라이버(uart_init/uart_putc)를 추가했다. 원문: Dave @0186b5a"
+                ],
+                "body": "",
+                "sources": [],
+                "children": []
+              },
+              {
+                "id": "s103",
+                "title": "S103 UART 에코 펌웨어",
+                "lede": "sim 왕복 검증 PASS",
+                "summary": [
+                  "받은 바이트를 그대로 돌려보내는 펌웨어로 시뮬레이션 수준 왕복 검증을 마쳤다(실보드 플래싱은 보류). 원문: Dave @d2d60c4"
+                ],
+                "body": "",
+                "sources": [],
+                "children": []
+              }
+            ]
+          },
+          {
+            "id": "d6-q2",
+            "title": "AP1 UART 셸",
+            "lede": "",
+            "summary": [
+              "한 줄 읽기 + 첫 토큰 명령 디스패치를 얹은 셸 — 이후 모든 App의 공통 진입점이 됐다."
+            ],
+            "body": "",
+            "sources": [],
+            "children": [
+              {
+                "id": "s106",
+                "title": "S106 AP1: UART 커맨드 셸",
+                "lede": "",
+                "summary": [
+                  "한 줄 읽기+첫 토큰 명령 디스패치를 얹은 셸 — 이후 모든 App의 진입점, sim+실보드 검증 완료. 원문: Dave @5fc921d"
+                ],
+                "body": "",
+                "sources": [],
+                "children": []
+              }
+            ]
+          },
+          {
+            "id": "d6-q3",
+            "title": "AP2 계산기",
+            "lede": "",
+            "summary": [
+              "셸의 명령 테이블에 calc 하나만 추가해 정수 사칙연산 앱을 완성 — 원 PoC의 1차 목표(MVP)를 여기서 달성했다."
+            ],
+            "body": "",
+            "sources": [],
+            "children": [
+              {
+                "id": "s107",
+                "title": "S107 AP2: 계산기 앱",
+                "lede": "'App까지' MVP 완료",
+                "summary": [
+                  "셸 명령 테이블에 calc 하나만 추가해 정수 사칙연산 앱을 완성, 원 PoC의 1차 목표(MVP)를 달성했다. 원문: Dave @ec45ebb"
+                ],
+                "body": "",
+                "sources": [],
+                "children": []
+              }
+            ]
+          },
+          {
+            "id": "d6-q4",
+            "title": "AP3 GPIO+PWM LED",
+            "lede": "",
+            "summary": [
+              "PWM 드라이버 위에 led 명령을 얹었고, 대량 전송 시 깨지는 현상이 RTL이 아니라 PC 쪽 페이싱 문제였음을 가려냈다."
+            ],
+            "body": "",
+            "sources": [],
+            "children": [
+              {
+                "id": "s108",
+                "title": "S108 AP3: GPIO+PWM LED 컨트롤러",
+                "lede": "",
+                "summary": [
+                  "pwm_gen 위에 최소 드라이버를 얹고 led 명령으로 색을 제어, 문자간 지연으로 벌크전송 문제를 해결했다. 반복 패턴: UART 대량 전송 시 깨짐을 RTL 문제로 오인하기 쉬움 — 실제로는 PC측 페이싱 문제 원문: Dave @1f826e2"
+                ],
+                "body": "",
+                "sources": [],
+                "children": [],
+                "pattern": "UART 대량 전송 시 깨짐을 RTL 문제로 오인하기 쉬움 — 실제로는 PC측 페이싱 문제"
+              }
+            ]
+          },
+          {
+            "id": "d6-q5",
+            "title": "AP4 Timer+WDT",
+            "lede": "",
+            "summary": [
+              "워치독 킥의 순서(EN 전에 먼저 KICK)라는 코너케이스를 사이클 단위로 실측해 반영, sim 검증을 완료했다(실보드는 d4로 이어짐)."
+            ],
+            "body": "",
+            "sources": [],
+            "children": [
+              {
+                "id": "s109",
+                "title": "S109 AP4: Timer+WDT 워치독 데모",
+                "lede": "sim 검증 완료",
+                "summary": [
+                  "KICK을 먼저 친 뒤 EN을 세우는 순서(코너케이스 회피)로 sim 검증까지 완료, 실보드는 다음 세션으로 이월했다. 원문: Dave @e99b924"
+                ],
+                "body": "",
+                "sources": [],
+                "children": []
+              }
+            ]
+          },
+          {
+            "id": "d6-q6",
+            "title": "AP5~AP7 에뮬레이션(프레임버퍼·I2C·SPI)",
+            "lede": "",
+            "summary": [
+              "OLED 디스플레이를 실제로 조달하지 않고도 그 인터페이스를 검증하는 세 갈래 에뮬레이션 — UART로 프레임버퍼를 덤프(B), 부품 추가 조달 없이 같은 칩 안의 I2C 마스터/슬레이브를 와이어드-AND로 직결한 루프백, SPI 마스터/슬레이브 직결(A)에서 처음 드러난 RTL 타이밍 버그(cs_n 1클럭 지연)까지 — CLAUDE.md 체크리스트 전항목을 여기서 완료했다."
+            ],
+            "body": "",
+            "sources": [],
+            "children": [
+              {
+                "id": "s112",
+                "title": "S112 AP5: UART 프레임버퍼 덤프 (OLED 에뮬레이션 B)",
+                "lede": "",
+                "summary": [
+                  "64x32 1bpp 프레임버퍼를 RAM 예산(4KB)에 맞춰 설계, sim+실보드 검증 완료. 원문: Dave @b1aa717"
+                ],
+                "body": "",
+                "sources": [],
+                "children": []
+              },
+              {
+                "id": "s113",
+                "title": "S113 AP6: I2C 마스터-슬레이브 단일 보드 내부 루프백",
+                "lede": "",
+                "summary": [
+                  "부품 추가 조달 없이 같은 soc_top 안의 i2c_master/i2c_slave를 오픈드레인 와이어드-AND로 직결, sim+실보드 검증 완료. 원문: Dave @907d6f0"
+                ],
+                "body": "",
+                "sources": [],
+                "children": []
+              },
+              {
+                "id": "s114",
+                "title": "S114 AP7: SPI 에뮬레이션 모델 (OLED 에뮬레이션 A) + spi_master 핀 확장",
+                "lede": "",
+                "summary": [
+                  "spi_master를 전용 헤더 핀으로 확장하고 spi_slave와 칩 내부 직결 — 처음 드러난 cs_n 1클럭 지연 타이밍 버그를 수정, CLAUDE.md 체크리스트 전항목을 완료했다. 원문: Dave @ff37f73"
+                ],
+                "body": "",
+                "sources": [],
+                "children": [],
+                "also_in": [
+                  "d9"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "d9",
+        "no": "9",
+        "title": "회고·교훈",
+        "lede": "완주 소감과 반복된 디버깅 패턴, 남은 한계",
+        "summary": [],
+        "body": "",
+        "sources": [],
+        "children": [
+          {
+            "id": "d9-q1",
+            "title": "완주 소감",
+            "lede": "",
+            "summary": [
+              "114개 세션에 걸쳐 \"자연어 요구 → spec.json → RTL → cocotb/Yosys 검증\"이라는 폐루프 한 바퀴(S6~S8)가 15개 모듈 생성(d2)과 SoC 통합(d2), 두 갈래 검증(cocotb + 형식 등가검사, d3), 두 트랙(FPGA 실물/d4, ASIC PnR·Sign-off/d5), 그리고 App 7종(d6)까지 확장됐다. 가장 반복된 경험은 \"처음 세운 가설이 다음 세션에서 정정되는\" 패턴이었다 — ss 코너 타이밍 병목의 진짜 원인(S59→S66→S67), PnR 다이 면적이 RTL 개선 효과를 가리는 현상(S69~S82), 실물 보드의 \"파란 LED 고정\"이 부팅 실패가 아니라 핀 배정 문제였던 것(S94)까지, 매번 실측으로 이전 결론을 검증하거나 뒤집는 과정이 이 프로젝트의 실제 작업 방식이었다."
+            ],
+            "body": "",
+            "sources": [],
+            "children": []
+          },
+          {
+            "id": "d9-q2",
+            "title": "반복된 디버깅 패턴",
+            "lede": "",
+            "summary": [
+              "- 환경/배선을 논리 버그로 오인: S94(RGB LED 파란 고정 → 전용 패드 배선 문제), S105(LED 버그 재발 → build_bitstream.sh 문제), S108(UART 벌크 전송 깨짐 → PC측 페이싱 문제). - Windows 서브프로세스·PATH 환경 버그의 반복 재발: S46(subprocess orphan)과 같은 종류의 PATH 함정이 S52·S85·S86에서 형태를 바꿔 재발했다 — 한 번 고친 환경 버그도 완전히 영구화되지 않으면 다시 걸린다. - 자동화 훅이 조용히 실패: S47에서 만든 용어집 자동 갱신 훅이 S48~S59 내내 실행되지 않았고(S60), 그 수정 자체도 사각지대가 남아 있었다(S61) — 자동화는 도입 직후 end-to-end로 실행 여부를 직접 확인해야 한다. - 이전 세션 진단을 다음 세션이 실측으로 정정: S59→S66→S67(ss 코너 병목 원인), S64→S65(PnR 변동성 vs 결정론적 부수효과) — \"정직하게 보고하고 다음 세션에서 검증\"하는 순환이 이 프로젝트 전체를 관통한다."
+            ],
+            "body": "",
+            "sources": [],
+            "children": []
+          },
+          {
+            "id": "d9-q3",
+            "title": "남은 한계",
+            "lede": "",
+            "summary": [
+              "1. ss 코너 타이밍이 목표에 못 미쳤다 — 여러 라운드의 RTL 개선(카운터 제거, 파이프라이닝, PC 경로 리타이밍)과 DIE_AREA 스윕을 거쳐 fmax 약 79MHz까지 끌어올렸지만, 목표였던 100MHz에는 도달하지 못했다. PC/ALU 구조적 병목은 PicoRV32 코어 자체의 전면 재설계 없이는 더 줄이기 어렵다는 결론으로 PPA 최적화를 별도 프로젝트로 이월했다(S83). 2. i2c_slave_burst 재현율이 약 13%~60% 구간을 오갔다 — 가장 복잡한 다상태 리액티브 FSM의 자연어→RTL 자동 생성은 근본적으로 확률적이며, baseline 조건(PATH 수정+timeout 1200s)을 확정한 뒤에도 완전한 결정성에는 도달하지 못했다(S91 최종 60%). 3. Windows 환경 잡음 — subprocess orphan, PATH shadow, eqy 파티션 스택 오버플로처럼 이 프로젝트의 적지 않은 세션이 RTL 로직이 아니라 Windows 네이티브 환경의 한계(WSL 이전으로 우회) 때문에 소모됐다."
+            ],
+            "body": "",
+            "sources": [],
+            "children": []
+          }
+        ],
+        "figure": {
+          "svg": "<svg viewBox=\"0 0 720 200\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"반복 디버깅 패턴: 증상에서 환경 원인까지\">\n  <rect width=\"720\" height=\"200\" fill=\"#F6EFE3\"/>\n  <text x=\"28\" y=\"34\" font-size=\"20\" font-weight=\"700\" fill=\"#241C16\">반복된 디버깅 패턴</text>\n\n  <rect x=\"28\" y=\"70\" width=\"136\" height=\"52\" rx=\"16\" fill=\"#D6C6AE\"/>\n  <text x=\"96\" y=\"101\" font-size=\"15\" fill=\"#241C16\" text-anchor=\"middle\">증상 관찰</text>\n\n  <rect x=\"196\" y=\"70\" width=\"136\" height=\"52\" rx=\"16\" fill=\"#D6C6AE\"/>\n  <text x=\"264\" y=\"101\" font-size=\"15\" fill=\"#241C16\" text-anchor=\"middle\">논리 가설</text>\n\n  <rect x=\"364\" y=\"70\" width=\"136\" height=\"52\" rx=\"16\" fill=\"#D6C6AE\"/>\n  <text x=\"432\" y=\"101\" font-size=\"15\" fill=\"#241C16\" text-anchor=\"middle\">대조 실험</text>\n\n  <rect x=\"532\" y=\"70\" width=\"160\" height=\"52\" rx=\"16\" fill=\"none\" stroke=\"#2E5E5B\" stroke-width=\"2.5\"/>\n  <text x=\"612\" y=\"94\" font-size=\"13\" fill=\"#6B5A4A\" text-anchor=\"middle\">진짜 원인</text>\n  <text x=\"612\" y=\"113\" font-size=\"15\" fill=\"#241C16\" text-anchor=\"middle\" font-weight=\"600\">환경·배선</text>\n\n  <line x1=\"164\" y1=\"96\" x2=\"192\" y2=\"96\" stroke=\"#B5761D\" stroke-width=\"3\" marker-end=\"url(#arrow-d9)\"/>\n  <line x1=\"332\" y1=\"96\" x2=\"360\" y2=\"96\" stroke=\"#B5761D\" stroke-width=\"3\" marker-end=\"url(#arrow-d9)\"/>\n  <line x1=\"500\" y1=\"96\" x2=\"528\" y2=\"96\" stroke=\"#B5761D\" stroke-width=\"3\" marker-end=\"url(#arrow-d9)\"/>\n\n  <path d=\"M264,122 C264,155 96,155 96,124\" fill=\"none\" stroke=\"#6B5A4A\" stroke-width=\"1.5\" stroke-dasharray=\"4 4\" marker-end=\"url(#arrow-d9-soft)\"/>\n  <text x=\"180\" y=\"170\" font-size=\"12\" fill=\"#6B5A4A\" text-anchor=\"middle\">가설이 정정되면 처음부터 다시 관찰</text>\n\n  <defs>\n    <marker id=\"arrow-d9\" viewBox=\"0 0 10 10\" refX=\"8\" refY=\"5\" markerWidth=\"7\" markerHeight=\"7\" orient=\"auto-start-reverse\">\n      <path d=\"M0,0 L10,5 L0,10 z\" fill=\"#B5761D\"/>\n    </marker>\n    <marker id=\"arrow-d9-soft\" viewBox=\"0 0 10 10\" refX=\"8\" refY=\"5\" markerWidth=\"6\" markerHeight=\"6\" orient=\"auto-start-reverse\">\n      <path d=\"M0,0 L10,5 L0,10 z\" fill=\"#6B5A4A\"/>\n    </marker>\n  </defs>\n</svg>"
+        }
+      }
+    ],
+    "stats": [
+      {
+        "n": "8",
+        "l": "대주제"
+      },
+      {
+        "n": "38",
+        "l": "소주제"
+      },
+      {
+        "n": "114",
+        "l": "세션"
+      }
+    ],
+    "figure": {
+      "svg": "<svg viewBox=\"0 0 760 320\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"DAVE 전체 흐름: 자연어에서 App까지\">\n  <rect width=\"760\" height=\"320\" fill=\"#F6EFE3\"/>\n  <text x=\"28\" y=\"34\" font-size=\"22\" font-weight=\"700\" fill=\"#241C16\">DAVE — 자연어에서 App까지</text>\n\n  <rect x=\"28\" y=\"58\" width=\"96\" height=\"42\" rx=\"21\" fill=\"#D6C6AE\"/>\n  <text x=\"76\" y=\"84\" font-size=\"15\" fill=\"#241C16\" text-anchor=\"middle\">자연어 요구</text>\n\n  <rect x=\"164\" y=\"58\" width=\"88\" height=\"42\" rx=\"21\" fill=\"#D6C6AE\"/>\n  <text x=\"208\" y=\"84\" font-size=\"15\" fill=\"#241C16\" text-anchor=\"middle\">Spec</text>\n\n  <rect x=\"292\" y=\"58\" width=\"88\" height=\"42\" rx=\"21\" fill=\"#D6C6AE\"/>\n  <text x=\"336\" y=\"84\" font-size=\"15\" fill=\"#241C16\" text-anchor=\"middle\">RTL</text>\n\n  <rect x=\"420\" y=\"58\" width=\"96\" height=\"42\" rx=\"21\" fill=\"#D6C6AE\"/>\n  <text x=\"468\" y=\"84\" font-size=\"15\" fill=\"#241C16\" text-anchor=\"middle\">검증</text>\n\n  <line x1=\"124\" y1=\"79\" x2=\"160\" y2=\"79\" stroke=\"#B5761D\" stroke-width=\"3\" marker-end=\"url(#arrow-dave)\"/>\n  <line x1=\"252\" y1=\"79\" x2=\"288\" y2=\"79\" stroke=\"#B5761D\" stroke-width=\"3\" marker-end=\"url(#arrow-dave)\"/>\n  <line x1=\"380\" y1=\"79\" x2=\"416\" y2=\"79\" stroke=\"#B5761D\" stroke-width=\"3\" marker-end=\"url(#arrow-dave)\"/>\n\n  <path d=\"M468,100 C468,140 300,140 262,168\" fill=\"none\" stroke=\"#2E5E5B\" stroke-width=\"2.5\" marker-end=\"url(#arrow-dave-b)\"/>\n  <path d=\"M468,100 C468,140 636,140 674,168\" fill=\"none\" stroke=\"#2E5E5B\" stroke-width=\"2.5\" marker-end=\"url(#arrow-dave-b)\"/>\n\n  <rect x=\"120\" y=\"176\" width=\"150\" height=\"52\" rx=\"16\" fill=\"none\" stroke=\"#2E5E5B\" stroke-width=\"2\" stroke-dasharray=\"6 5\"/>\n  <text x=\"195\" y=\"197\" font-size=\"13\" fill=\"#6B5A4A\" text-anchor=\"middle\">Track A</text>\n  <text x=\"195\" y=\"216\" font-size=\"15\" fill=\"#241C16\" text-anchor=\"middle\" font-weight=\"600\">FPGA 실물</text>\n\n  <rect x=\"522\" y=\"176\" width=\"150\" height=\"52\" rx=\"16\" fill=\"none\" stroke=\"#2E5E5B\" stroke-width=\"2\" stroke-dasharray=\"6 5\"/>\n  <text x=\"597\" y=\"197\" font-size=\"13\" fill=\"#6B5A4A\" text-anchor=\"middle\">Track B</text>\n  <text x=\"597\" y=\"216\" font-size=\"15\" fill=\"#241C16\" text-anchor=\"middle\" font-weight=\"600\">ASIC PnR·Sign-off</text>\n\n  <path d=\"M195,228 C195,262 310,262 332,280\" fill=\"none\" stroke=\"#B5761D\" stroke-width=\"2.5\" marker-end=\"url(#arrow-dave)\"/>\n  <path d=\"M597,228 C597,262 470,262 448,280\" fill=\"none\" stroke=\"#B5761D\" stroke-width=\"2.5\" marker-end=\"url(#arrow-dave)\"/>\n\n  <rect x=\"336\" y=\"264\" width=\"88\" height=\"42\" rx=\"21\" fill=\"#D6C6AE\"/>\n  <text x=\"380\" y=\"290\" font-size=\"15\" fill=\"#241C16\" text-anchor=\"middle\">App</text>\n\n  <defs>\n    <marker id=\"arrow-dave\" viewBox=\"0 0 10 10\" refX=\"8\" refY=\"5\" markerWidth=\"7\" markerHeight=\"7\" orient=\"auto-start-reverse\">\n      <path d=\"M0,0 L10,5 L0,10 z\" fill=\"#B5761D\"/>\n    </marker>\n    <marker id=\"arrow-dave-b\" viewBox=\"0 0 10 10\" refX=\"8\" refY=\"5\" markerWidth=\"7\" markerHeight=\"7\" orient=\"auto-start-reverse\">\n      <path d=\"M0,0 L10,5 L0,10 z\" fill=\"#2E5E5B\"/>\n    </marker>\n  </defs>\n</svg>"
+    }
+  }
 }

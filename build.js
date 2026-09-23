@@ -32,8 +32,10 @@ const { marked } = require("marked");
 
 const ROOT_DIR = __dirname;
 const CONTENT_DIR = path.join(ROOT_DIR, "content");
+const DAVE_CONTENT_DIR = path.join(CONTENT_DIR, "dave");
 const FIGURES_DIR = path.join(ROOT_DIR, "figures");
 const SUBTOPICS_FILE = path.join(ROOT_DIR, "analysis", "subtopics.json");
+const DAVE_SESSIONS_FILE = path.join(ROOT_DIR, "analysis", "dave_sessions.json");
 const OUT_FILE = path.join(ROOT_DIR, "docs", "data.json");
 
 const SOURCE_MARK = "**출처**";
@@ -78,6 +80,20 @@ function topicsForChapter(subtopics, chapterNo) {
   return subtopics
     .filter((t) => Array.isArray(t.appears_in) && t.appears_in.includes(chapterNo))
     .map((t) => ({ id: t.id, title: t.title, lede: t.lede || "", home: t.ch, appears_in: t.appears_in }));
+}
+
+// analysis/dave_sessions.json — 세션별 also_in/pattern 메타. 없어도 실패하지 않는다.
+function readDaveSessions() {
+  if (!fs.existsSync(DAVE_SESSIONS_FILE)) return new Map();
+  try {
+    const list = JSON.parse(fs.readFileSync(DAVE_SESSIONS_FILE, "utf8"));
+    const map = new Map();
+    if (Array.isArray(list)) list.forEach((r) => r && r.id && map.set(r.id, r));
+    return map;
+  } catch (e) {
+    console.warn(`analysis/dave_sessions.json 파싱 실패 — also_in/pattern 없이 진행: ${e.message}`);
+    return new Map();
+  }
 }
 
 function plainify(s) {
@@ -182,6 +198,116 @@ function splitBasis(md) {
   }
   if (cur) sections.push(cur);
   return { pre: pre.join("\n"), sections: sections.map((s) => ({ heading: s.heading, raw: s.lines.join("\n") })) };
+}
+
+// "### S<n> 제목" 단위로 분할 (레벨 3, DAVE 세션 전용)
+function splitSession(md) {
+  const lines = md.split(/\r?\n/);
+  const pre = [];
+  const sections = [];
+  let cur = null;
+  for (const line of lines) {
+    const m = line.match(/^###\s+S(\d+)\s+(.+?)\s*$/);
+    if (m) {
+      if (cur) sections.push(cur);
+      cur = { no: parseInt(m[1], 10), heading: m[2].trim(), lines: [] };
+    } else if (cur) {
+      cur.lines.push(line);
+    } else {
+      pre.push(line);
+    }
+  }
+  if (cur) sections.push(cur);
+  return { pre: pre.join("\n"), sections: sections.map((s) => ({ no: s.no, heading: s.heading, raw: s.lines.join("\n") })) };
+}
+
+// ── DAVE 장(대주제) 파싱 ──────────────────────────────
+// content/dave/*.md 전용 — "##"는 소주제, "### S<n> 제목"은 세션. basis 근거 노드는 없다.
+
+function parseDaveChapter(file, daveSessions) {
+  const raw = fs.readFileSync(file, "utf8");
+  const { data, content: rawContent } = matter(raw);
+  const content = stripLeadingH1(unescapeMd(rawContent));
+  const id = data.id || path.basename(file, ".md");
+  const top = splitTop(content);
+
+  const qnodes = top.sections.map((sec, i) => {
+    const qid = `${id}-q${i + 1}`;
+    const sessionSplit = splitSession(sec.raw);
+    const qnode = makeNode(qid, sec.heading, sessionSplit.pre);
+    qnode.children = sessionSplit.sections.map((s) => {
+      const sid = "s" + String(s.no).padStart(3, "0");
+      const node = makeNode(sid, `S${s.no} ${s.heading}`, s.raw);
+      const meta = daveSessions.get(sid);
+      if (meta) {
+        if (meta.also_in && meta.also_in.length) node.also_in = meta.also_in;
+        if (meta.pattern) node.pattern = meta.pattern;
+      }
+      return node;
+    });
+    return qnode;
+  });
+
+  const lead = toLeafFields(top.pre);
+  const chapter = {
+    id,
+    no: data.no || "",
+    title: data.title || id,
+    lede: data.lede || "",
+    summary: lead.summary,
+    body: lead.body,
+    sources: lead.sources,
+    children: qnodes,
+  };
+  // d9(회고)의 "반복된 디버깅 패턴" 절 그림은 지시서 6절이 지정한 파일명(d9-pattern.svg)을
+  // 그대로 쓰되, 소주제 자동 id(d9-q2 등)에 의존하지 않도록 장 레벨에 붙인다.
+  const fig = readFigure(id) || (id === "d9" ? readFigure("d9-pattern") : null);
+  if (fig) chapter.figure = fig;
+  return chapter;
+}
+
+function countSessions(chapters) {
+  return chapters.reduce((s, c) => s + (c.children || []).reduce((s2, q) => s2 + (q.children || []).length, 0), 0);
+}
+
+// content/dave/ 가 있으면 dave 컬렉션(대주제→소주제→세션)을 만들어 반환, 없으면 null.
+// root.children(교과서 8장)과 완전히 분리된 형제 트리 — 기존 계층 스트립·통계에 영향 없음.
+function buildDaveCollection() {
+  const files = fs.existsSync(DAVE_CONTENT_DIR)
+    ? fs
+        .readdirSync(DAVE_CONTENT_DIR)
+        .filter((f) => f.endsWith(".md"))
+        .map((f) => path.join(DAVE_CONTENT_DIR, f))
+    : [];
+  if (!files.length) return null;
+
+  const daveSessions = readDaveSessions();
+  const chapters = files
+    .map((f) => parseDaveChapter(f, daveSessions))
+    .sort((a, b) => {
+      const na = parseInt(String(a.no).replace(/\D/g, ""), 10);
+      const nb = parseInt(String(b.no).replace(/\D/g, ""), 10);
+      return (isNaN(na) ? 0 : na) - (isNaN(nb) ? 0 : nb);
+    });
+
+  const totalTopics = chapters.reduce((s, c) => s + (c.children || []).length, 0);
+  const totalSessions = countSessions(chapters);
+
+  return {
+    id: "dave",
+    title: "DAVE 실습 — CustomSoC PoC",
+    lede: "자연어 요구 → RTL → cocotb → Yosys 폐루프를 114개 세션에 걸쳐 완결한 1인기업 PoC 기록.",
+    summary: [
+      "'CustomSoC(Dave)'는 오픈소스 RISC-V 코어(PicoRV32)를 자연어 요구로 커스터마이징하는 1인기업 PoC다. spec.json 자동 해석부터 RTL 생성, cocotb·형식 등가검사(eqy) 검증, FPGA 실물(Track A)·ASIC PnR·Sign-off(Track B) 두 트랙, 그리고 7개 App까지 — 아래 대주제 순서(환경·도구 → 자연어→Spec → Spec→RTL → 검증 → FPGA 실물 → ASIC PnR → App → 회고)가 실제 진행 순서와 같다.",
+    ],
+    children: chapters,
+    stats: [
+      { n: String(chapters.length), l: "대주제" },
+      { n: String(totalTopics), l: "소주제" },
+      { n: String(totalSessions), l: "세션" },
+    ],
+    figure: readFigure("dave") || undefined,
+  };
 }
 
 // ── 장(chapter) 파싱 ──────────────────────────────────
@@ -314,10 +440,14 @@ function main() {
   const rootFig = readFigure("root");
   if (rootFig) root.figure = rootFig;
 
+  const dave = buildDaveCollection();
+  if (dave) root.dave = dave;
+
   fs.mkdirSync(path.dirname(OUT_FILE), { recursive: true });
   fs.writeFileSync(OUT_FILE, JSON.stringify(root, null, 2), "utf8");
+  const daveMsg = dave ? `, DAVE 대주제 ${dave.children.length}개/세션 ${countSessions(dave.children)}개` : "";
   console.log(
-    `data.json 생성 완료 — 장 ${root.children.length}개, 노드 ${totalNodes}개, 출처 ${totalSources}개 → ${path.relative(ROOT_DIR, OUT_FILE)}`
+    `data.json 생성 완료 — 장 ${root.children.length}개, 노드 ${totalNodes}개, 출처 ${totalSources}개${daveMsg} → ${path.relative(ROOT_DIR, OUT_FILE)}`
   );
 }
 

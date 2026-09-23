@@ -163,8 +163,9 @@ footer{margin-top:44px;padding-top:16px;border-top:1px solid var(--line);
 </head>
 <body>
 <div class="wrap">
+  <div class="tools" id="colltabs"></div>
   <div class="spine">
-    <div class="spine-cap">계층 흐름 — 재료에서 집적까지</div>
+    <div class="spine-cap" id="spinecap">계층 흐름 — 재료에서 집적까지</div>
     <div class="row1" id="row1"></div>
     <div class="row2" id="row2"></div>
   </div>
@@ -190,26 +191,50 @@ footer{margin-top:44px;padding-top:16px;border-top:1px solid var(--line);
    ══════════════════════════════════════════════════════ */
 
 const BAR=["#5A2E1C","#6E3A24","#84492A","#9A5A2A","#AC6A22","#B5761D","#C08A2E","#C9A24A"];
-const idxOf=(DATA,p)=>p[1]?DATA.children.findIndex(c=>c.id===p[1].id):-1;
+const idxOf=(ROOT,p)=>p[1]?ROOT.children.findIndex(c=>c.id===p[1].id):-1;
 
 let DATA=null, figOpen=false;
 
-function resolve(DATA,hash){
+// 해시 첫 토큰이 "dave"면 DATA.dave가 활성 컬렉션 루트, 아니면 DATA(교과서 8장) 그대로.
+// 두 컬렉션은 완전히 분리된 형제 트리라 기존 교과서 해시(#/ch4/ch4-q1)는 손대지 않아도 그대로 동작한다.
+function activeRoot(DATA,hash){
   const ids=hash.replace(/^#\/?/,"").split("/").filter(Boolean);
-  const path=[DATA]; let cur=DATA;
+  if(ids[0]==="dave" && DATA.dave) return {root:DATA.dave, ids:ids.slice(1)};
+  return {root:DATA, ids};
+}
+
+function resolve(root,ids){
+  const path=[root]; let cur=root;
   for(const id of ids){const nx=(cur.children||[]).find(c=>c.id===id); if(!nx)break; path.push(nx); cur=nx;}
   return path;
 }
-const href=p=>"#/"+p.slice(1).map(n=>n.id).join("/");
+const href=(root,p)=>"#/"+(root.id==="dave"?"dave/":"")+p.slice(1).map(n=>n.id).join("/");
 
 function render(){
   if(!DATA) return;
-  const path=resolve(DATA,location.hash), node=path[path.length-1], i=idxOf(DATA,path);
+  const {root:ROOT,ids}=activeRoot(DATA,location.hash);
+  const path=resolve(ROOT,ids), node=path[path.length-1], i=idxOf(ROOT,path);
   const bar=i<0?"#B5761D":BAR[i%BAR.length];
   document.documentElement.style.setProperty("--bar",bar);
 
+  // 컬렉션 전환 탭 — DATA.dave가 있을 때만 그린다(기존 동작 100% 유지).
+  const collTabs=document.getElementById("colltabs");
+  if(DATA.dave){
+    const onDave=ROOT.id==="dave";
+    collTabs.innerHTML=
+      `<button class="btn ${onDave?"":"on"}" data-coll="text">${DATA.title||"교과서"}</button>`+
+      `<button class="btn ${onDave?"on":""}" data-coll="dave">${DATA.dave.title||"DAVE 실습"}</button>`;
+    collTabs.querySelectorAll("[data-coll]").forEach(b=>b.onclick=()=>{
+      location.hash = b.dataset.coll==="dave" ? "#/dave" : "#/";
+    });
+  } else {
+    collTabs.innerHTML="";
+  }
+  document.getElementById("spinecap").textContent =
+    ROOT.id==="dave" ? "대주제 흐름 — 자연어에서 App까지" : "계층 흐름 — 재료에서 집적까지";
+
   // 1줄 — 계층 흐름
-  const chapters=DATA.children||[];
+  const chapters=ROOT.children||[];
   document.getElementById("row1").innerHTML=chapters.map((c,k)=>
     `<button class="layer ${path[1]&&path[1].id===c.id?"on":""}" data-id="${c.id}" style="--bar:${BAR[k%BAR.length]}">
        <div class="tick"></div><b>${c.no||k+1}</b><span>${c.title}</span></button>`
@@ -222,15 +247,15 @@ function render(){
          <em>${k+1}</em>${s.title}</button>`).join("")
     : `<span class="hint">${chapters.length?"위에서 계층을 고르면 소주제가 여기에 펼쳐집니다.":"content/ 에 md 를 넣고 build 하면 여기에 계층이 채워집니다."}</span>`;
 
-  document.querySelectorAll(".layer").forEach(el=>el.onclick=()=>location.hash="#/"+el.dataset.id);
-  document.querySelectorAll(".sub").forEach(el=>el.onclick=()=>location.hash=`#/${path[1].id}/${el.dataset.sub}`);
+  document.querySelectorAll(".layer").forEach(el=>el.onclick=()=>location.hash=href(ROOT,[ROOT,{id:el.dataset.id}]));
+  document.querySelectorAll(".sub").forEach(el=>el.onclick=()=>location.hash=href(ROOT,[ROOT,path[1],{id:el.dataset.sub}]));
 
   // 브레드크럼
   const cr=document.getElementById("crumb"); cr.innerHTML="";
   path.forEach((n,k)=>{
     if(k) cr.insertAdjacentHTML("beforeend","<i>›</i>");
     if(k<path.length-1){const b=document.createElement("button");
-      b.textContent=k===0?"전체":n.title; b.onclick=()=>location.hash=href(path.slice(0,k+1)); cr.appendChild(b);}
+      b.textContent=k===0?"전체":n.title; b.onclick=()=>location.hash=href(ROOT,path.slice(0,k+1)); cr.appendChild(b);}
     else if(path.length>1) cr.insertAdjacentHTML("beforeend",`<span>${n.title}</span>`);
   });
 
@@ -301,7 +326,7 @@ function render(){
   content.innerHTML = boardHTML + bodyHTML + placeholderHTML;
   if(kids.length){
     content.querySelectorAll(".card").forEach(el=>el.onclick=()=>
-      location.hash=href(path.concat([kids.find(k=>k.id===el.dataset.id)])));
+      location.hash=href(ROOT,path.concat([kids.find(k=>k.id===el.dataset.id)])));
   }
   content.insertAdjacentHTML("beforeend", srcHTML(node));
   scrollTo({top:0,behavior:"instant"});
